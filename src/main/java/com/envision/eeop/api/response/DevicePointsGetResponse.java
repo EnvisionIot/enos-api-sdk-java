@@ -1,0 +1,20 @@
+package com.envision.eeop.api.response;
+
+import java.util.List;
+
+import com.envision.eeop.api.EnvisionResponse;
+import com.envision.eeop.api.domain.DomainPointValue;
+
+public class DevicePointsGetResponse extends EnvisionResponse {	
+	private static final long serialVersionUID = 7045405215401587107L;
+	
+	private List<DomainPointValue> pointValues;
+
+	public List<DomainPointValue> getPointValues() {
+		return pointValues;
+	}
+
+	public void setPointValues(List<DomainPointValue> pointValues) {
+		this.pointValues = pointValues;
+	}
+}

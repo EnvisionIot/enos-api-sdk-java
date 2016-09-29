@@ -1,0 +1,74 @@
+/**
+ * Project: eeop
+ * 
+ * Copyright http://www.envisioncn.com/
+ * All rights reserved.
+ *
+ * @author xiaomin.zhou
+ */
+package com.envision.eeop.api.request;
+
+import java.util.List;
+import java.util.Map;
+
+import com.envision.eeop.api.EnvisionRequest;
+import com.envision.eeop.api.exception.EnvisionRuleException;
+import com.envision.eeop.api.response.MdmObjectAttributesGetResponse;
+import com.envision.eeop.api.util.EnvisionHashMap;
+import com.envision.eeop.api.util.RuleCheckUtils;
+import com.envision.eeop.api.util.StringUtils;
+
+public class MdmObjectAttributesGetRequest implements EnvisionRequest<MdmObjectAttributesGetResponse> {
+	private static final String API_METHOD = "/mdmService/getObjectAttributes"; 
+	
+	private String mdmIDList;			// mandatory
+	
+	private String attributeList;		// optional
+
+	public MdmObjectAttributesGetRequest(List<String> mdmIDList){
+		this.mdmIDList = StringUtils.listToString(mdmIDList, ',');
+	}
+	
+	public MdmObjectAttributesGetRequest(List<String> mdmIDList, List<String> attributeList){
+		this.mdmIDList = StringUtils.listToString(mdmIDList, ',');
+		this.attributeList = StringUtils.listToString(attributeList, ',');
+	}
+	
+	public String getMdmIDList() {
+		return mdmIDList;
+	}
+
+	public void setMdmIDList(String mdmIDList) {
+		this.mdmIDList = mdmIDList;
+	}
+
+	public String getAttributeList() {
+		return attributeList;
+	}
+
+	public void setAttributeList(String attributeList) {
+		this.attributeList = attributeList;
+	}
+
+	public String getApiMethodName() {
+		return API_METHOD;
+	}
+
+	public Map<String, String> getTextParams() {		
+		EnvisionHashMap txtParams = new EnvisionHashMap();
+		txtParams.put("mdmids", this.mdmIDList);
+		if(!StringUtils.isEmpty(attributeList)){
+			txtParams.put("attributes", this.attributeList);
+		}
+		
+		return txtParams;
+	}
+
+	public Class<MdmObjectAttributesGetResponse> getResponseClass() {
+		return MdmObjectAttributesGetResponse.class;
+	}
+	
+	public void check() throws EnvisionRuleException {
+		RuleCheckUtils.checkNotEmpty(mdmIDList,"mdmids");
+	}
+}
