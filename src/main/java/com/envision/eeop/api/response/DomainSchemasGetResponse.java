@@ -9,20 +9,23 @@ import com.google.gson.annotations.SerializedName;
 
 /**
  * Domain schemas
+ * 
  * @author jieyuan.shen
  */
-public class DomainSchemasGetResponse extends EnvisionResponse {
+public class DomainSchemasGetResponse extends EnvisionResponse
+{
+    private static final long serialVersionUID = 5507674239653869373L;
 
-	private static final long serialVersionUID = 5507674239653869373L;
+    @SerializedName("data")
+    private Map<String, List<DomainSchema>> domainSchemas;
 
-	@SerializedName("data")
-	private Map<String,List<DomainSchema>> domainSchemas;
+    public Map<String, List<DomainSchema>> getDomainSchemas()
+    {
+        return domainSchemas;
+    }
 
-	public Map<String, List<DomainSchema>> getDomainSchemas() {
-		return domainSchemas;
-	}
-
-	public void setDomainSchemas(Map<String, List<DomainSchema>> domainSchemas) {
-		this.domainSchemas = domainSchemas;
-	}
+    public void setDomainSchemas(Map<String, List<DomainSchema>> domainSchemas)
+    {
+        this.domainSchemas = domainSchemas;
+    }
 }

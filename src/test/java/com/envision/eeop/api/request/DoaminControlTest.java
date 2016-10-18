@@ -8,8 +8,6 @@
  */
 package com.envision.eeop.api.request;
 
-import javax.xml.ws.Response;
-
 import org.junit.Test;
 
 import com.envision.eeop.api.EnvisionClient;
