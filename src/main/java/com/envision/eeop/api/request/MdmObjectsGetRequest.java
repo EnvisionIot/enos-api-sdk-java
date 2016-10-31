@@ -22,15 +22,20 @@ public class MdmObjectsGetRequest implements EnvisionRequest<MdmObjectsGetRespon
 
     private static final String API_METHOD = "/mdmService/getObjects";
 
-    private String mdmIDList; // mandatory
-
-    private String typeList; // optional
-
-    private String attributeList; // optional
+    private String mdmIDList;           // mandatory
+    private String typeList;            // optional
+    private String attributeList;       // optional
+    private String locale;              // optional
 
     public MdmObjectsGetRequest(List<String> mdmIDList)
     {
         this.mdmIDList = StringUtils.listToString(mdmIDList, ',');
+    }
+
+    public MdmObjectsGetRequest(List<String> mdmIDList, String locale)
+    {
+        this(mdmIDList);
+        this.locale = locale;
     }
 
     public MdmObjectsGetRequest(List<String> mdmIDList, List<String> typeList, List<String> attributeList)
@@ -38,6 +43,12 @@ public class MdmObjectsGetRequest implements EnvisionRequest<MdmObjectsGetRespon
         this.mdmIDList = StringUtils.listToString(mdmIDList, ',');
         this.typeList = StringUtils.listToString(typeList, ',');
         this.attributeList = StringUtils.listToString(attributeList, ',');
+    }
+
+    public MdmObjectsGetRequest(List<String> mdmIDList, List<String> typeList, List<String> attributeList, String locale)
+    {
+        this(mdmIDList, typeList, attributeList);
+        this.locale = locale;
     }
 
     public String getMdmIDList()
@@ -78,15 +89,16 @@ public class MdmObjectsGetRequest implements EnvisionRequest<MdmObjectsGetRespon
     public Map<String, String> getTextParams()
     {
         EnvisionHashMap txtParams = new EnvisionHashMap();
-        txtParams.put("mdmids", this.mdmIDList);
+        txtParams.put("mdmids", mdmIDList);
         if(!StringUtils.isEmpty(typeList))
         {
-            txtParams.put("types", this.typeList);
+            txtParams.put("types", typeList);
         }
         if(!StringUtils.isEmpty(attributeList))
         {
-            txtParams.put("attributes", this.attributeList);
+            txtParams.put("attributes", attributeList);
         }
+        txtParams.put("locale", locale);
 
         return txtParams;
     }

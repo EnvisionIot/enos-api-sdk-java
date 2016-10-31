@@ -29,15 +29,12 @@ public class MdmFilteredObjectsGetRequest implements EnvisionRequest<MdmObjectSt
 
     private static final String API_METHOD = "/mdmService/getFilteredObjects";
 
-    private String token; // mandatory
-
-    private String type; // mandatory
-
-    private String filterList; // optional
-
+    private String token;               // mandatory
+    private String type;                // mandatory
+    private String filterList;          // optional
     private String appointedFilterList; // optional
-
-    private String attributeList; // optional
+    private String attributeList;       // optional
+    private String locale;              // optional
 
     public MdmFilteredObjectsGetRequest(String token, String type)
     {
@@ -48,13 +45,27 @@ public class MdmFilteredObjectsGetRequest implements EnvisionRequest<MdmObjectSt
         this.attributeList = "";
     }
 
-    public MdmFilteredObjectsGetRequest(String token, String type, List<Filter> filterList, List<AppointedFilter> appointedFilterList, List<String> attributeList)
+    public MdmFilteredObjectsGetRequest(String token, String type, String locale)
+    {
+        this(token, type);
+        this.locale = locale;
+    }
+
+    public MdmFilteredObjectsGetRequest(String token, String type, List<Filter> filterList, 
+            List<AppointedFilter> appointedFilterList, List<String> attributeList)
     {
         this.token = token;
         this.type = type;
         this.filterList = JsonParser.toJson(filterList);
         this.appointedFilterList = JsonParser.toJson(appointedFilterList);
         this.attributeList = StringUtils.listToString(attributeList, ',');
+    }
+
+    public MdmFilteredObjectsGetRequest(String token, String type, List<Filter> filterList, 
+            List<AppointedFilter> appointedFilterList, List<String> attributeList, String locale)
+    {
+        this(token, type, filterList, appointedFilterList, attributeList);
+        this.locale = locale;
     }
 
     public String getToken()
@@ -107,6 +118,16 @@ public class MdmFilteredObjectsGetRequest implements EnvisionRequest<MdmObjectSt
         this.attributeList = attributeList;
     }
 
+    public String getLocale()
+    {
+        return locale;
+    }
+
+    public void setLocale(String locale)
+    {
+        this.locale = locale;
+    }
+
     public String getApiMethodName()
     {
         return API_METHOD;
@@ -120,6 +141,7 @@ public class MdmFilteredObjectsGetRequest implements EnvisionRequest<MdmObjectSt
         txtParams.put("filter", filterList);
         txtParams.put("appointedFilter", appointedFilterList);
         txtParams.put("attributes", attributeList);
+        txtParams.put("locale", locale);
 
         return txtParams;
     }

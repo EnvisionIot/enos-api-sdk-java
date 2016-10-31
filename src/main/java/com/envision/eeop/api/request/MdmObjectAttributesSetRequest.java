@@ -1,8 +1,7 @@
 /**
  * Project: eeop
  * 
- * Copyright http://www.envisioncn.com/
- * All rights reserved.
+ * Copyright http://www.envisioncn.com/ All rights reserved.
  *
  * @author xiaomin.zhou
  */
@@ -19,61 +18,86 @@ import com.envision.eeop.api.util.EnvisionHashMap;
 import com.envision.eeop.api.util.RuleCheckUtils;
 import com.envision.eeop.api.util.StringUtils;
 
-public class MdmObjectAttributesSetRequest implements EnvisionRequest<EnvisionResponse>{
-	private static final String API_METHOD = "/mdmService/setObjectAttributes"; 
+public class MdmObjectAttributesSetRequest implements EnvisionRequest<EnvisionResponse>
+{
+    private static final String API_METHOD = "/mdmService/setObjectAttributes";
 
-	private String mdmID;				// mandatory
-	
-	private String attributeList;		// mandatory
-	
-	public MdmObjectAttributesSetRequest(String mdmID, Map<String,String> attributeValues) {
-		this.mdmID = mdmID;
-		List<String> attributes = new ArrayList<String>();
-		for (String attribute: attributeValues.keySet()) {
-			attributes.add(attribute + ":\"" + attributeValues.get(attribute));
-		}
-		if (!attributes.isEmpty()) {
-			attributeList = StringUtils.listToString(attributes, "\",");
-			attributeList = attributeList.concat("\"");
-		} else {
-			attributeList = "";
-		}
-	}
+    private String mdmID;               // mandatory
+    private String attributeList;       // mandatory
+    private String locale;              // optional
+    private String defaultLocale;       // optional
 
-	public String getMdmID() {
-		return mdmID;
-	}
+    public MdmObjectAttributesSetRequest(String mdmID, Map<String, String> attributeValues)
+    {
+        this.mdmID = mdmID;
+        List<String> attributes = new ArrayList<String>();
+        for(String attribute : attributeValues.keySet())
+        {
+            attributes.add(attribute + ":\"" + attributeValues.get(attribute));
+        }
+        if(!attributes.isEmpty())
+        {
+            attributeList = StringUtils.listToString(attributes, "\",");
+            attributeList = attributeList.concat("\"");
+        }
+        else
+        {
+            attributeList = "";
+        }
+    }
 
-	public void setMdmID(String mdmID) {
-		this.mdmID = mdmID;
-	}
+    public MdmObjectAttributesSetRequest(String mdmID, Map<String, String> attributeValues, 
+            String locale, boolean defaultLocale)
+    {
+        this(mdmID, attributeValues);
+        this.locale = locale;
+        this.defaultLocale = String.valueOf(defaultLocale);
+    }
 
-	public String getAttributeList() {
-		return attributeList;
-	}
+    public String getMdmID()
+    {
+        return mdmID;
+    }
 
-	public void setAttributeList(String attributeList) {
-		this.attributeList = attributeList;
-	}
+    public void setMdmID(String mdmID)
+    {
+        this.mdmID = mdmID;
+    }
 
-	public String getApiMethodName() {
-		return API_METHOD;
-	}
+    public String getAttributeList()
+    {
+        return attributeList;
+    }
 
-	public Map<String, String> getTextParams() {
-		EnvisionHashMap txtParams = new EnvisionHashMap();
-		txtParams.put("mdmid", this.mdmID);
-		txtParams.put("attributes", this.attributeList);
-		
-		return txtParams;
-	}
+    public void setAttributeList(String attributeList)
+    {
+        this.attributeList = attributeList;
+    }
 
-	public Class<EnvisionResponse> getResponseClass() {
-		return EnvisionResponse.class;
-	}
+    public String getApiMethodName()
+    {
+        return API_METHOD;
+    }
 
-	public void check() throws EnvisionRuleException {
-		RuleCheckUtils.checkNotEmpty(mdmID, "mdmid");
-		RuleCheckUtils.checkNotEmpty(attributeList,"attributes");
-	}
+    public Map<String, String> getTextParams()
+    {
+        EnvisionHashMap txtParams = new EnvisionHashMap();
+        txtParams.put("mdmid", mdmID);
+        txtParams.put("attributes", attributeList);
+        txtParams.put("locale", locale);
+        txtParams.put("defaultLocale", defaultLocale);
+
+        return txtParams;
+    }
+
+    public Class<EnvisionResponse> getResponseClass()
+    {
+        return EnvisionResponse.class;
+    }
+
+    public void check() throws EnvisionRuleException
+    {
+        RuleCheckUtils.checkNotEmpty(mdmID, "mdmid");
+        RuleCheckUtils.checkNotEmpty(attributeList, "attributes");
+    }
 }

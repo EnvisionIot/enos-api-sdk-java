@@ -1,5 +1,6 @@
 package com.envision.eeop.api.request;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -10,58 +11,113 @@ import com.envision.eeop.api.util.EnvisionHashMap;
 import com.envision.eeop.api.util.RuleCheckUtils;
 import com.envision.eeop.api.util.StringUtils;
 
-public class DomainSchemasGetRequest implements EnvisionRequest<DomainSchemasGetResponse> {
-	private static final String API_METHOD = "/mdmService/getSchemas"; 
+public class DomainSchemasGetRequest implements EnvisionRequest<DomainSchemasGetResponse>
+{
+    private static final String API_METHOD = "/mdmService/getSchemas";
+    
+    public static final String FIELD_DESC = "desc";
+    public static final String FIELD_METADATA = "metadata";
 
-	private String mdmIDList;			// mandatory
-	
-	private String fieldList;				// optional
+    private String mdmIDList;   // mandatory
+    private String fieldList;   // optional
+    private String locale;      // optional
 
-	public DomainSchemasGetRequest(List<String> mdmIDList) {
-		this.mdmIDList = StringUtils.listToString(mdmIDList, ',');
-	}
-	
-	public DomainSchemasGetRequest(List<String> mdmIDList, List<String> fieldList) {
-		this.mdmIDList = StringUtils.listToString(mdmIDList, ',');
-		this.fieldList = StringUtils.listToString(fieldList, ',');
-	}
+    public DomainSchemasGetRequest(List<String> mdmIDList, boolean includeDesc, boolean includeMetadata)
+    {
+        this.mdmIDList = StringUtils.listToString(mdmIDList, ',');
+        List<String> fields = new ArrayList<>();
+        if (includeDesc)
+        {
+            fields.add(FIELD_DESC);
+        }
+        if (includeMetadata)
+        {
+            fields.add(FIELD_METADATA);
+        }
+        if (!fields.isEmpty())
+        {
+            this.fieldList = StringUtils.listToString(fields, ',');
+        }
+    }
 
-	public String getMdmIDList() {
-		return mdmIDList;
-	}
+    public DomainSchemasGetRequest(List<String> mdmIDList, boolean includeDesc, boolean includeMetadata, String locale)
+    {
+        this(mdmIDList, includeDesc, includeMetadata);
+        this.locale = locale;
+    }
 
-	public void setMdmIDList(String mdmIDList) {
-		this.mdmIDList = mdmIDList;
-	}
+    /**
+     * @deprecated use {@link #DomainSchemasGetRequest(List, boolean, boolean)} instead
+     */
+    public DomainSchemasGetRequest(List<String> mdmIDList)
+    {
+        this.mdmIDList = StringUtils.listToString(mdmIDList, ',');
+    }
 
-	public String getFieldList() {
-		return fieldList;
-	}
+    /**
+     * @deprecated use {@link #DomainSchemasGetRequest(List, boolean, boolean)} instead
+     */
+    public DomainSchemasGetRequest(List<String> mdmIDList, List<String> fieldList)
+    {
+        this.mdmIDList = StringUtils.listToString(mdmIDList, ',');
+        this.fieldList = StringUtils.listToString(fieldList, ',');
+    }
 
-	public void setFieldList(String fieldList) {
-		this.fieldList = fieldList;
-	}
+    public String getMdmIDList()
+    {
+        return mdmIDList;
+    }
 
-	public String getApiMethodName() {
-		return API_METHOD;
-	}
+    public void setMdmIDList(String mdmIDList)
+    {
+        this.mdmIDList = mdmIDList;
+    }
 
-	public Map<String, String> getTextParams() {		
-		EnvisionHashMap txtParams = new EnvisionHashMap();
-		txtParams.put("mdmids", this.mdmIDList);
-		if (!StringUtils.isEmpty(fieldList)) {
-			txtParams.put("fields", this.fieldList);
-		}
-		
-		return txtParams;
-	}
+    public String getFieldList()
+    {
+        return fieldList;
+    }
 
-	public Class<DomainSchemasGetResponse> getResponseClass() {
-		return DomainSchemasGetResponse.class;
-	}
-	
-	public void check() throws EnvisionRuleException {
-		RuleCheckUtils.checkNotEmpty(mdmIDList, "mdmids");
-	}
-	
+    public void setFieldList(String fieldList)
+    {
+        this.fieldList = fieldList;
+    }
+
+    public String getLocale()
+    {
+        return locale;
+    }
+
+    public void setLocale(String locale)
+    {
+        this.locale = locale;
+    }
+
+    public String getApiMethodName()
+    {
+        return API_METHOD;
+    }
+
+    public Map<String, String> getTextParams()
+    {
+        EnvisionHashMap txtParams = new EnvisionHashMap();
+        txtParams.put("mdmids", mdmIDList);
+        if (!StringUtils.isEmpty(fieldList))
+        {
+            txtParams.put("fields", fieldList);
+        }
+        txtParams.put("locale", locale);
+        return txtParams;
+    }
+
+    public Class<DomainSchemasGetResponse> getResponseClass()
+    {
+        return DomainSchemasGetResponse.class;
+    }
+
+    public void check() throws EnvisionRuleException
+    {
+        RuleCheckUtils.checkNotEmpty(mdmIDList, "mdmids");
+    }
+
 }
