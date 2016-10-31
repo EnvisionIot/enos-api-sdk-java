@@ -1,6 +1,7 @@
 package com.envision.eeop.api.request;
 
 import com.envision.eeop.api.EnvisionRequest;
+import com.envision.eeop.api.EnvisionResponse;
 import com.envision.eeop.api.exception.EnvisionRuleException;
 import com.envision.eeop.api.util.RuleCheckUtils;
 
@@ -11,7 +12,7 @@ import java.util.Map;
 /**
  * Created by changyi.yuan on 2016/10/18.
  */
-public class FileDownloadRequest implements EnvisionRequest {
+public class FileDownloadRequest implements EnvisionRequest<EnvisionResponse> {
     private static final String API_METHOD = "/fileService/download";
 
     private String mdmId;
@@ -64,8 +65,8 @@ public class FileDownloadRequest implements EnvisionRequest {
         return txtParams;
     }
 
-    public Class<Object> getResponseClass() {
-        return Object.class;
+    public Class<EnvisionResponse> getResponseClass() {
+        return EnvisionResponse.class;
     }
 
     public void check() throws EnvisionRuleException {

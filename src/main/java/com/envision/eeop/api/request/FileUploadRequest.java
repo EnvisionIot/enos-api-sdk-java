@@ -12,7 +12,7 @@ import java.util.Map;
 /**
  * Created by changyi.yuan on 2016/10/18.
  */
-public class FileUploadRequest implements EnvisionRequest {
+public class FileUploadRequest implements EnvisionRequest<EnvisionResponse> {
     private static final String API_METHOD = "/fileService/upload";
 
     private String mdmId;

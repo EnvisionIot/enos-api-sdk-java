@@ -14,6 +14,7 @@ import java.io.OutputStream;
  * <p/>
  * Created by changyi.yuan on 2016/10/18.
  */
+@SuppressWarnings("unused")
 public interface EnvisionStreamClient {
     /**
      * streaming download

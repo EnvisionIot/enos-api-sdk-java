@@ -1,6 +1,5 @@
 package com.envision.eeop.api.request;
 
-import com.envision.eeop.api.EnvisionDefaultStreamClient;
 import com.envision.eeop.api.EnvisionStreamClient;
 import com.envision.eeop.api.exception.EnvisionApiException;
 import org.junit.Test;
@@ -11,6 +10,7 @@ import java.io.IOException;
 /**
  * Created by changyi.yuan on 2016/10/18.
  */
+@SuppressWarnings("unused")
 public class FileUploadRequestTest {
     /*private final static String GATEWAY = "http://localhost:8080/eeop";
 
