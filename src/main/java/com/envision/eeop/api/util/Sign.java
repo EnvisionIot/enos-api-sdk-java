@@ -1,8 +1,7 @@
 /**
  * Project: eeop
  * 
- * Copyright http://www.envisioncn.com/
- * All rights reserved.
+ * Copyright http://www.envisioncn.com/ All rights reserved.
  *
  * @author xiaomin.zhou
  */
@@ -29,142 +28,148 @@ import com.envision.eeop.api.Constants;
  * Digest
  *
  */
-public class Sign {
-	private static Logger logger = LoggerFactory.getLogger(Sign.class);
-	
-	private Sign() {
+public class Sign
+{
+    private static Logger logger = LoggerFactory.getLogger(Sign.class);
 
-	}
+    private Sign()
+    {
 
-	//Conver Bytes To Hex string
-	private static String convertToHex(byte[] data) {
-		StringBuilder buf = new StringBuilder();
-		for (int i = 0; i < data.length; i++) {
-			int halfbyte = (data[i] >>> 4) & 0x0F;
-			int twoHalfs = 0;
-			do {
-				if ((0 <= halfbyte) && (halfbyte <= 9))
-					buf.append((char) ('0' + halfbyte));
-				else
-					buf.append((char) ('a' + (halfbyte - 10)));
-				halfbyte = data[i] & 0x0F;
-			} while (twoHalfs++ < 1);
-		}
-		return buf.toString();
-	}
+    }
 
-	//Assembly String
-	public static String makeString(String appKey, String secret,
-			Map<String, String> paramMap) {
-		//Sort Para Map
-		String[] keyArray = paramMap.keySet().toArray(new String[0]);
-		Arrays.sort(keyArray);
+    //Conver Bytes To Hex string
+    private static String convertToHex(byte[] data)
+    {
+        StringBuilder buf = new StringBuilder();
+        for(int i = 0; i < data.length; i++)
+        {
+            int halfbyte = (data[i] >>> 4) & 0x0F;
+            int twoHalfs = 0;
+            do
+            {
+                if((0 <= halfbyte) && (halfbyte <= 9)) buf.append((char) ('0' + halfbyte));
+                else buf.append((char) ('a' + (halfbyte - 10)));
+                halfbyte = data[i] & 0x0F;
+            }
+            while(twoHalfs++ < 1);
+        }
+        return buf.toString();
+    }
 
-		//Assembly string
-		StringBuilder stringBuilder = new StringBuilder();
-		stringBuilder.append(appKey);
-		for (String key : keyArray) {
-			stringBuilder.append(key).append(paramMap.get(key));
-		}
-		stringBuilder.append(secret);
-		
-		return stringBuilder.toString();
-	}
+    //Assembly String
+    public static String makeString(String appKey, String secret, Map<String, String> paramMap)
+    {
+        //Sort Para Map
+        String[] keyArray = paramMap.keySet().toArray(new String[0]);
+        Arrays.sort(keyArray);
 
-	public static byte[] encryptMD5(byte[] data) throws IOException {
-		byte[] bytes = null;
+        //Assembly string
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(appKey);
+        for(String key : keyArray)
+        {
+            stringBuilder.append(key).append(paramMap.get(key));
+        }
+        stringBuilder.append(secret);
 
-		try {
-			MessageDigest md5 = MessageDigest.getInstance(Constants.KEY_MD5);
-			md5.update(data);
-			bytes = md5.digest();
-		} catch (NoSuchAlgorithmException e) {
-			throw new IOException(e);
-		}
+        return stringBuilder.toString();
+    }
 
-		return bytes;
-	}
+    public static byte[] encryptMD5(byte[] data) throws IOException
+    {
+        byte[] bytes = null;
 
-	public static byte[] encryptSHA(byte[] data) throws IOException {
-		byte[] bytes = null;
+        try
+        {
+            MessageDigest md5 = MessageDigest.getInstance(Constants.KEY_MD5);
+            md5.update(data);
+            bytes = md5.digest();
+        }
+        catch(NoSuchAlgorithmException e)
+        {
+            throw new IOException(e);
+        }
 
-		try {
-			MessageDigest sha = MessageDigest.getInstance(Constants.KEY_SHA);
-			sha.update(data);
-			bytes = sha.digest();
-		} catch (NoSuchAlgorithmException e) {
-			throw new IOException(e);
-		}
+        return bytes;
+    }
 
-		return bytes;
-	}
+    public static byte[] encryptSHA(byte[] data) throws IOException
+    {
+        byte[] bytes = null;
 
-	public static byte[] encryptHMAC(byte[] data, String key) throws IOException {
-		byte[] bytes = null;
-		try {
-			SecretKey sk = new SecretKeySpec(
-					key.getBytes(Constants.CHARSET_UTF8), Constants.KEY_HMAC);
-			Mac mac = Mac.getInstance(sk.getAlgorithm());
-			mac.init(sk);
-			bytes = mac.doFinal(data);
-		} catch (GeneralSecurityException e) {
-			throw new IOException(e);
-		}
-		return bytes;
-	}
+        try
+        {
+            MessageDigest sha = MessageDigest.getInstance(Constants.KEY_SHA);
+            sha.update(data);
+            bytes = sha.digest();
+        }
+        catch(NoSuchAlgorithmException e)
+        {
+            throw new IOException(e);
+        }
 
-	public static String sign(String appKey, String secret,
-			Map<String, String> paramMap, String type){
-		String sign = null;
+        return bytes;
+    }
 
-		try {
-			String codes = makeString(appKey, secret, paramMap);
-			byte[] bytes = codes.getBytes(Constants.CHARSET_UTF8);
-			byte[] encrypt;
-			if(type.equals(Constants.KEY_MD5)){
-				encrypt = encryptMD5(bytes);
-			}else if(type.equals(Constants.KEY_HMAC)){
-				encrypt = encryptHMAC(bytes, secret);
-			}else{
-				encrypt = encryptSHA(bytes);
-			}
-			
-			String hexStr = convertToHex(encrypt);
-			sign = hexStr.toUpperCase();
-		} catch (UnsupportedEncodingException e) {
-			logger.error("UnsupportedEncodingException", e);
-			return new String("");
-		} catch (IOException e) {
-			logger.error("IOException", e);
-			return new String("");
-		}
-		
-		return sign;
-	}
-	
-	//Default signature algorithm : SHA
-	public static String sign(String appKey, String secret,
-			Map<String, String> paramMap){
-		return sign(appKey, secret, paramMap, Constants.KEY_SHA);
-	}
+    public static byte[] encryptHMAC(byte[] data, String key) throws IOException
+    {
+        byte[] bytes = null;
+        try
+        {
+            SecretKey sk = new SecretKeySpec(key.getBytes(Constants.CHARSET_UTF8), Constants.KEY_HMAC);
+            Mac mac = Mac.getInstance(sk.getAlgorithm());
+            mac.init(sk);
+            bytes = mac.doFinal(data);
+        }
+        catch(GeneralSecurityException e)
+        {
+            throw new IOException(e);
+        }
+        return bytes;
+    }
 
-//	public static String sign(String appKey, String secret,
-//			Map<String, String> paramMap) {
-//		String codes = makeString(appKey, secret, paramMap);
-//
-//		// SHA-1编码， 这里使用的是Apache
-//		// codec，即可获得签名(shaHex()会首先将中文转换为UTF8编码然后进行sha1计算，使用其他的工具包请注意UTF8编码转换)
-//		/*
-//		 * 以下sha1签名代码效果等同 byte[] sha =
-//		 * org.apache.commons.codec.digest.DigestUtils
-//		 * .sha(org.apache.commons.codec
-//		 * .binary.StringUtils.getBytesUtf8(codes)); String sign =
-//		 * org.apache.commons
-//		 * .codec.binary.Hex.encodeHexString(sha).toUpperCase()
-//		 */
-//		String sign = org.apache.commons.codec.digest.DigestUtils.shaHex(codes)
-//				.toUpperCase();
-//
-//		return sign;
-//	}
+    public static String sign(String appKey, String secret, Map<String, String> paramMap, String type)
+    {
+        String sign = null;
+
+        try
+        {
+            String codes = makeString(appKey, secret, paramMap);
+            byte[] bytes = codes.getBytes(Constants.CHARSET_UTF8);
+            byte[] encrypt;
+            if(type.equals(Constants.KEY_MD5))
+            {
+                encrypt = encryptMD5(bytes);
+            }
+            else if(type.equals(Constants.KEY_HMAC))
+            {
+                encrypt = encryptHMAC(bytes, secret);
+            }
+            else
+            {
+                encrypt = encryptSHA(bytes);
+            }
+
+            String hexStr = convertToHex(encrypt);
+            sign = hexStr.toUpperCase();
+        }
+        catch(UnsupportedEncodingException e)
+        {
+            logger.error("UnsupportedEncodingException", e);
+            return new String("");
+        }
+        catch(IOException e)
+        {
+            logger.error("IOException", e);
+            return new String("");
+        }
+
+        return sign;
+    }
+
+    //Default signature algorithm : SHA
+    public static String sign(String appKey, String secret, Map<String, String> paramMap)
+    {
+        return sign(appKey, secret, paramMap, Constants.KEY_SHA);
+    }
 }
