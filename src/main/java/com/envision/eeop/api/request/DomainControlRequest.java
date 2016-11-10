@@ -13,7 +13,7 @@ import java.util.Map;
  * Created by changyi.yuan on 2016/6/19.
  */
 public class DomainControlRequest implements EnvisionRequest<EnvisionResponse> {
-    private static final String API_METHOD = "/domainService/control";
+    private static final String API_METHOD = "/controlService/control";
 
     private String mdmid; //mandatory
 

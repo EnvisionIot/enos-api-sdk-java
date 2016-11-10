@@ -28,10 +28,10 @@ public class DoaminControlTest {
   public void testDomainDetails() throws EnvisionApiException {
       EnvisionClient client = new EnvisionDefaultClient(
               GATEWAY,
-              "test",
+              "EEOP_TEST",
               "0E133FBBFC57CA282FC2FC34C6651218");
       
-      DomainControlRequest request = new DomainControlRequest("f5917483-22f1-49c1-9221-fb22bda3a1be", "CONTROL_TEST");
+      DomainControlRequest request = new DomainControlRequest("931b03e4-6c52-4c7a-af14-9f9bfbb9ff2f", "ctrlclose");
       EnvisionResponse response = client.execute(request);
 
     	  System.out.println(response.getBody());
