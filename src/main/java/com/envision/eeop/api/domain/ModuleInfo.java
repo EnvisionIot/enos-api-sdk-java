@@ -9,6 +9,8 @@ public class ModuleInfo implements Serializable{
     
     public String id;
     public String name;
+    public String nameEn;
+    public String nameZh;
     public String icon;
     public String url;
     public int state;

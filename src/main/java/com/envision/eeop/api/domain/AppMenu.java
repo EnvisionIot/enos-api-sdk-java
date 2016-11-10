@@ -9,6 +9,8 @@ public class AppMenu implements Serializable{
     
     public String appKey;
     public String appName;
+    public String appNameEn;
+    public String appNameZh;
     public boolean isMobile;
     public String appIcon;
     
