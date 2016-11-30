@@ -28,10 +28,10 @@ import com.envision.eeop.api.response.DimensionsGetResponse;
  *
  */
 public class DimensionTest {
-	private final static String GATEWAY = "http://localhost:8080/eeop";
+	//private final static String GATEWAY = "http://localhost:8080/eeop";
 
 	// private final static String GATEWAY = "http://10.21.10.12:8080/eeop";
-	//private final static String GATEWAY = "http://172.16.33.223:8080/eeop";
+	private final static String GATEWAY = "http://172.16.33.223:8080/eeop";
 
 	@Test
 	public void testFindByColumns() throws EnvisionApiException {
@@ -76,7 +76,7 @@ public class DimensionTest {
 				"0E133FBBFC57CA282FC2FC34C6651218");
 
 		DimensionFindByKeyRequest request = new DimensionFindByKeyRequest(
-				"57baab592b0f1cfd669469d2", "standardstate", "285e485ec6c14888a25ed20cf5239087");
+				"57baab5ed3eb4806104b045d", "sc_template", "SXD02_6");
 		DimensionGetResponse response = client.execute(request, "zzz");
 		System.out.println(response.getBody());
 	}

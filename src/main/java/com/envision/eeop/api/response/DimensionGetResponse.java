@@ -1,3 +1,11 @@
+/**
+ * Project: eeop
+ * 
+ * Copyright http://www.envisioncn.com/
+ * All rights reserved.
+ *
+ * @author xiaomin.zhou
+ */
 package com.envision.eeop.api.response;
 
 import java.util.Map;
@@ -5,10 +13,6 @@ import java.util.Map;
 import com.envision.eeop.api.EnvisionResponse;
 import com.google.gson.annotations.SerializedName;
 
-/**
- * Domain schemas
- * @author jieyuan.shen
- */
 public class DimensionGetResponse extends EnvisionResponse {
 
 	private static final long serialVersionUID = 627716959003640263L;

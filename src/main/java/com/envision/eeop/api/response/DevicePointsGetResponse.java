@@ -1,3 +1,11 @@
+/**
+ * Project: eeop
+ * 
+ * Copyright http://www.envisioncn.com/
+ * All rights reserved.
+ *
+ * @author xiaomin.zhou
+ */
 package com.envision.eeop.api.response;
 
 import java.util.List;
