@@ -78,7 +78,9 @@ public class DimensionTest {
 		DimensionFindByKeyRequest request = new DimensionFindByKeyRequest(
 				"57baab5ed3eb4806104b045d", "sc_template", "SXD02_6");
 		DimensionGetResponse response = client.execute(request, "zzz");
+		String soundNum = (String) response.getDimensionMap().get("soundNum");
 		System.out.println(response.getBody());
+		System.out.println(soundNum);
 	}
 	
 	@Test
