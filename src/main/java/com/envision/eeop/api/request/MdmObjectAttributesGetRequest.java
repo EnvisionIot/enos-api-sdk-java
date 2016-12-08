@@ -87,11 +87,14 @@ public class MdmObjectAttributesGetRequest implements EnvisionRequest<MdmObjectA
     {
         EnvisionHashMap txtParams = new EnvisionHashMap();
         txtParams.put("mdmids", this.mdmIDList);
-        if(!StringUtils.isEmpty(attributeList))
+        if (!StringUtils.isEmpty(attributeList))
         {
             txtParams.put("attributes", this.attributeList);
         }
-        txtParams.put("locale", locale);
+        if (!StringUtils.isEmpty(locale))
+        {
+            txtParams.put("locale", locale);
+        }
 
         return txtParams;
     }

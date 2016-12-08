@@ -141,7 +141,10 @@ public class MdmFilteredObjectsGetRequest implements EnvisionRequest<MdmObjectSt
         txtParams.put("filter", filterList);
         txtParams.put("appointedFilter", appointedFilterList);
         txtParams.put("attributes", attributeList);
-        txtParams.put("locale", locale);
+        if (!StringUtils.isEmpty(locale))
+        {
+            txtParams.put("locale", locale);
+        }
 
         return txtParams;
     }

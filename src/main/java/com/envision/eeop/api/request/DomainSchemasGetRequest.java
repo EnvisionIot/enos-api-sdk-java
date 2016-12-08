@@ -106,7 +106,10 @@ public class DomainSchemasGetRequest implements EnvisionRequest<DomainSchemasGet
         {
             txtParams.put("fields", fieldList);
         }
-        txtParams.put("locale", locale);
+        if (!StringUtils.isEmpty(locale))
+        {
+            txtParams.put("locale", locale);
+        }
         return txtParams;
     }
 

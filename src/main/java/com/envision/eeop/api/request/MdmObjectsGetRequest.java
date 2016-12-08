@@ -98,7 +98,10 @@ public class MdmObjectsGetRequest implements EnvisionRequest<MdmObjectsGetRespon
         {
             txtParams.put("attributes", attributeList);
         }
-        txtParams.put("locale", locale);
+        if (!StringUtils.isEmpty(locale))
+        {
+            txtParams.put("locale", locale);
+        }
 
         return txtParams;
     }

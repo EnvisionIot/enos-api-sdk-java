@@ -84,8 +84,14 @@ public class MdmObjectAttributesSetRequest implements EnvisionRequest<EnvisionRe
         EnvisionHashMap txtParams = new EnvisionHashMap();
         txtParams.put("mdmid", mdmID);
         txtParams.put("attributes", attributeList);
-        txtParams.put("locale", locale);
-        txtParams.put("defaultLocale", defaultLocale);
+        if (!StringUtils.isEmpty(locale))
+        {
+            txtParams.put("locale", locale);
+        }
+        if (!StringUtils.isEmpty(defaultLocale))
+        {
+            txtParams.put("defaultLocale", defaultLocale);
+        }
 
         return txtParams;
     }
