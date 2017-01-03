@@ -14,7 +14,6 @@ import com.google.gson.annotations.SerializedName;
 
 public class MdmChildObjects extends MdmObjectAttributes
 {
-
     private static final long serialVersionUID = -905511497091094031L;
 
     @SerializedName("mdmobjects")
@@ -22,10 +21,18 @@ public class MdmChildObjects extends MdmObjectAttributes
 
     public MdmChildObjects()
     {
+        super();
     }
 
     public MdmChildObjects(Map<String, List<MdmObject>> mdmObjectList)
     {
+        super();
+        this.mdmObjectList = mdmObjectList;
+    }
+    
+    public MdmChildObjects(Map<String, String> attributes, Map<String, List<MdmObject>> mdmObjectList)
+    {
+        super(attributes);
         this.mdmObjectList = mdmObjectList;
     }
 
