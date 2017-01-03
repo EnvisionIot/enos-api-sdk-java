@@ -41,6 +41,6 @@ public class MdmObjectAttributes implements Serializable {
 
 	@Override
 	public String toString() {
-		return "MdmObject [attributes=" + attributes + "]";
+		return "MdmObjectAttributes [attributes=" + attributes + "]";
 	}
 }

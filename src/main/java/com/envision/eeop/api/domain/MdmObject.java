@@ -39,7 +39,6 @@ public class MdmObject extends MdmObjectAttributes {
 
 	@Override
 	public String toString() {
-		return "MdmObject [mdmID=" + mdmID + 
-				", attributes=" + attributes + "]";
+		return "MdmObject [mdmID=" + mdmID + ", attributes=" + attributes + "]";
 	}
 }
