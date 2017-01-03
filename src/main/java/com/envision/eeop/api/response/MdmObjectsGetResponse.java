@@ -16,7 +16,7 @@ public class MdmObjectsGetResponse extends EnvisionResponse {
 	private static final long serialVersionUID = -3251518557042008764L;
 
 	@SerializedName("data")
-	private Map<String/*parent mdmID*/,MdmChildObjects> mdmChildObjects;
+	private Map<String/*associate mdmID*/,MdmChildObjects> mdmChildObjects;
 
 	public Map<String, MdmChildObjects> getMdmChildObjects() {
 		return mdmChildObjects;
