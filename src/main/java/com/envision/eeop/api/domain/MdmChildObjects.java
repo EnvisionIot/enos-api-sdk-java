@@ -24,6 +24,9 @@ public class MdmChildObjects extends MdmObjectAttributes
         super();
     }
 
+    /**
+     * @deprecated use {@link #MdmChildObjects(Map, Map)} instead
+     */
     public MdmChildObjects(Map<String, List<MdmObject>> mdmObjectList)
     {
         super();
