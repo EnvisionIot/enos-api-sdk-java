@@ -6,18 +6,20 @@ import com.envision.eeop.api.EnvisionResponse;
 import com.envision.eeop.api.domain.MdmObject;
 import com.google.gson.annotations.SerializedName;
 
-public class MdmObjectStructureGetResponse extends EnvisionResponse {
+public class MdmObjectStructureGetResponse extends EnvisionResponse
+{
+    private static final long serialVersionUID = 943451741324250846L;
 
-	private static final long serialVersionUID = 943451741324250846L;
+    @SerializedName("data")
+    private List<MdmObject> mdmObjects;
 
-	@SerializedName("data")
-	private List<MdmObject> mdmObjects;
+    public List<MdmObject> getMdmObjects()
+    {
+        return mdmObjects;
+    }
 
-	public List<MdmObject> getMdmObjects() {
-		return mdmObjects;
-	}
-
-	public void setMdmObjects(List<MdmObject> mdmObjects) {
-		this.mdmObjects = mdmObjects;
-	}
+    public void setMdmObjects(List<MdmObject> mdmObjects)
+    {
+        this.mdmObjects = mdmObjects;
+    }
 }

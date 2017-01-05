@@ -1,8 +1,7 @@
 /**
  * Project: eeop
  * 
- * Copyright http://www.envisioncn.com/
- * All rights reserved.
+ * Copyright http://www.envisioncn.com/ All rights reserved.
  *
  * @author xiaomin.zhou
  */
@@ -16,20 +15,23 @@ import com.google.gson.annotations.SerializedName;
 
 /**
  * MDM Object Attributes
+ * 
  * @author jieyuan.shen
  */
-public class MdmObjectAttributesGetResponse extends EnvisionResponse {
+public class MdmObjectAttributesGetResponse extends EnvisionResponse
+{
+    private static final long serialVersionUID = 5639495343976077137L;
 
-	private static final long serialVersionUID = 5639495343976077137L;
+    @SerializedName("data")
+    private Map<String, MdmObjectAttributes> mdmObjects;
 
-	@SerializedName("data")
-	private Map<String,MdmObjectAttributes> mdmObjects;
+    public Map<String, MdmObjectAttributes> getMdmObjects()
+    {
+        return mdmObjects;
+    }
 
-	public Map<String, MdmObjectAttributes> getMdmObjects() {
-		return mdmObjects;
-	}
-
-	public void setMdmObjects(Map<String, MdmObjectAttributes> mdmObjects) {
-		this.mdmObjects = mdmObjects;
-	}
+    public void setMdmObjects(Map<String, MdmObjectAttributes> mdmObjects)
+    {
+        this.mdmObjects = mdmObjects;
+    }
 }

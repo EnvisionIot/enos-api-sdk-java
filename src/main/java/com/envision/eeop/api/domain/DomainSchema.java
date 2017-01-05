@@ -52,14 +52,6 @@ public class DomainSchema implements Serializable
     }
 
     /**
-     * @deprecated replaced by setDesc()
-     */
-    public void includeDescription(String desc)
-    {
-        this.desc = desc;
-    }
-
-    /**
      * @deprecated replaced by getSchema() and getDesc()
      */
     public Map<String, String> getSchemaDef()
@@ -71,21 +63,6 @@ public class DomainSchema implements Serializable
             schemaDef.put("desc", desc);
         }
         return schemaDef;
-    }
-
-    /**
-     * @deprecated replaced by setSchema() and setDesc()
-     */
-    public void setSchemaDef(Map<String, String> schemaDef)
-    {
-        if (schemaDef.containsKey("schema"))
-        {
-            schema = schemaDef.get("schema");
-        }
-        if (schemaDef.containsKey("desc"))
-        {
-            desc = schemaDef.get("desc");
-        }
     }
 
     @Override
