@@ -11,7 +11,7 @@ import com.envision.eeop.api.domain.DomainSchema;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * Domain schemas
+ * Domain schemas (TO BE USED IN FUTURE)
  * @author jieyuan.shen
  */
 public class DomainSchemasGetResponseV2 extends EnvisionResponse
