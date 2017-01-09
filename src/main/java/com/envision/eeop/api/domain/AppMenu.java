@@ -13,6 +13,7 @@ public class AppMenu implements Serializable{
     public String appNameZh;
     public boolean isMobile;
     public String appIcon;
+    public String appLink;
     
     public List<Integer> appCatIndex = new ArrayList<>();
     public List<String> appCategory = new ArrayList<>();
