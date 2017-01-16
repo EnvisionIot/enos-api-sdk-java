@@ -20,6 +20,18 @@
         </dependency>
 
         <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpmime</artifactId>
+            <version>4.5.2</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>1.7.7</version>
@@ -39,17 +51,21 @@
             <version>4.12</version>
             <scope>test</scope>
         </dependency>
-
+        
         <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpclient</artifactId>
-            <version>4.5.2</version>
+            <groupId>com.envision.energy</groupId>
+            <artifactId>login-server-share</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>test</scope>
         </dependency>
+        
         <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpmime</artifactId>
-            <version>4.5.2</version>
+            <groupId>com.envision.eos</groupId>
+            <artifactId>eos-commons</artifactId>
+            <version>0.0.3-SNAPSHOT</version>
+            <scope>test</scope>
         </dependency>
+        
     </dependencies>
 
     <build>
