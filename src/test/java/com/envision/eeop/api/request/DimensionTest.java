@@ -30,7 +30,6 @@ import com.envision.energy.login_server.share.data.UserTokenInfo;
 
 /**
  * TODO Comment of DoaminControlTest
- *
  */
 public class DimensionTest
 {
