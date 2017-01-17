@@ -18,8 +18,6 @@ import com.envision.eeop.api.util.EnvisionHashMap;
 import com.envision.eeop.api.util.RuleCheckUtils;
 import com.envision.eeop.api.util.StringUtils;
 
-import io.netty.util.internal.StringUtil;
-
 /**
  * Delete MDM object
  * @author jieyuan.shen
@@ -37,7 +35,7 @@ public class MdmObjectDeleteRequest implements EnvisionRequest<EnvisionResponse>
 
     public List<String> getMdmIDList()
     {
-        return Arrays.asList(StringUtil.split(mdmIDList, ','));
+        return Arrays.asList(StringUtils.split(mdmIDList, ","));
     }
 
     public void setMdmIDList(List<String> mdmIDList)
