@@ -9,6 +9,7 @@ import com.envision.eeop.api.util.EnvisionHashMap;
 import com.envision.eeop.api.util.JsonParser;
 import com.envision.eeop.api.util.RuleCheckUtils;
 import com.envision.eeop.api.util.StringUtils;
+import com.google.gson.reflect.TypeToken;
 
 public class MdmObjectInsertRequest implements EnvisionRequest<MdmObjectInsertResponse>
 {
@@ -82,6 +83,66 @@ public class MdmObjectInsertRequest implements EnvisionRequest<MdmObjectInsertRe
         this.locale = locale;
     }
 
+    public String getParentID()
+    {
+        return parentID;
+    }
+
+    public void setParentID(String parentID)
+    {
+        this.parentID = parentID;
+    }
+
+    public int getCategory()
+    {
+        return Integer.parseInt(category);
+    }
+
+    public void setCategory(int category)
+    {
+        this.category = String.valueOf(category);
+    }
+
+    public int getType()
+    {
+        return Integer.parseInt(type);
+    }
+
+    public void setType(int type)
+    {
+        this.type = String.valueOf(type);
+    }
+
+    public Map<String,String> getAttributes()
+    {
+        return JsonParser.fromJson(attributes, new TypeToken<Map<String,String>>(){}.getType());
+    }
+
+    public void setAttributes(Map<String,String> attributes)
+    {
+        this.attributes = JsonParser.toJson(attributes);
+    }
+
+    public String getMdmID()
+    {
+        return mdmID;
+    }
+
+    public void setMdmID(String mdmID)
+    {
+        this.mdmID = mdmID;
+    }
+
+    public String getLocale()
+    {
+        return locale;
+    }
+
+    public void setLocale(String locale)
+    {
+        this.locale = locale;
+    }
+
     @Override
     public String getApiMethodName()
     {
@@ -121,7 +182,7 @@ public class MdmObjectInsertRequest implements EnvisionRequest<MdmObjectInsertRe
     {
         RuleCheckUtils.checkNotEmpty(parentID, "parentid");
         RuleCheckUtils.checkNotEmpty(type, "type");
-        if (Integer.valueOf(type) < 102)
+        if (Integer.parseInt(type) < 102)
         {
             RuleCheckUtils.checkNotEmpty(category, "category");
         }
