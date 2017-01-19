@@ -27,19 +27,6 @@ public class MdmFilteredObjectsGetRequestTest
     private static String configLocation = "consumer.xml";
     private static ApplicationContext context;
     
-//    private static class AppStartup extends MavenStandardProject
-//    {
-//
-//        @Override
-//        protected List<String> _getSpringXML()
-//        {
-//            return Lists.newArrayList("consumer.xml");
-//            //return super._getSpringXML();
-//        }
-//    }
-//    
-//    private static final AppStartup app = new AppStartup();
-
     static
     {
         context = new ClassPathXmlApplicationContext(configLocation);
@@ -52,7 +39,7 @@ public class MdmFilteredObjectsGetRequestTest
         EnvisionClient client = new EnvisionDefaultClient(GATEWAY, appKey, appSecret);
         
         Response<UserTokenInfo> tokenInfo =  loginService.login(
-                appKey, appSecret, "test", "test", "web");
+                appKey, appSecret, "cimsync_trina", "test", "web");
         
         String token = null;
         if (tokenInfo.getCode() == ResponseCode.successful)
@@ -66,7 +53,7 @@ public class MdmFilteredObjectsGetRequestTest
         }
 
         MdmFilteredObjectsGetRequest request = new MdmFilteredObjectsGetRequest(
-                token, "54", 
+                token, "58", 
                 ImmutableList.<Filter>of(),
                 Lists.<AppointedFilter>newArrayList(),
                 ImmutableList.of("name"));
