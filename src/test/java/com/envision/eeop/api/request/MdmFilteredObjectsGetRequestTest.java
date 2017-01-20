@@ -7,7 +7,6 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.envision.eeop.api.EnvisionClient;
 import com.envision.eeop.api.EnvisionDefaultClient;
 import com.envision.eeop.api.exception.EnvisionApiException;
-import com.envision.eeop.api.response.MdmObjectAttributesGetResponse;
 import com.envision.eeop.api.response.MdmObjectStructureGetResponse;
 import com.envision.eeop.api.response.MdmObjectsGetResponse;
 import com.envision.energy.login_server.share.ILoginService;
@@ -15,7 +14,6 @@ import com.envision.energy.login_server.share.constants.ResponseCode;
 import com.envision.energy.login_server.share.data.Response;
 import com.envision.energy.login_server.share.data.UserTokenInfo;
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Lists;
 
 public class MdmFilteredObjectsGetRequestTest
 {
