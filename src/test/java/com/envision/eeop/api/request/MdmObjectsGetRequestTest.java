@@ -2,6 +2,7 @@ package com.envision.eeop.api.request;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -50,14 +51,20 @@ public class MdmObjectsGetRequestTest {
 	
 	@Test
 	public void testWithTypesAndAttributes() throws EnvisionApiException {
-		List<String> mdmIDList =  Arrays.asList("9184ddb253464235948ac0c521e964a4");
-		List<String> typeList = Arrays.asList("207");
-		List<String> attributeList = Arrays.asList("name", "branches");
+		List<String> mdmIDList =  Arrays.asList("WF0024WTG0001,WF0024");
+		List<String> typeList = Arrays.asList("58");
+		List<String> attributeList = Arrays.asList("name", "timezone");
 
-		MdmObjectsGetRequest request = new MdmObjectsGetRequest(mdmIDList, typeList, attributeList);
-
-		MdmObjectsGetResponse response = client.execute(request);
-		System.out.println(response.getBody());
-		System.out.println(response.toString());		
+		MdmObjectsGetRequest request = new MdmObjectsGetRequest(
+		        mdmIDList, typeList, attributeList, Locale.CHINA.toString());
+		MdmObjectsGetResponse response = client.execute(request, "token-white-line");
+		
+		// How to get name:
+		System.out.println(response.getMdmChildObjects()
+		        .get("WF0024WTG0001").getAttributes().get("name"));
+		// How to get timezone:
+		System.out.println(response.getMdmChildObjects()
+		        .get("WF0024WTG0001").getMdmObjectList().get("58")
+		        .iterator().next().getAttributes().get("timezone"));
 	}
 }

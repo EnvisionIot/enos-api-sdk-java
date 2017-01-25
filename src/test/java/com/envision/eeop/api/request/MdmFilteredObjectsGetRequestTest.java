@@ -17,8 +17,8 @@ import com.google.common.collect.ImmutableList;
 
 public class MdmFilteredObjectsGetRequestTest
 {
-    private final static String GATEWAY = "http://172.16.33.223:8080/eeop";
-//    private final static String GATEWAY = "http://localhost:8080/eeop";
+//    private final static String GATEWAY = "http://172.16.33.223:8080/eeop";
+    private final static String GATEWAY = "http://localhost:8080/eeop";
     
     private final static String appKey = "9e7b9345-565d-400f-acc9-422bf13297b1";
     private final static String appSecret = "DEB7709FACCB019F373D36A2D563EAC1";
