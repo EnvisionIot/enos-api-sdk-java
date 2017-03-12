@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.envision.energy.sdk</groupId>
     <artifactId>eeop</artifactId>
-    <version>0.0.8.1-SNAPSHOT</version>
+    <version>0.0.8.2-SNAPSHOT</version>
     <name>Envision Energy Open Platform</name>
 
     <properties>
@@ -58,7 +58,7 @@
             <version>0.0.1-SNAPSHOT</version>
             <scope>test</scope>
         </dependency>
-        
+
         <dependency>
             <groupId>com.envision.eos</groupId>
             <artifactId>eos-commons</artifactId>

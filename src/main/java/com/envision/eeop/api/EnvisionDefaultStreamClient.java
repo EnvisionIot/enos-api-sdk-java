@@ -24,6 +24,7 @@ import java.util.Map;
  * Created by changyi.yuan on 2016/10/18.
  */
 public class EnvisionDefaultStreamClient implements EnvisionStreamClient {
+    @SuppressWarnings("unused")
     private static Logger logger = LoggerFactory
             .getLogger(EnvisionDefaultStreamClient.class);
 
