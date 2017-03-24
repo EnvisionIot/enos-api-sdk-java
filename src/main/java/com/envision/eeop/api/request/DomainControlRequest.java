@@ -56,7 +56,7 @@ public class DomainControlRequest implements EnvisionRequest<EnvisionResponse> {
         txtParams.put("point", point);
         
         if(!StringUtils.isEmpty(parameter)){
-        	 txtParams.put("parameter", txtParams);
+        	 txtParams.put("parameter", parameter);
         }
 
         return txtParams;
