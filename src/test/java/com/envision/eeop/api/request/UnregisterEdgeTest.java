@@ -1,5 +1,8 @@
 package com.envision.eeop.api.request;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
 
 import org.junit.Test;
@@ -12,6 +15,7 @@ import com.envision.eeop.api.EnvisionResponse;
 import com.envision.eeop.api.domain.MdmObject;
 import com.envision.eeop.api.exception.EnvisionApiException;
 import com.envision.eeop.api.response.MdmObjectsGetResponse;
+import com.google.common.base.Charsets;
 import com.google.common.base.Splitter;
 import com.google.common.collect.ImmutableList;
 
@@ -30,6 +34,20 @@ public class UnregisterEdgeTest
 
     private static EnvisionClient registerClient = new EnvisionDefaultClient(
             "http://10.21.10.13:8080/eeop", "HEMS_REGISTER_TEST", "dummy");
+
+    @Test
+    public void unregisterInvalidBox() throws EnvisionApiException, IOException
+    {
+        // load box ids
+        List<String> boxIDs = Files.readAllLines(Paths.get("sites.csv"), Charsets.UTF_8);
+
+        for (String boxID: boxIDs)
+        {
+            EdgeUnregisterRequest edgeUnregisterRequest = new EdgeUnregisterRequest(boxID);
+            EnvisionResponse response = registerClient.execute(edgeUnregisterRequest, "token-white-line");
+            System.out.println("unregister " + boxID + ", result: " + response.getStatus());
+        }
+    }
 
     @Test
     public void unregisterAll() throws EnvisionApiException
