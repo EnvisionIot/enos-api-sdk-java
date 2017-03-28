@@ -2,6 +2,7 @@ package com.envision.eeop.api.request;
 
 import com.envision.eeop.api.EnvisionRequest;
 import com.envision.eeop.api.exception.EnvisionRuleException;
+import com.envision.eeop.api.response.DomainDetailsGetResponseV2;
 import com.envision.eeop.api.response.DomainMetricsGetResponse;
 import com.envision.eeop.api.util.EnvisionHashMap;
 
@@ -12,7 +13,7 @@ import java.util.Map;
  * <p/>
  * Created by changyi.yuan on 2016/6/19.
  */
-public class DomainDetailsGetRequestV2 implements EnvisionRequest<DomainMetricsGetResponse> {
+public class DomainDetailsGetRequestV2 implements EnvisionRequest<DomainDetailsGetResponseV2> {
     private static final String API_METHOD = "/domainService/detailsV2";
 
     private String mdmId;
@@ -80,8 +81,8 @@ public class DomainDetailsGetRequestV2 implements EnvisionRequest<DomainMetricsG
         return txtParams;
     }
 
-    public Class<DomainMetricsGetResponse> getResponseClass() {
-        return DomainMetricsGetResponse.class;
+    public Class<DomainDetailsGetResponseV2> getResponseClass() {
+        return DomainDetailsGetResponseV2.class;
     }
 
     @Override
