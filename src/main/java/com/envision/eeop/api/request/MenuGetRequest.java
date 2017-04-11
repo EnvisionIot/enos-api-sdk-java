@@ -15,12 +15,14 @@ public class MenuGetRequest implements EnvisionRequest<MenuGetResponse>{
     private String token;            // mandatory
     private String spaceId;          // mandatory
     private String locale;           // optional
+    private String userId;           // optional
     
     public MenuGetRequest(String siteId, String token, String spaceId){
         this.siteId = siteId;
         this.token = token;
         this.spaceId = spaceId;
         this.locale = "";
+        this.userId = "";
     }
     
     public MenuGetRequest(String siteId, String token, String spaceId, String locale){
@@ -28,6 +30,15 @@ public class MenuGetRequest implements EnvisionRequest<MenuGetResponse>{
         this.token = token;
         this.spaceId = spaceId;
         this.locale = locale;
+        this.userId = "";
+    }
+    
+    public MenuGetRequest(String siteId, String token, String spaceId, String locale, String userId){
+        this.siteId = siteId;
+        this.token = token;
+        this.spaceId = spaceId;
+        this.locale = locale;
+        this.userId = userId;
     }
     
     public String getApiMethodName(){
@@ -41,6 +52,7 @@ public class MenuGetRequest implements EnvisionRequest<MenuGetResponse>{
         txtParams.put("token", token);
         txtParams.put("spaceId", spaceId);
         txtParams.put("locale", locale);
+        txtParams.put("userId", userId);
         
         return txtParams;
     }
