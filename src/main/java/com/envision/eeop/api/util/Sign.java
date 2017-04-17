@@ -65,7 +65,10 @@ public class Sign
 
         //Assembly string
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(appKey);
+        if (appKey != null)
+        {
+            stringBuilder.append(appKey);
+        }
         for(String key : keyArray)
         {
             stringBuilder.append(key).append(paramMap.get(key));
@@ -171,5 +174,11 @@ public class Sign
     public static String sign(String appKey, String secret, Map<String, String> paramMap)
     {
         return sign(appKey, secret, paramMap, Constants.KEY_SHA);
+    }
+
+    //Default signature algorithm : SHA
+    public static String sign(String secret, Map<String, String> paramMap)
+    {
+        return sign(null, secret, paramMap, Constants.KEY_SHA);
     }
 }
