@@ -3,7 +3,6 @@ package com.envision.eeop.api.request;
 import com.envision.eeop.api.EnvisionRequest;
 import com.envision.eeop.api.exception.EnvisionRuleException;
 import com.envision.eeop.api.response.DomainDetailsGetResponseV2;
-import com.envision.eeop.api.response.DomainMetricsGetResponse;
 import com.envision.eeop.api.util.EnvisionHashMap;
 
 import java.util.Map;
