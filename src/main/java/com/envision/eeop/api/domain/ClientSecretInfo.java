@@ -7,32 +7,32 @@ public class ClientSecretInfo implements Serializable
 {
     private static final long serialVersionUID = 2368630024167282491L;
 
-    private String boxInfo;             // boxInfo encrypted by license public key
-    private String clientSecret;        // client secret encrypted by license public key
+    private String encryptedBoxInfo;             // boxInfo encrypted by license public key
+    private String encryptedClientSecret;        // client secret encrypted by license public key
 
-    public String getBoxInfo()
+    public String getEncryptedBoxInfo()
     {
-        return boxInfo;
+        return encryptedBoxInfo;
     }
 
-    public void setBoxInfo(String boxInfo)
+    public void setEncryptedBoxInfo(String encryptedBoxInfo)
     {
-        this.boxInfo = boxInfo;
+        this.encryptedBoxInfo = encryptedBoxInfo;
     }
 
-    public String getClientSecret()
+    public String getEncryptedClientSecret()
     {
-        return clientSecret;
+        return encryptedClientSecret;
     }
 
-    public void setClientSecret(String clientSecret)
+    public void setEncryptedClientSecret(String encryptedClientSecret)
     {
-        this.clientSecret = clientSecret;
+        this.encryptedClientSecret = encryptedClientSecret;
     }
 
     @Override
     public String toString()
     {
-        return "ClientSecretInfo [boxInfo=" + boxInfo + ", clientSecret=" + clientSecret + "]";
+        return "ClientSecretInfo [encryptedBoxInfo=" + encryptedBoxInfo + ", encryptedClientSecret=" + encryptedClientSecret + "]";
     }
 }
