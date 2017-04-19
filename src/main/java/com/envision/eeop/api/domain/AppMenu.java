@@ -2,7 +2,10 @@ package com.envision.eeop.api.domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class AppMenu implements Serializable{
     private static final long serialVersionUID = -3356249611399229124L;
@@ -18,4 +21,5 @@ public class AppMenu implements Serializable{
     public List<Integer> appCatIndex = new ArrayList<>();
     public List<String> appCategory = new ArrayList<>();
     public List<ModuleInfo> modules = new ArrayList<>();
+    public Map<String, Set<String>> permissionMap = new HashMap<>();
 }
