@@ -19,6 +19,16 @@ public class MdmObjectConfigInfo implements Serializable
     
     private String mdmID;
     private int domainID;
+    
+    public MdmObjectConfigInfo()
+    {
+    }
+    
+    public MdmObjectConfigInfo(String mdmID, int domainID)
+    {
+        this.mdmID = mdmID;
+        this.domainID = domainID;
+    }
 
     public String getMdmID()
     {
