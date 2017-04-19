@@ -1,8 +1,6 @@
 package com.envision.eeop.api.response;
 
 import com.envision.eeop.api.EnvisionResponse;
-import com.envision.eeop.api.domain.ClientSecretInfo;
-import com.google.gson.annotations.SerializedName;
 
 /**
  * Response for client activation
@@ -11,22 +9,32 @@ public class ClientActivateResponse extends EnvisionResponse
 {
     private static final long serialVersionUID = 7394419251870779384L;
 
-    @SerializedName("data")
-    private ClientSecretInfo clientSecretInfo;
+    private String encryptedBoxInfo;             // boxInfo encrypted by license public key
+    private String encryptedClientSecret;        // client secret encrypted by license public key
 
-    public ClientSecretInfo getClientSecretInfo()
+    public String getEncryptedBoxInfo()
     {
-        return clientSecretInfo;
+        return encryptedBoxInfo;
     }
 
-    public void setClientSecretInfo(ClientSecretInfo clientSecretInfo)
+    public void setEncryptedBoxInfo(String encryptedBoxInfo)
     {
-        this.clientSecretInfo = clientSecretInfo;
+        this.encryptedBoxInfo = encryptedBoxInfo;
+    }
+
+    public String getEncryptedClientSecret()
+    {
+        return encryptedClientSecret;
+    }
+
+    public void setEncryptedClientSecret(String encryptedClientSecret)
+    {
+        this.encryptedClientSecret = encryptedClientSecret;
     }
 
     @Override
     public String toString()
     {
-        return "ClientActivateResponse [clientSecretInfo=" + clientSecretInfo + "]";
+        return "ClientActivateResponse [encryptedBoxInfo=" + encryptedBoxInfo + ", encryptedClientSecret=" + encryptedClientSecret + "]";
     }
 }
