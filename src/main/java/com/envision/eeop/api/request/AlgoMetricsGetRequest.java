@@ -2,6 +2,7 @@ package com.envision.eeop.api.request;
 
 import com.envision.eeop.api.EnvisionRequest;
 import com.envision.eeop.api.exception.EnvisionRuleException;
+import com.envision.eeop.api.response.AlgoMetricsGetResponse;
 import com.envision.eeop.api.response.DomainMetricsGetResponse;
 import com.envision.eeop.api.util.EnvisionHashMap;
 import com.envision.eeop.api.util.StringUtils;
@@ -12,12 +13,12 @@ import java.util.Map;
 /**
  * Created by changyi.yuan on 2016/6/19.
  */
-public class AlgoMetricsGetRequest implements EnvisionRequest<DomainMetricsGetResponse> {
-    private static final String API_METHOD = "/algoService/domainPoints";
+public class AlgoMetricsGetRequest implements EnvisionRequest<AlgoMetricsGetResponse> {
+    private static final String API_METHOD = "/algoService/metrics";
 
     private String mdmIDList;
 
-    private String domainPoints;
+    private String metrics;
 
     private String beginTime;
 
@@ -31,21 +32,21 @@ public class AlgoMetricsGetRequest implements EnvisionRequest<DomainMetricsGetRe
     }
 
     public AlgoMetricsGetRequest(List<String> mdmIds,
-                                 List<String> domainPoints,
+                                 List<String> metrics,
                                  String beginTime,
                                  String timeGroup) {
         this.mdmIDList = StringUtils.listToString(mdmIds, ',');
-        this.domainPoints = StringUtils.listToString(domainPoints, ',');
+        this.metrics = StringUtils.listToString(metrics, ',');
         this.beginTime = beginTime;
         this.timeGroup = timeGroup;
     }
 
     public AlgoMetricsGetRequest(List<String> mdmIds,
-                                 List<String> domainPoints,
+                                 List<String> metrics,
                                  String beginTime,
                                  String endTime,
                                  String timeGroup) {
-        this(mdmIds, domainPoints, beginTime, timeGroup);
+        this(mdmIds, metrics, beginTime, timeGroup);
         this.endTime = endTime;
     }
 
@@ -53,7 +54,7 @@ public class AlgoMetricsGetRequest implements EnvisionRequest<DomainMetricsGetRe
         EnvisionHashMap txtParams = new EnvisionHashMap();
 
         txtParams.put("mdmids", mdmIDList);
-        txtParams.put("domainPoints", domainPoints);
+        txtParams.put("metrics", metrics);
         txtParams.put("begin_time", beginTime);
         txtParams.put("end_time", endTime);
         txtParams.put("time_group", timeGroup);
@@ -61,8 +62,8 @@ public class AlgoMetricsGetRequest implements EnvisionRequest<DomainMetricsGetRe
         return txtParams;
     }
 
-    public Class<DomainMetricsGetResponse> getResponseClass() {
-        return DomainMetricsGetResponse.class;
+    public Class<AlgoMetricsGetResponse> getResponseClass() {
+        return AlgoMetricsGetResponse.class;
     }
 
     public void check() throws EnvisionRuleException {

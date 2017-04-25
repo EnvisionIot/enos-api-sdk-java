@@ -12,14 +12,14 @@ import java.util.Map;
 public class AlgoMetricsGetResponse extends EnvisionResponse {
     private static final long serialVersionUID = 8127279315171206933L;
 
-    @SerializedName("domainPoints")
-    private List<Map<String, String>> algoMetricList;
+    @SerializedName("metrics")
+    private List<Map<String, String>> metricList;
 
-    public List<Map<String, String>> getAlgoMetricList() {
-        return algoMetricList;
+    public List<Map<String, String>> getMetricList() {
+        return metricList;
     }
 
-    public void setAlgoMetricList(List<Map<String, String>> algoMetricList) {
-        this.algoMetricList = algoMetricList;
+    public void setMetricList(List<Map<String, String>> metricList) {
+        this.metricList = metricList;
     }
 }
