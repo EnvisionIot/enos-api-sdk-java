@@ -1,6 +1,7 @@
 package com.envision.eeop.api;
 
 import com.envision.eeop.api.exception.EnvisionApiException;
+import com.envision.eeop.api.request.AbstractEnvisionStreamRequest;
 import com.envision.eeop.api.request.FileDownloadRequest;
 import com.envision.eeop.api.request.FileUploadRequest;
 import com.envision.eeop.api.util.Sign;
@@ -72,7 +73,7 @@ public class EnvisionDefaultStreamClient implements EnvisionStreamClient {
     }
 
     @Override
-    public boolean download(FileDownloadRequest request, String token) throws EnvisionApiException, IOException {
+    public boolean download(AbstractEnvisionStreamRequest request, String token) throws EnvisionApiException, IOException {
         String url = makeUrl(request.getTextParams(), request.getApiMethodName());
         CloseableHttpClient client = HttpClients.createDefault();
 
@@ -83,7 +84,7 @@ public class EnvisionDefaultStreamClient implements EnvisionStreamClient {
 
         InputStream is = response.getEntity().getContent();
         BufferedInputStream bis = new BufferedInputStream(is);
-        BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(request.getResult()));
+        BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(request.getFile()));
         byte[] b = new byte[1024];
         int len = 0;
         while ((len = bis.read(b, 0, b.length)) != -1) {
@@ -96,11 +97,11 @@ public class EnvisionDefaultStreamClient implements EnvisionStreamClient {
         return true;
     }
 
-    public boolean upload(FileUploadRequest request, String token) throws EnvisionApiException, IOException {
+    public boolean upload(AbstractEnvisionStreamRequest request, String token) throws EnvisionApiException, IOException {
         String url = makeUrl(request.getTextParams(), request.getApiMethodName());
         CloseableHttpClient client = HttpClients.createDefault();
 
-        HttpResponse response = execute(client, url, request.getFileParams(), request.getTextParams());
+        HttpResponse response = execute(client, url, request.getFile(), request.getTextParams());
 
         if (response == null || response.getStatusLine().getStatusCode() != 200)
             return false;
@@ -108,17 +109,15 @@ public class EnvisionDefaultStreamClient implements EnvisionStreamClient {
         return true;
     }
 
-    private HttpResponse execute(CloseableHttpClient client, String url, Map<String, File> fileBodys, Map<String, String> stringBodys) throws IOException {
+    private HttpResponse execute(CloseableHttpClient client, String url, File file, Map<String, String> stringBodys) throws IOException {
         HttpPost post = new HttpPost(url);
 
         MultipartEntityBuilder builder = MultipartEntityBuilder.create();
         builder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
 
-        if (fileBodys != null) {
-            for (String key : fileBodys.keySet()) {
-                FileBody fileBody = new FileBody(fileBodys.get(key), ContentType.DEFAULT_BINARY);
-                builder.addPart(key, fileBody);
-            }
+        if (file != null) {
+            FileBody fileBody = new FileBody(file, ContentType.DEFAULT_BINARY);
+            builder.addPart("data", fileBody);
         }
         if (stringBodys != null) {
             for (String key : stringBodys.keySet()) {

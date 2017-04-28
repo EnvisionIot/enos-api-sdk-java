@@ -2,6 +2,7 @@ package com.envision.eeop.api;
 
 import com.envision.eeop.api.exception.EnvisionApiException;
 import com.envision.eeop.api.exception.EnvisionIOException;
+import com.envision.eeop.api.request.AbstractEnvisionStreamRequest;
 import com.envision.eeop.api.request.FileDownloadRequest;
 import com.envision.eeop.api.request.FileUploadRequest;
 
@@ -24,10 +25,10 @@ public interface EnvisionStreamClient {
      * @return
      * @throws EnvisionApiException
      */
-    public boolean download(FileDownloadRequest request, String token) throws EnvisionApiException, IOException;
+    public boolean download(AbstractEnvisionStreamRequest request, String token) throws EnvisionApiException, IOException;
 
     /**
-     *  streaming upload
+     * streaming upload
      *
      * @param request
      * @param token
@@ -35,5 +36,5 @@ public interface EnvisionStreamClient {
      * @throws EnvisionApiException
      * @throws IOException
      */
-    public boolean upload(FileUploadRequest request, String token) throws EnvisionApiException, IOException;
+    public boolean upload(AbstractEnvisionStreamRequest request, String token) throws EnvisionApiException, IOException;
 }

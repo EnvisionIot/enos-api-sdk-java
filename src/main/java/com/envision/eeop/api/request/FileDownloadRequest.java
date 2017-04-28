@@ -12,14 +12,12 @@ import java.util.Map;
 /**
  * Created by changyi.yuan on 2016/10/18.
  */
-public class FileDownloadRequest implements EnvisionRequest<EnvisionResponse> {
+public class FileDownloadRequest extends AbstractEnvisionStreamRequest {
     private static final String API_METHOD = "/fileService/download";
 
     private String mdmId;
 
     private String timestamp;
-
-    private File result;
 
     public String getTimestamp() {
         return timestamp;
@@ -37,18 +35,10 @@ public class FileDownloadRequest implements EnvisionRequest<EnvisionResponse> {
         this.mdmId = mdmId;
     }
 
-    public File getResult() {
-        return result;
-    }
-
-    public void setResult(File result) {
-        this.result = result;
-    }
-
-    public FileDownloadRequest(String mdmId, String timestamp, File result) {
+    public FileDownloadRequest(String mdmId, String timestamp, File file) {
         this.mdmId = mdmId;
         this.timestamp = timestamp;
-        this.result = result;
+        this.file = file;
     }
 
     public String getApiMethodName() {

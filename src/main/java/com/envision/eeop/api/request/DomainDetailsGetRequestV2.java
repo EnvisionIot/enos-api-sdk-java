@@ -2,28 +2,28 @@ package com.envision.eeop.api.request;
 
 import com.envision.eeop.api.EnvisionRequest;
 import com.envision.eeop.api.exception.EnvisionRuleException;
-import com.envision.eeop.api.response.DomainDetailsGetResponseV2;
+import com.envision.eeop.api.response.DomainMetricsGetResponse;
 import com.envision.eeop.api.util.EnvisionHashMap;
+import com.envision.eeop.api.util.StringUtils;
 
+import java.util.List;
 import java.util.Map;
 
 /**
- * DomainDetailGetRequest version 2
- * <p/>
  * Created by changyi.yuan on 2016/6/19.
  */
-public class DomainDetailsGetRequestV2 implements EnvisionRequest<DomainDetailsGetResponseV2> {
+public class DomainDetailsGetRequestV2 implements EnvisionRequest<DomainMetricsGetResponse> {
     private static final String API_METHOD = "/domainService/detailsV2";
 
-    private String mdmId;
+    private String mdmIDList;
 
-    private String metric;
+    private String metricList;
 
     private String beginTime;
 
     private String endTime;
 
-    private String interval;
+    private Integer interval;
 
     private Integer limit;
 
@@ -32,46 +32,46 @@ public class DomainDetailsGetRequestV2 implements EnvisionRequest<DomainDetailsG
         return API_METHOD;
     }
 
-    public DomainDetailsGetRequestV2(String mdmId,
-                                     String metric,
+    public DomainDetailsGetRequestV2(List<String> mdmIds,
+                                     List<String> metrics,
                                      String beginTime) {
-        this(mdmId, metric, beginTime, null);
+        this.mdmIDList = StringUtils.listToString(mdmIds, ',');
+        this.metricList = StringUtils.listToString(metrics, ',');
+        this.beginTime = beginTime;
     }
 
-    public DomainDetailsGetRequestV2(String mdmId,
-                                     String metric,
+    public DomainDetailsGetRequestV2(List<String> mdmIds,
+                                     List<String> metrics,
                                      String beginTime,
                                      String endTime) {
-        this(mdmId, metric, beginTime, endTime, null);
-    }
-
-    public DomainDetailsGetRequestV2(String mdmId,
-                                     String metric,
-                                     String beginTime,
-                                     String endTime,
-                                     String interval) {
-        this(mdmId, metric, beginTime, endTime, interval, null);
-    }
-
-    public DomainDetailsGetRequestV2(String mdmIDList,
-                                     String metricList,
-                                     String beginTime,
-                                     String endTime,
-                                     String interval,
-                                     Integer limit) {
-        this.mdmId = mdmIDList;
-        this.metric = metricList;
-        this.beginTime = beginTime;
+        this(mdmIds, metrics, beginTime);
         this.endTime = endTime;
+    }
+
+    public DomainDetailsGetRequestV2(List<String> mdmIds,
+                                     List<String> metrics,
+                                     String beginTime,
+                                     String endTime,
+                                     Integer interval) {
+        this(mdmIds, metrics, beginTime, endTime);
         this.interval = interval;
+    }
+
+    public DomainDetailsGetRequestV2(List<String> mdmIds,
+                                     List<String> metrics,
+                                     String beginTime,
+                                     String endTime,
+                                     Integer interval,
+                                     Integer limit) {
+        this(mdmIds, metrics, beginTime, endTime, interval);
         this.limit = limit;
     }
 
     public Map<String, String> getTextParams() {
         EnvisionHashMap txtParams = new EnvisionHashMap();
 
-        txtParams.put("mdmid", mdmId);
-        txtParams.put("metric", metric);
+        txtParams.put("mdmids", mdmIDList);
+        txtParams.put("metrics", metricList);
         txtParams.put("begin_time", beginTime);
         txtParams.put("end_time", endTime);
         txtParams.put("interval", interval);
@@ -80,13 +80,14 @@ public class DomainDetailsGetRequestV2 implements EnvisionRequest<DomainDetailsG
         return txtParams;
     }
 
-    public Class<DomainDetailsGetResponseV2> getResponseClass() {
-        return DomainDetailsGetResponseV2.class;
+    public Class<DomainMetricsGetResponse> getResponseClass() {
+        return DomainMetricsGetResponse.class;
     }
 
-    @Override
     public void check() throws EnvisionRuleException {
-
+//        RuleCheckUtils.checkNotEmpty(mdmIDList, "mdmIds");
+//        RuleCheckUtils.checkNotEmpty(metricList, "metrics");
+//        RuleCheckUtils.checkNotEmpty(beginTime, "begin_time");
+//        RuleCheckUtils.checkDateFormat(beginTime, "begin_time", endTime, "end_time");
     }
-
 }
