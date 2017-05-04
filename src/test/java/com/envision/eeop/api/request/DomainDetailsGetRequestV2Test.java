@@ -3,7 +3,6 @@ package com.envision.eeop.api.request;
 import com.envision.eeop.api.EnvisionClient;
 import com.envision.eeop.api.EnvisionDefaultClient;
 import com.envision.eeop.api.exception.EnvisionApiException;
-import com.envision.eeop.api.response.DomainDetailsGetResponseV2;
 import com.envision.eeop.api.response.DomainMetricsGetResponse;
 import com.google.common.collect.Lists;
 import org.junit.Test;

@@ -4,7 +4,6 @@ import com.envision.eeop.api.EnvisionClient;
 import com.envision.eeop.api.EnvisionDefaultClient;
 import com.envision.eeop.api.exception.EnvisionApiException;
 import com.envision.eeop.api.response.AlgoMetricsGetResponse;
-import com.envision.eeop.api.response.DomainMetricsGetResponse;
 import org.junit.Test;
 
 import java.util.ArrayList;
