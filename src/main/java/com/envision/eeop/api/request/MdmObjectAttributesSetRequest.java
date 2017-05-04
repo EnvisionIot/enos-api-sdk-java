@@ -7,9 +7,10 @@
  */
 package com.envision.eeop.api.request;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import com.envision.eeop.api.EnvisionRequest;
 import com.envision.eeop.api.EnvisionResponse;
@@ -17,33 +18,25 @@ import com.envision.eeop.api.exception.EnvisionRuleException;
 import com.envision.eeop.api.util.EnvisionHashMap;
 import com.envision.eeop.api.util.RuleCheckUtils;
 import com.envision.eeop.api.util.StringUtils;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 public class MdmObjectAttributesSetRequest implements EnvisionRequest<EnvisionResponse>
 {
     private static final String API_METHOD = "/mdmService/setObjectAttributes";
 
     private String mdmID;               // mandatory
-    private String attributeList;       // mandatory
+    @SuppressWarnings("unused")
+    @Deprecated
+    private String attributeList;       // deprecated
+    private Map<String,Object> attributeJson = new HashMap<>();         // mandatory
     private String locale;              // optional
     private String defaultLocale;       // optional
-
+    
     public MdmObjectAttributesSetRequest(String mdmID, Map<String, String> attributeValues)
     {
         this.mdmID = mdmID;
-        List<String> attributes = new ArrayList<String>();
-        for(String attribute : attributeValues.keySet())
-        {
-            attributes.add(attribute + ":\"" + attributeValues.get(attribute));
-        }
-        if(!attributes.isEmpty())
-        {
-            attributeList = StringUtils.listToString(attributes, "\",");
-            attributeList = attributeList.concat("\"");
-        }
-        else
-        {
-            attributeList = "";
-        }
+        this.attributeJson.putAll(attributeValues);
     }
 
     public MdmObjectAttributesSetRequest(String mdmID, Map<String, String> attributeValues, 
@@ -64,14 +57,45 @@ public class MdmObjectAttributesSetRequest implements EnvisionRequest<EnvisionRe
         this.mdmID = mdmID;
     }
 
-    public String getAttributeList()
+    public Map<String, Object> getAttributeJson()
     {
-        return attributeList;
+        return attributeJson;
     }
 
+    public void setAttributeJson(Map<String, Object> attributeJson)
+    {
+        this.attributeJson = attributeJson;
+    }
+
+    /**
+     * @deprecated use {@link #getAttributeJson()} instead
+     */
+    public String getAttributeList()
+    {
+        StringBuffer sb = new StringBuffer();
+        Iterator<Entry<String,Object>> it = attributeJson.entrySet().iterator();
+        while (it.hasNext())
+        {
+            Entry<String,Object> entry = it.next();
+            sb.append(entry.getKey()).append(":\"")
+              .append(entry.getValue())
+              .append(it.hasNext() ? "\"," : "\"");
+        }
+        return sb.toString();
+    }
+
+    /**
+     * @deprecated use {@link #setAttributeJson(Map)} instead
+     */
     public void setAttributeList(String attributeList)
     {
-        this.attributeList = attributeList;
+        String[] attributeValues = StringUtils.split(
+                attributeList.substring(0, attributeList.length() - 1), "\",");
+        for (String attributeValue: attributeValues)
+        {
+            String[] keyValue = StringUtils.split(attributeValue, ":\"");
+            this.attributeJson.put(keyValue[0], keyValue[1]);
+        }
     }
 
     public String getApiMethodName()
@@ -83,7 +107,8 @@ public class MdmObjectAttributesSetRequest implements EnvisionRequest<EnvisionRe
     {
         EnvisionHashMap txtParams = new EnvisionHashMap();
         txtParams.put("mdmid", mdmID);
-        txtParams.put("attributes", attributeList);
+        txtParams.put("attributeValues", 
+                new Gson().toJson(attributeJson, new TypeToken<Map<String,String>>(){}.getType()));
         if (!StringUtils.isEmpty(locale))
         {
             txtParams.put("locale", locale);
@@ -104,6 +129,6 @@ public class MdmObjectAttributesSetRequest implements EnvisionRequest<EnvisionRe
     public void check() throws EnvisionRuleException
     {
         RuleCheckUtils.checkNotEmpty(mdmID, "mdmid");
-        RuleCheckUtils.checkNotEmpty(attributeList, "attributes");
+        RuleCheckUtils.checkNotEmpty(attributeJson, "attributeValues");
     }
 }

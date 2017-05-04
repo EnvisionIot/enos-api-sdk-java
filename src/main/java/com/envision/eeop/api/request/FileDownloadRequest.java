@@ -1,6 +1,5 @@
 package com.envision.eeop.api.request;
 
-import com.envision.eeop.api.EnvisionRequest;
 import com.envision.eeop.api.EnvisionResponse;
 import com.envision.eeop.api.exception.EnvisionRuleException;
 import com.envision.eeop.api.util.RuleCheckUtils;

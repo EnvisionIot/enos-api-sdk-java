@@ -2,8 +2,6 @@ package com.envision.eeop.api;
 
 import com.envision.eeop.api.exception.EnvisionApiException;
 import com.envision.eeop.api.request.AbstractEnvisionStreamRequest;
-import com.envision.eeop.api.request.FileDownloadRequest;
-import com.envision.eeop.api.request.FileUploadRequest;
 import com.envision.eeop.api.util.Sign;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -74,9 +72,11 @@ public class EnvisionDefaultStreamClient implements EnvisionStreamClient {
 
     @Override
     public boolean download(AbstractEnvisionStreamRequest request, String token) throws EnvisionApiException, IOException {
+        @SuppressWarnings("unchecked")
         String url = makeUrl(request.getTextParams(), request.getApiMethodName());
         CloseableHttpClient client = HttpClients.createDefault();
 
+        @SuppressWarnings("unchecked")
         HttpResponse response = execute(client, url, null, request.getTextParams());
 
         if (response == null || response.getStatusLine().getStatusCode() != 200)
@@ -98,9 +98,11 @@ public class EnvisionDefaultStreamClient implements EnvisionStreamClient {
     }
 
     public boolean upload(AbstractEnvisionStreamRequest request, String token) throws EnvisionApiException, IOException {
+        @SuppressWarnings("unchecked")
         String url = makeUrl(request.getTextParams(), request.getApiMethodName());
         CloseableHttpClient client = HttpClients.createDefault();
 
+        @SuppressWarnings("unchecked")
         HttpResponse response = execute(client, url, request.getFile(), request.getTextParams());
 
         if (response == null || response.getStatusLine().getStatusCode() != 200)

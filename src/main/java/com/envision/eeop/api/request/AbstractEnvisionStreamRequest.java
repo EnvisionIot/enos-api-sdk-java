@@ -7,6 +7,7 @@ import java.io.File;
 /**
  * Created by changyi.yuan on 2017/4/26.
  */
+@SuppressWarnings("rawtypes")
 public abstract class AbstractEnvisionStreamRequest implements EnvisionRequest {
     protected File file;
 

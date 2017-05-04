@@ -6,8 +6,10 @@ import com.envision.eeop.api.request.Filter;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import com.google.gson.reflect.TypeToken;
 
@@ -25,6 +27,16 @@ public class RuleCheckUtils {
         }
         if (value instanceof String) {
             if (((String) value).trim().length() == 0) {
+                throw new EnvisionRuleException(ERROR_CODE_ARGUMENTS_MISS, "client-error:Missing Required Arguments:" + fieldName + "");
+            }
+        }
+        else if (value instanceof Collection<?>) {
+            if (((Collection<?>) value).isEmpty()) {
+                throw new EnvisionRuleException(ERROR_CODE_ARGUMENTS_MISS, "client-error:Missing Required Arguments:" + fieldName + "");
+            }
+        }
+        else if (value instanceof Map<?,?>) {
+            if (((Map<?,?>) value).isEmpty()) {
                 throw new EnvisionRuleException(ERROR_CODE_ARGUMENTS_MISS, "client-error:Missing Required Arguments:" + fieldName + "");
             }
         }
