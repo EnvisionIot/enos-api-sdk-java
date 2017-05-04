@@ -29,7 +29,7 @@ public class MdmObjectAttributesSetRequest implements EnvisionRequest<EnvisionRe
     @SuppressWarnings("unused")
     @Deprecated
     private String attributeList;       // deprecated
-    private Map<String,Object> attributeJson = new HashMap<>();         // mandatory
+    private Map<String,String> attributeJson = new HashMap<>();         // mandatory
     private String locale;              // optional
     private String defaultLocale;       // optional
     
@@ -57,12 +57,12 @@ public class MdmObjectAttributesSetRequest implements EnvisionRequest<EnvisionRe
         this.mdmID = mdmID;
     }
 
-    public Map<String, Object> getAttributeJson()
+    public Map<String, String> getAttributeJson()
     {
         return attributeJson;
     }
 
-    public void setAttributeJson(Map<String, Object> attributeJson)
+    public void setAttributeJson(Map<String, String> attributeJson)
     {
         this.attributeJson = attributeJson;
     }
@@ -73,10 +73,10 @@ public class MdmObjectAttributesSetRequest implements EnvisionRequest<EnvisionRe
     public String getAttributeList()
     {
         StringBuffer sb = new StringBuffer();
-        Iterator<Entry<String,Object>> it = attributeJson.entrySet().iterator();
+        Iterator<Entry<String,String>> it = attributeJson.entrySet().iterator();
         while (it.hasNext())
         {
-            Entry<String,Object> entry = it.next();
+            Entry<String,String> entry = it.next();
             sb.append(entry.getKey()).append(":\"")
               .append(entry.getValue())
               .append(it.hasNext() ? "\"," : "\"");
