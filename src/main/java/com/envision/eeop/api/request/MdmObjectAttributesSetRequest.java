@@ -109,6 +109,8 @@ public class MdmObjectAttributesSetRequest implements EnvisionRequest<EnvisionRe
         txtParams.put("mdmid", mdmID);
         txtParams.put("attributeValues", 
                 new Gson().toJson(attributeJson, new TypeToken<Map<String,String>>(){}.getType()));
+        // TODO: to be removed in future release
+        txtParams.put("attributes", getAttributeList());
         if (!StringUtils.isEmpty(locale))
         {
             txtParams.put("locale", locale);
