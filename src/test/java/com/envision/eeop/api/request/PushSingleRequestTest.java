@@ -11,7 +11,7 @@ import org.junit.Test;
  * Created by zhiqi.yang on 2017/1/4.
  */
 public class PushSingleRequestTest {
-    private final static String GATEWAY = "http://localhost:8080";
+    private final static String GATEWAY = "http://172.16.33.223:8080/eeop/";
 //    private final static String GATEWAY = "http://10.21.10.12:8080/eeop";
 //    private final static String GATEWAY = "http://172.16.33.223:8080/eeop";
 
