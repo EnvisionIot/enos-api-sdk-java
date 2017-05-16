@@ -10,7 +10,6 @@ import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
-import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 
@@ -44,7 +43,7 @@ public class EventJsonParser {
 
 				Class<?> klass = Class.forName(type);
 
-				return context.deserialize(((JsonObject) json).get("object"), klass);
+				return context.deserialize(((JsonObject) json), klass);
 
 			} catch (ClassNotFoundException e) {
 
@@ -56,11 +55,7 @@ public class EventJsonParser {
 		@Override
 		public JsonElement serialize(Filter src, Type typeOfSrc, JsonSerializationContext context) {
 			JsonElement json = context.serialize(src, src.getClass());
-			JsonObject j = new JsonObject();
-			j.add("type", new JsonPrimitive(src.getClass().getName()));
-			j.add("object", json);
-
-			return j;
+			return json;
 		}
 
 	}
