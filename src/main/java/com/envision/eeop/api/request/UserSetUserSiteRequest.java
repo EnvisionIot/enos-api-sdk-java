@@ -11,7 +11,7 @@ import java.util.Map;
 /**
  * Created by zhiqi.yang on 2017/5/14.
  */
-public class UserSetSiteRequest implements EnvisionRequest {
+public class UserSetUserSiteRequest implements EnvisionRequest {
     private static final String API_METHOD = "/userService/setUserSite";
     private String userId;
     private String orgCode;
@@ -19,10 +19,10 @@ public class UserSetSiteRequest implements EnvisionRequest {
     private String siteIds;
     private String type;
 
-    public UserSetSiteRequest() {
+    public UserSetUserSiteRequest() {
     }
 
-    public UserSetSiteRequest(String userId, String orgCode, String roleIds, String siteIds) {
+    public UserSetUserSiteRequest(String userId, String orgCode, String roleIds, String siteIds) {
         this.userId = userId;
         this.orgCode = orgCode;
         this.roleIds = roleIds;
