@@ -52,15 +52,15 @@ public class EventQueryRequest implements EnvisionRequest<EventQueryGetResponse>
 		EventQuery query = new EventQuery("30m-ago", "now");
 		// 以下等价where child_war_type in ("102001") and site_id in
 		// ("179651f09e7ec000")
-		Filter filter = new LiteralFilter(Column.SITE_ID).addLiteral("179651f09e7ec000");
+		Filter filter = new LiteralFilter(Column.SITE_ID).addLiteral("fac_idxxxx");
 
-		filter = filter.and(new LiteralFilter(Column.SITE_ID).addLiteral("179651f09e7ec000"));
+		filter = filter.and(new LiteralFilter(Column.DEVICE_ID).addLiteral("deviceidxxxx"));
 		query.setFilter(filter);
 		// 以下等价limit 10,20 可用来分页
-		 query.setS(10);
+		 query.setS(0);
 		 query.setN(20);
 		// 以下表示只查询总数，相当于select count(*) from xxxx
-		query.setShowTotal(true);
+		//query.setShowTotal(true);
 		String json = EventJsonParser.toJson(query);
 		System.out.println(json);
 

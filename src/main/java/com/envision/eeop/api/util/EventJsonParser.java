@@ -17,6 +17,8 @@ public class EventJsonParser {
 
 	private static final Gson gson = new GsonBuilder().registerTypeAdapter(Filter.class, new FilterDeserializer())
 			.create();
+	
+	private static final String  FILTER_PREFIX="com.envision.eos.event.api.expression.";
 
 	private EventJsonParser() {
 	}
@@ -40,6 +42,8 @@ public class EventJsonParser {
 				throws JsonParseException {
 			try {
 				String type = ((JsonObject) json).get("type").getAsString();
+				
+				type=FILTER_PREFIX+type;
 
 				Class<?> klass = Class.forName(type);
 
