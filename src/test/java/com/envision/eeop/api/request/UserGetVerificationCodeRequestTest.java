@@ -15,7 +15,7 @@ public class UserGetVerificationCodeRequestTest {
     Logger logger = LoggerFactory.getLogger(UnregisterEdgeTest.class);
 
     private static EnvisionClient client = new EnvisionDefaultClient(
-            "http://localhost:8080", "ac683bf3-d96a-466c-ab7e-22edcf5c3549", "8A4512531A06075ECA7485229389C98F");
+            "http://172.16.33.223:8080/eeop", "ac683bf3-d96a-466c-ab7e-22edcf5c3549", "8A4512531A06075ECA7485229389C98F");
 
     private String token;
     private String refreshToken;
@@ -77,9 +77,12 @@ public class UserGetVerificationCodeRequestTest {
     @Test
     public void testGetRoles(){
         try {
+            this.name = "user_20170428";
+            this.password ="test";
+
             testLogin();
             UserGetRolesRequest rolesRequest = new UserGetRolesRequest();
-            rolesRequest.setOrgCode("17e974108bc3e000");
+            rolesRequest.setOrgCode("17cf50d7b243e000");
             UserGetRolesResponse rolesResponse = client.execute(rolesRequest, this.token);
             System.out.println(JSON.toJSONString(rolesResponse));
         } catch (Exception e) {
@@ -132,6 +135,7 @@ public class UserGetVerificationCodeRequestTest {
     @Test
     public void testGetVerificationCodeModifyPassword(){
         try {
+            testLogin();
             UserGetVerificationCodeRequest request = new UserGetVerificationCodeRequest();
             request.setEmail("zhiqi.yang@envisioncn.com");
             request.setType(UserGetVerificationCodeRequest.TYPE_MODIFYPASSWORD);
@@ -177,9 +181,9 @@ public class UserGetVerificationCodeRequestTest {
 
     @Test
     public void testLogout(){
-        String refreshToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE0OTc1Mjg2MDUsInVzZXJfaWQiOiI2MzRkMDQ1Yi02Y2E5LTQ1YWItOWM4ZS1mMGMzNTQ4MWM5NjkiLCJjbGllbnRfaWQiOiJhYzY4M2JmMy1kOTZhLTQ2NmMtYWI3ZS0yMmVkY2Y1YzM1NDkifQ.g-cprHXohqGg0Ag5DzfGFuZv4VC3bqS8lqPUGkB-jyI";
+        String refreshToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE0OTc2OTIyMDksInVzZXJfaWQiOiJiMWY2YTNhZS00OTNlLTQ3NmItYjI0MC1iMWExOGEyYWZjYzAiLCJjbGllbnRfaWQiOiJhYzY4M2JmMy1kOTZhLTQ2NmMtYWI3ZS0yMmVkY2Y1YzM1NDkifQ.3ldPfvJl32FbMS0bko6bPxC4eMiugZ345dNggIlGBfo";
         UserLogoutRequest request = new UserLogoutRequest();
-        request.setUserId("634d045b-6ca9-45ab-9c8e-f0c35481c969");
+        request.setUserId("b1f6a3ae-493e-476b-b240-b1a18a2afcc0");
         request.setRefreshToken(refreshToken);
         try {
             UserLogoutResponse response = client.execute(request);

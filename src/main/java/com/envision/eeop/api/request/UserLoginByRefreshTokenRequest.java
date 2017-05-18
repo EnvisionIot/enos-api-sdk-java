@@ -13,14 +13,14 @@ import java.util.Map;
  */
 public class UserLoginByRefreshTokenRequest implements EnvisionRequest<UserLoginByRefreshTokenResponse> {
     private static final String API_METHOD = "/userService/loginByRefreshToken";
-    private String refreshToke;
+    private String refreshToken;
     private String userId;
 
     public UserLoginByRefreshTokenRequest() {
     }
 
-    public UserLoginByRefreshTokenRequest(String refreshToke, String userId) {
-        this.refreshToke = refreshToke;
+    public UserLoginByRefreshTokenRequest(String refreshToken, String userId) {
+        this.refreshToken = refreshToken;
         this.userId = userId;
     }
 
@@ -32,7 +32,7 @@ public class UserLoginByRefreshTokenRequest implements EnvisionRequest<UserLogin
     @Override
     public Map<String, String> getTextParams() {
         EnvisionHashMap txtParams = new EnvisionHashMap();
-        txtParams.put("refreshToke",this.refreshToke);
+        txtParams.put("refreshToken",this.refreshToken);
         txtParams.put("userId",this.userId);
         return txtParams;
     }
@@ -44,16 +44,16 @@ public class UserLoginByRefreshTokenRequest implements EnvisionRequest<UserLogin
 
     @Override
     public void check() throws EnvisionRuleException {
-        RuleCheckUtils.checkNotEmpty(this.refreshToke, "refreshToke");
+        RuleCheckUtils.checkNotEmpty(this.refreshToken, "refreshToken");
         RuleCheckUtils.checkNotEmpty(this.userId, "userId");
     }
 
-    public String getRefreshToke() {
-        return refreshToke;
+    public String getRefreshToken() {
+        return refreshToken;
     }
 
-    public void setRefreshToke(String refreshToke) {
-        this.refreshToke = refreshToke;
+    public void setRefreshToken(String refreshToken) {
+        this.refreshToken = refreshToken;
     }
 
     public String getUserId() {
