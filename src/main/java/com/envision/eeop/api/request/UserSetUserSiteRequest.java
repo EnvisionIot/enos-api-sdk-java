@@ -11,7 +11,7 @@ import java.util.Map;
 /**
  * Created by zhiqi.yang on 2017/5/14.
  */
-public class UserSetUserSiteRequest implements EnvisionRequest {
+public class UserSetUserSiteRequest implements EnvisionRequest<UserSetUserSiteResponse> {
     private static final String API_METHOD = "/userService/setUserSite";
     private String userId;
     private String orgCode;
