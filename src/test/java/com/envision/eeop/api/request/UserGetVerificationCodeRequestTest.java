@@ -40,8 +40,10 @@ public class UserGetVerificationCodeRequestTest {
     @Test
     public void testGetVerificationCodeRegister(){
         try {
+            testLogin();
             UserGetVerificationCodeRequest request = new UserGetVerificationCodeRequest();
-            request.setEmail("zhiqi.yang@envisioncn.com");
+            request.setAreaCode("86");
+            request.setMobile("15021075406");
             request.setType(UserGetVerificationCodeRequest.TYPE_REGISTER);
             UserGetVerificationCodeResponse codeResponse = client.execute(request, this.token);
             System.out.println(JSON.toJSONString(codeResponse));
@@ -52,15 +54,20 @@ public class UserGetVerificationCodeRequestTest {
 
     @Test
     public void testRegister(){
-        String msgType = UserRequestCommon.MSG_TYPE_EMAIL;
-        String verificationCode = "77536";
-        String orgCode = "17f152f2026d6000";
+        testLogin();
+//        String msgType = UserRequestCommon.MSG_TYPE_EMAIL;
+        String msgType = UserRequestCommon.MSG_TYPE_MOBILE;
+        String verificationCode = "51625";
+        String orgCode = "57baab5ed3eb4806104b045d";
         String name = "zikyTest001";
         String email = "zhiqi.yang@envisioncn.com";
         String password = "!@#Qwe1";
+        String areaCode = "86";
+        String mobile = "15021075406";
         try {
-            UserRegisterRequest registerRequest = new UserRegisterRequest(msgType, verificationCode, orgCode, name, email, password);
-            UserRegisterResponse response = client.execute(registerRequest);
+//            UserRegisterRequest registerRequest = new UserRegisterRequest(msgType, verificationCode, orgCode, name, email, password);
+            UserRegisterRequest registerRequest = new UserRegisterRequest(msgType,verificationCode,orgCode,name,mobile,areaCode,password);
+            UserRegisterResponse response = client.execute(registerRequest,this.token);
             System.out.println(JSON.toJSONString(response));
         } catch (Exception e) {
             e.printStackTrace();
@@ -70,9 +77,10 @@ public class UserGetVerificationCodeRequestTest {
     @Test
     public void testGetRoles(){
         try {
+            testLogin();
             UserGetRolesRequest rolesRequest = new UserGetRolesRequest();
             rolesRequest.setOrgCode("17e974108bc3e000");
-            UserGetRolesResponse rolesResponse = client.execute(rolesRequest);
+            UserGetRolesResponse rolesResponse = client.execute(rolesRequest, this.token);
             System.out.println(JSON.toJSONString(rolesResponse));
         } catch (Exception e) {
             e.printStackTrace();

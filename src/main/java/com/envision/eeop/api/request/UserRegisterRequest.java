@@ -3,6 +3,7 @@ package com.envision.eeop.api.request;
 import com.envision.eeop.api.EnvisionRequest;
 import com.envision.eeop.api.exception.EnvisionRuleException;
 import com.envision.eeop.api.response.UserRegisterResponse;
+import com.envision.eeop.api.util.AES;
 import com.envision.eeop.api.util.EnvisionHashMap;
 import com.envision.eeop.api.util.RuleCheckUtils;
 
@@ -24,6 +25,8 @@ public class UserRegisterRequest implements EnvisionRequest<UserRegisterResponse
     private String email;
     private String password;
 
+    private String passwordEncrypt;
+
     public UserRegisterRequest() {
     }
 
@@ -31,14 +34,14 @@ public class UserRegisterRequest implements EnvisionRequest<UserRegisterResponse
      * register by mobile
      *
      * @param msgType
-     * @param code
+     * @param verificationCode
      * @param orgCode
      * @param name
      * @param mobile
      * @param areaCode
      * @param password
      */
-    public UserRegisterRequest(String msgType, String verificationCode, String orgCode, String name, String mobile, String areaCode, String password) {
+    public UserRegisterRequest(String msgType, String verificationCode, String orgCode, String name, String mobile, String areaCode, String password) throws Exception {
         this.msgType = msgType;
         this.verificationCode = verificationCode;
         this.orgCode = orgCode;
@@ -46,6 +49,7 @@ public class UserRegisterRequest implements EnvisionRequest<UserRegisterResponse
         this.mobile = mobile;
         this.areaCode = areaCode;
         this.password = password;
+        this.passwordEncrypt = AES.encrypt(password);
     }
 
     /**
@@ -58,13 +62,14 @@ public class UserRegisterRequest implements EnvisionRequest<UserRegisterResponse
      * @param email
      * @param password
      */
-    public UserRegisterRequest(String msgType, String verificationCode, String orgCode, String name, String email, String password) {
+    public UserRegisterRequest(String msgType, String verificationCode, String orgCode, String name, String email, String password) throws Exception {
         this.msgType = msgType;
         this.verificationCode = verificationCode;
         this.orgCode = orgCode;
         this.name = name;
         this.email = email;
         this.password = password;
+        this.passwordEncrypt = AES.encrypt(password);
     }
 
     @Override
@@ -82,7 +87,7 @@ public class UserRegisterRequest implements EnvisionRequest<UserRegisterResponse
         txtParams.put("mobile", this.mobile);
         txtParams.put("areaCode", this.areaCode);
         txtParams.put("email", this.email);
-        txtParams.put("password", this.password);
+        txtParams.put("password", this.passwordEncrypt);
 
 
         return txtParams;
@@ -163,7 +168,8 @@ public class UserRegisterRequest implements EnvisionRequest<UserRegisterResponse
         return password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(String password) throws Exception {
         this.password = password;
+        this.passwordEncrypt = AES.encrypt(password);
     }
 }
