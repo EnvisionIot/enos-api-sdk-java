@@ -182,7 +182,7 @@ public class MdmObjectInsertRequest implements EnvisionRequest<MdmObjectInsertRe
     {
         RuleCheckUtils.checkNotEmpty(parentID, "parentid");
         RuleCheckUtils.checkNotEmpty(type, "type");
-        if (Integer.parseInt(type) < 102)
+        if (Integer.parseInt(type) >= 102)
         {
             RuleCheckUtils.checkNotEmpty(category, "category");
         }
