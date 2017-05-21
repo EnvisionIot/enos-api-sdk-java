@@ -13,10 +13,11 @@ import java.util.Map;
  * Created by zhiqi.yang on 2017/5/14.
  */
 public class UserRegisterRequest implements EnvisionRequest<UserRegisterResponse> {
-
+    public static final String STP1 = "step1";
+    public static final String STP2 = "step2";
 
     private static final String API_METHOD = "/userService/register";
-    private String msgType;
+    private String step;
     private String verificationCode;
     private String orgCode;
     private String name;
@@ -24,52 +25,24 @@ public class UserRegisterRequest implements EnvisionRequest<UserRegisterResponse
     private String areaCode;
     private String email;
     private String password;
+    private String sendBy;
 
     private String passwordEncrypt;
 
     public UserRegisterRequest() {
     }
 
-    /**
-     * register by mobile
-     *
-     * @param msgType
-     * @param verificationCode
-     * @param orgCode
-     * @param name
-     * @param mobile
-     * @param areaCode
-     * @param password
-     */
-    public UserRegisterRequest(String msgType, String verificationCode, String orgCode, String name, String mobile, String areaCode, String password) throws Exception {
-        this.msgType = msgType;
+
+    public UserRegisterRequest(String step, String verificationCode, String orgCode, String name, String mobile, String areaCode, String email, String password, String sendBy) {
+        this.step = step;
         this.verificationCode = verificationCode;
         this.orgCode = orgCode;
         this.name = name;
         this.mobile = mobile;
         this.areaCode = areaCode;
-        this.password = password;
-        this.passwordEncrypt = AES.encrypt(password);
-    }
-
-    /**
-     * register by email
-     *
-     * @param msgType
-     * @param verificationCode
-     * @param orgCode
-     * @param name
-     * @param email
-     * @param password
-     */
-    public UserRegisterRequest(String msgType, String verificationCode, String orgCode, String name, String email, String password) throws Exception {
-        this.msgType = msgType;
-        this.verificationCode = verificationCode;
-        this.orgCode = orgCode;
-        this.name = name;
         this.email = email;
         this.password = password;
-        this.passwordEncrypt = AES.encrypt(password);
+        this.sendBy = sendBy;
     }
 
     @Override
@@ -80,7 +53,8 @@ public class UserRegisterRequest implements EnvisionRequest<UserRegisterResponse
     @Override
     public Map<String, String> getTextParams() {
         EnvisionHashMap txtParams = new EnvisionHashMap();
-        txtParams.put("msgType", this.msgType);
+        txtParams.put("step", this.step);
+        txtParams.put("sendBy", this.sendBy);
         txtParams.put("verificationCode", this.verificationCode);
         txtParams.put("orgCode", this.orgCode);
         txtParams.put("name", this.name);
@@ -100,21 +74,10 @@ public class UserRegisterRequest implements EnvisionRequest<UserRegisterResponse
 
     @Override
     public void check() throws EnvisionRuleException {
-        RuleCheckUtils.checkNotEmpty(this.name, "name");
-        RuleCheckUtils.checkNotEmpty(this.msgType, "msgType");
-        RuleCheckUtils.checkNotEmpty(this.verificationCode, "code");
-        RuleCheckUtils.checkNotEmpty(this.orgCode, "orgCode");
-        RuleCheckUtils.checkNotEmpty(this.password, "password");
+        RuleCheckUtils.checkNotEmpty(this.step, "step");
         RuleCheckUtils.checkNotEmpty((this.email == null ? "" : this.email) + (this.mobile == null ? "" : this.mobile), "email or mobile" );
     }
 
-    public String getMsgType() {
-        return msgType;
-    }
-
-    public void setMsgType(String msgType) {
-        this.msgType = msgType;
-    }
 
     public String getVerificationCode() {
         return verificationCode;
@@ -171,5 +134,21 @@ public class UserRegisterRequest implements EnvisionRequest<UserRegisterResponse
     public void setPassword(String password) throws Exception {
         this.password = password;
         this.passwordEncrypt = AES.encrypt(password);
+    }
+
+    public String getStep() {
+        return step;
+    }
+
+    public void setStep(String step) {
+        this.step = step;
+    }
+
+    public String getSendBy() {
+        return sendBy;
+    }
+
+    public void setSendBy(String sendBy) {
+        this.sendBy = sendBy;
     }
 }

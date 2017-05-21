@@ -14,36 +14,22 @@ import java.util.Map;
 public class UserGetVerificationCodeRequest implements EnvisionRequest<UserGetVerificationCodeResponse> {
     /** type : register */
     public static final String TYPE_REGISTER = "register";
-    /** type : modify userInfo */
-    public static final String TYPE_MODIFYUSERINFO = "modifyUserInfo";
+    /** type : modify user contact Stp1 */
+    public static final String TYPE_MODIFY_CONTACT_STP1 = "modifyUserContactStp1";
+    /** type : modify user contact Stp2 */
+    public static final String TYPE_MODIFY_CONTACT_STP2 = "modifyUserContactStp2";
     /** type : modify password */
-    public static final String TYPE_MODIFYPASSWORD = "modifyPassword";
+    public static final String TYPE_MODIFYPASSWORD_EMAIL = "modifyPasswordByEmail";
+    public static final String TYPE_MODIFYPASSWORD_MOBILE = "modifyPasswordByMobile";
 
     private String email;
     private String areaCode;
     private String mobile;
     private String type;
-
+    private String userId;
+    private String verificationCode;
     private static final String API_METHOD = "/userService/getVerificationCode";
 
-
-    public UserGetVerificationCodeRequest() {
-    }
-
-    public UserGetVerificationCodeRequest(String email) {
-        this.email = email;
-    }
-
-    public UserGetVerificationCodeRequest(String email, String type) {
-        this.email = email;
-        this.type = type;
-    }
-
-    public UserGetVerificationCodeRequest(String areaCode, String mobile, String type) {
-        this.areaCode = areaCode;
-        this.mobile = mobile;
-        this.type = type;
-    }
 
 
     @Override
@@ -61,6 +47,10 @@ public class UserGetVerificationCodeRequest implements EnvisionRequest<UserGetVe
             txtParams.put("mobile", this.mobile);
         }
         txtParams.put("type", this.type);
+        txtParams.put("userId", this.userId);
+        if (this.verificationCode != null){
+            txtParams.put("verificationCode", this.verificationCode);
+        }
         return txtParams;
     }
 
@@ -71,7 +61,13 @@ public class UserGetVerificationCodeRequest implements EnvisionRequest<UserGetVe
 
     @Override
     public void check() throws EnvisionRuleException {
-        RuleCheckUtils.checkNotEmpty((this.email == null ? "" : this.email) + (this.mobile == null ? "" : this.mobile), "email or mobile" );
+        if (TYPE_MODIFY_CONTACT_STP1.equals(this.type)
+                || TYPE_MODIFYPASSWORD_EMAIL.equals(this.type)
+                || TYPE_MODIFYPASSWORD_MOBILE.equals(this.type)){
+            RuleCheckUtils.checkNotEmpty(this.userId, "userId" );
+        } else {
+            RuleCheckUtils.checkNotEmpty((this.email == null ? "" : this.email) + (this.mobile == null ? "" : this.mobile), "email or mobile" );
+        }
     }
 
     public String getEmail() {
@@ -104,5 +100,21 @@ public class UserGetVerificationCodeRequest implements EnvisionRequest<UserGetVe
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getVerificationCode() {
+        return verificationCode;
+    }
+
+    public void setVerificationCode(String verificationCode) {
+        this.verificationCode = verificationCode;
     }
 }

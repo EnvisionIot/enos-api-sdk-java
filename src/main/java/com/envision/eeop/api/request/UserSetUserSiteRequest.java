@@ -1,6 +1,7 @@
 package com.envision.eeop.api.request;
 
 import com.envision.eeop.api.EnvisionRequest;
+import com.envision.eeop.api.domain.UserSetUserSiteVo;
 import com.envision.eeop.api.exception.EnvisionRuleException;
 import com.envision.eeop.api.response.UserSetUserSiteResponse;
 import com.envision.eeop.api.util.EnvisionHashMap;
@@ -19,16 +20,6 @@ public class UserSetUserSiteRequest implements EnvisionRequest<UserSetUserSiteRe
     private String siteIds;
     private String type;
 
-    public UserSetUserSiteRequest() {
-    }
-
-    public UserSetUserSiteRequest(String userId, String orgCode, String roleIds, String siteIds) {
-        this.userId = userId;
-        this.orgCode = orgCode;
-        this.roleIds = roleIds;
-        this.siteIds = siteIds;
-    }
-
     @Override
     public String getApiMethodName() {
         return API_METHOD;
@@ -37,11 +28,11 @@ public class UserSetUserSiteRequest implements EnvisionRequest<UserSetUserSiteRe
     @Override
     public Map<String, String> getTextParams() {
         EnvisionHashMap txtParams = new EnvisionHashMap();
-        txtParams.put("userId", this.userId);
-        txtParams.put("orgCode", this.orgCode);
-        txtParams.put("roleIds", this.roleIds);
-        txtParams.put("siteIds", this.siteIds);
-        txtParams.put("type", this.type);
+        txtParams.put("userId", userId);
+        txtParams.put("orgCode", orgCode);
+        txtParams.put("roleIds", roleIds);
+        txtParams.put("siteIds", siteIds);
+        txtParams.put("type", type);
         return txtParams;
     }
 
