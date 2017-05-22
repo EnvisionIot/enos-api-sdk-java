@@ -40,26 +40,10 @@ public class UserGetVerificationCodeRequestTest {
     }
 
     @Test
-    public void testGetVerificationCodeRegister(){
-        try {
-            testLogin();
-            UserGetVerificationCodeRequest request = new UserGetVerificationCodeRequest();
-            request.setAreaCode("86");
-            request.setMobile("15021075406");
-            request.setType(UserGetVerificationCodeRequest.TYPE_REGISTER);
-            UserGetVerificationCodeResponse codeResponse = client.execute(request, this.token);
-            System.out.println(JSON.toJSONString(codeResponse));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Test
     public void testRegisterStep1(){
         testLogin();
-//        String msgType = UserRequestCommon.MSG_TYPE_EMAIL;
         String step = UserRegisterRequest.STP1;
-        String sendBy = UserRequestCommon.MSG_TYPE_MOBILE;
+        String sendBy = UserRegisterRequest.SENDBY_MOBILE;
         String verificationCode = "54156";
         String orgCode = "57baab5ed3eb4806104b045d";
         String name = "zikyTest003";
@@ -85,7 +69,7 @@ public class UserGetVerificationCodeRequestTest {
         testLogin();
 //        String msgType = UserRequestCommon.MSG_TYPE_EMAIL;
         String step = UserRegisterRequest.STP2;
-        String sendBy = UserRequestCommon.MSG_TYPE_MOBILE;
+        String sendBy = UserRegisterRequest.SENDBY_MOBILE;;
         String verificationCode = "38435";
         String orgCode = "57baab5ed3eb4806104b045d";
         String name = "zikyTest004";
@@ -135,58 +119,6 @@ public class UserGetVerificationCodeRequestTest {
             request.setUserId(userId);
             UserGetUserInfoResponse response = client.execute(request);
             System.out.println(JSON.toJSONString(response));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Test
-    public void testGetVerificationCodeModifyUserInfo(){
-        try {
-            this.name = "zikyTest003";
-            this.password = "!@#Qwe1";
-            testLogin();
-            UserGetVerificationCodeRequest request = new UserGetVerificationCodeRequest();
-            request.setUserId("2d388940-611c-453d-bb41-0164ea344b77");
-            request.setEmail("zhiqi.yang@envisioncn.com");
-            request.setVerificationCode("40130");
-            request.setType(UserGetVerificationCodeRequest.TYPE_MODIFY_CONTACT_STP2);
-
-            UserGetVerificationCodeResponse codeResponse = client.execute(request, this.token);
-            System.out.println(JSON.toJSONString(codeResponse));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-    @Test
-    public void testSetUserContact(){
-        try{
-            this.name = "zikyTest003";
-            this.password = "!@#Qwe1";
-            testLogin();
-            UserSetUserContactRequest request = new UserSetUserContactRequest();
-            request.setUserId("2d388940-611c-453d-bb41-0164ea344b77");
-            request.setMobile("15021075406");
-            request.setAreaCode("86");
-            request.setVerificationCode("54156");
-            request.setEmail("zhiqi.yang@envisioncn.com");
-            request.setMsgType(UserRequestCommon.MSG_TYPE_MOBILE);
-            UserSetUserContactResponse response = client.execute(request,this.token);
-            System.out.println(JSON.toJSONString(response));
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-    }
-
-    @Test
-    public void testGetVerificationCodeModifyPassword(){
-        try {
-            testLogin();
-            UserGetVerificationCodeRequest request = new UserGetVerificationCodeRequest();
-            request.setEmail("zhiqi.yang@envisioncn.com");
-            request.setType(UserGetVerificationCodeRequest.TYPE_MODIFYPASSWORD_EMAIL);
-            UserGetVerificationCodeResponse codeResponse = client.execute(request, this.token);
-            System.out.println(JSON.toJSONString(codeResponse));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -261,17 +193,19 @@ public class UserGetVerificationCodeRequestTest {
 
     @Test
     public void testSetSite(){
+        this.name = "user_20170428";
+        this.password ="kotei$11";
+        testLogin();
+
         UserSetUserSiteRequest request = new UserSetUserSiteRequest();
-        UserSetUserSiteVo vo = new UserSetUserSiteVo();
-        vo.setUserId("testt");
-        vo.setType("type");
-        vo.setOrgCode("test");
-        vo.setRoleIds("test");
-        vo.setSiteIds("test");
-//        request.setUserSiteVo(vo);
+        request.setRoleIds("162");
+        request.setOrgCode("17cf50d7b243e000");
+        request.setUserId("e7f8efd3-bb18-4e58-8f1b-62365ab3ec29");
+        request.setType("add");
+        request.setSiteIds("17cf53cbacc3e000");
 
         try {
-            UserSetUserSiteResponse rs = client.execute(request);
+            UserSetUserSiteResponse rs = client.execute(request,this.token);
             System.out.println(JSON.toJSONString(rs));
         } catch (EnvisionApiException e) {
             e.printStackTrace();
@@ -280,13 +214,19 @@ public class UserGetVerificationCodeRequestTest {
 
     @Test
     public void testAddContactSetp1(){
-        this.name = "zikyTest003";
+        this.name = "zikyTest004";
         this.password = "test";
         testLogin();
         String email = "zhiqi.yang@envisioncn.com";
+        String areaCode = "86";
+        String mobile = "15021075405";
+        String vCode = "78156";
         UserAddContactRequest request = new UserAddContactRequest();
-        request.setEmail(email);
+//        request.setEmail(email);
+        request.setAreaCode(areaCode);
+        request.setMobile(mobile);
         request.setStep(UserAddContactRequest.STP1);
+        request.setVerificationCode(vCode);
         try {
             UserAddContactResponse rs = client.execute(request,this.token);
             System.out.println(JSON.toJSONString(rs));
@@ -296,13 +236,19 @@ public class UserGetVerificationCodeRequestTest {
     }
     @Test
     public void testAddContactStep2(){
-        this.name = "zikyTest003";
+        this.name = "zikyTest004";
         this.password = "test";
         testLogin();
         String email = "zhiqi.yang@envisioncn.com";
+        String areaCode = "86";
+        String mobile = "15021075405";
+
         UserAddContactRequest request = new UserAddContactRequest();
-        request.setEmail(email);
-        request.setVerificationCode("93820");
+//        request.setEmail(email);
+        request.setVerificationCode("78156");
+        request.setAreaCode(areaCode);
+        request.setMobile(mobile);
+
         request.setStep(UserAddContactRequest.STP2);
         try {
             UserAddContactResponse rs = client.execute(request,this.token);

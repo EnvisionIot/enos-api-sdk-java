@@ -16,6 +16,9 @@ public class UserRegisterRequest implements EnvisionRequest<UserRegisterResponse
     public static final String STP1 = "step1";
     public static final String STP2 = "step2";
 
+    public static final String SENDBY_EMAIL = "email";
+    public static final String SENDBY_MOBILE = "mobile";
+
     private static final String API_METHOD = "/userService/register";
     private String step;
     private String verificationCode;
@@ -75,7 +78,16 @@ public class UserRegisterRequest implements EnvisionRequest<UserRegisterResponse
     @Override
     public void check() throws EnvisionRuleException {
         RuleCheckUtils.checkNotEmpty(this.step, "step");
-        RuleCheckUtils.checkNotEmpty((this.email == null ? "" : this.email) + (this.mobile == null ? "" : this.mobile), "email or mobile" );
+        switch (this.step){
+            case UserRegisterRequest.STP1 :
+                RuleCheckUtils.checkNotEmpty((this.email == null ? "" : this.email) + (this.mobile == null ? "" : this.mobile), "email or mobile" );
+                break;
+            case UserRegisterRequest.STP2 :
+                RuleCheckUtils.checkNotEmpty(this.verificationCode, "verificationCode");
+                break;
+            default:
+                throw new EnvisionRuleException(RuleCheckUtils.ERROR_CODE_ARGUMENTS_INVALID,"step");
+        }
     }
 
 
