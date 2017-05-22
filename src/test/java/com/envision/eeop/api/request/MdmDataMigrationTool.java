@@ -26,12 +26,12 @@ public class MdmDataMigrationTool
 {
     
     private static final String FROM_URL = "https://eos.envisioncn.com/eeop";
-    private static final String FROM_APP = "CPGJM-HAHAHA";
+    private static final String FROM_APP = "";//"CPGJM-HAHAHA";
     private static final String TO_URL = "http://172.16.33.223:8080/eeop";
     private static final String TO_APP = "EEOP_TEST";
     
-    private static final String fromObjectID = "580829c6910bfb0b1c660deb";
-    private static final String toParentID = "580829e6910bfb0b1c660dec";
+    private static final String fromObjectID = "8182f598-2ade-4065-9dfb-9f9c98e45e34";
+    private static final String toParentID = "57bad8bad3eb482294baf5f7";
 
     private static EnvisionClient fromClient = new EnvisionDefaultClient(
 			FROM_URL, FROM_APP, "dummy");
