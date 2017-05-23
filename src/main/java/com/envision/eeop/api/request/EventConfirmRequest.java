@@ -8,6 +8,7 @@ import com.envision.eeop.api.exception.EnvisionRuleException;
 import com.envision.eeop.api.response.EventConfirmGetResponse;
 import com.envision.eeop.api.util.EventJsonParser;
 import com.envision.eeop.api.util.RuleCheckUtils;
+import com.envision.eos.event.api.bo.LanguageType;
 import com.envision.eos.event.api.expression.Filter;
 
 public class EventConfirmRequest implements EnvisionRequest<EventConfirmGetResponse> {
@@ -19,14 +20,29 @@ public class EventConfirmRequest implements EnvisionRequest<EventConfirmGetRespo
 	// 确认值(缺省为：1)
 	private int value;
 
+	private LanguageType language;
+
+	private boolean isAlarming;
+
 	public EventConfirmRequest(Filter filter, String confirmPerson) {
-		this(filter, confirmPerson, 1);
+		this(filter, false, LanguageType.ZH_CN, confirmPerson, 1);
 	}
 
 	public EventConfirmRequest(Filter filter, String confirmPerson, int value) {
+		this(filter, false, LanguageType.ZH_CN, confirmPerson, value);
+	}
+
+	public EventConfirmRequest(Filter filter, boolean isAlarming, String confirmPerson, int value) {
+		this(filter, isAlarming, LanguageType.ZH_CN, confirmPerson, value);
+	}
+
+	public EventConfirmRequest(Filter filter, boolean isAlarming, LanguageType language, String confirmPerson,
+			int value) {
 		this.filter = filter;
 		this.confirmPerson = confirmPerson;
 		this.value = value;
+		this.isAlarming = isAlarming;
+		this.language = language;
 	}
 
 	@Override
@@ -40,6 +56,8 @@ public class EventConfirmRequest implements EnvisionRequest<EventConfirmGetRespo
 		params.put("filter", EventJsonParser.toJson(filter));
 		params.put("confirmPerson", confirmPerson);
 		params.put("value", String.valueOf(value));
+		params.put("language", language.toString());
+		params.put("isAlarming", isAlarming?"true":"false");
 		return params;
 	}
 
@@ -52,7 +70,6 @@ public class EventConfirmRequest implements EnvisionRequest<EventConfirmGetRespo
 	public void check() throws EnvisionRuleException {
 		RuleCheckUtils.checkNotNull(filter, "filter");
 		RuleCheckUtils.checkNotEmpty(confirmPerson, "confirmPerson");
-
 	}
 
 }
