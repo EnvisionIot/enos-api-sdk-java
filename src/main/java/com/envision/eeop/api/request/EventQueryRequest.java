@@ -63,7 +63,8 @@ public class EventQueryRequest implements EnvisionRequest<EventQueryGetResponse>
 		//query.setShowTotal(true);
 		String json = EventJsonParser.toJson(query);
 		System.out.println(json);
-
+		json="{\"start\":\"30m-ago\",\"end\":\"now\",\"timezone\":\"local\",\"filter\":{\"left\":{\"column\":\"SITE_ID\",\"literals\":[\"fac_idxxxx\"],\"type\":\"LiteralFilter\"},\"right\":{\"column\":\"DEVICE_ID\",\"literals\":[\"deviceidxxxx\"],\"type\":\"LiteralFilter\"},\"type\":\"AndFilter\"},\"s\":0,\"n\":20}";
+		System.out.println(json);
 		EventQuery query1 = EventJsonParser.fromJson(json, EventQuery.class);
 
 		String json1 = EventJsonParser.toJson(query1);
