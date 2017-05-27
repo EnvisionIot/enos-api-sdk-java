@@ -15,10 +15,11 @@ import java.io.IOException;
 @SuppressWarnings("unused")
 public class FileDownloadRequestTest {
 //    private final static String EEOP_GATEWAY = "http://172.16.33.223:8080/eeop";
-    private final static String EEOP_GATEWAY = "http://10.21.10.13:8080/eeop";
+//    private final static String EEOP_GATEWAY = "http://10.21.10.13:8080/eeop";
+    private final static String EEOP_GATEWAY = "http://10.21.8.124:8080/eeop";
 
     //just for test
-    private final static String APP_KEY = "EEOP_TEST";
+    private final static String APP_KEY = "CPGJM-HAHAHA";
     private final static String APP_SECRET = "TEST";
     private final static String TOKEN = "TEST";
 

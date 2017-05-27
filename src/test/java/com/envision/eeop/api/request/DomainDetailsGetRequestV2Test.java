@@ -16,8 +16,8 @@ import java.util.Map;
 public class DomainDetailsGetRequestV2Test {
 
 //        private final static String GATEWAY = "http://10.21.8.124:8080/eeop";
-//    private final static String GATEWAY = "http://10.21.10.13:8080/eeop";
-    private final static String GATEWAY = "http://172.16.33.223:8080/eeop";
+    private final static String GATEWAY = "http://10.21.10.13:8080/eeop";
+//    private final static String GATEWAY = "http://172.16.33.223:8080/eeop";
 
     @Test
     public void testDomainDetails() throws EnvisionApiException {
@@ -28,15 +28,15 @@ public class DomainDetailsGetRequestV2Test {
 
         System.out.println("---------DomainDetailsGetRequestV2--------------");
 
-        String mdmId = "WF0024WTG0001";
-        String metric = "WNAC.NacellePosition";
+        String mdmId = "17dcaf11379e0000";
+        String metric = "WNAC.WindSpeed";
         List<String> mdmIds = Lists.newArrayList();
         List<String> metrics = Lists.newArrayList();
         mdmIds.add(mdmId);
         metrics.add(metric);
-        String beginTime = "2017-03-20 00:00:00";
-        String endTime = "2017-03-27 00:00:00";
-        int interval = 600000;
+        String beginTime = "2017-05-21 00:00:00";
+        String endTime = "2017-05-22 00:00:00";
+        int interval = 600;
         Integer limit = null;
 
         DomainDetailsGetRequestV2 request = new DomainDetailsGetRequestV2(
