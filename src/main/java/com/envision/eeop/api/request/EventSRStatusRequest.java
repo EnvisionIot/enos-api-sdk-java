@@ -6,12 +6,13 @@ import java.util.Map;
 import com.envision.eeop.api.EnvisionRequest;
 import com.envision.eeop.api.exception.EnvisionRuleException;
 import com.envision.eeop.api.response.EventConfirmGetResponse;
+import com.envision.eeop.api.response.EventSRStatusGetResponse;
 import com.envision.eeop.api.util.EventJsonParser;
 import com.envision.eeop.api.util.RuleCheckUtils;
 import com.envision.eos.event.api.bo.LanguageType;
 import com.envision.eos.event.api.expression.Filter;
 
-public class EventSRStatusRequest implements EnvisionRequest<EventConfirmGetResponse> {
+public class EventSRStatusRequest implements EnvisionRequest<EventSRStatusGetResponse> {
 
 	private static final String API_METHOD = "/eventService/srstatus";
 
@@ -54,8 +55,8 @@ public class EventSRStatusRequest implements EnvisionRequest<EventConfirmGetResp
 	}
 
 	@Override
-	public Class<EventConfirmGetResponse> getResponseClass() {
-		return EventConfirmGetResponse.class;
+	public Class<EventSRStatusGetResponse> getResponseClass() {
+		return EventSRStatusGetResponse.class;
 	}
 
 	@Override
