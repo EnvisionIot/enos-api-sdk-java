@@ -22,26 +22,18 @@ public class EventConfirmRequest implements EnvisionRequest<EventConfirmGetRespo
 
 	private LanguageType language;
 
-	private boolean isAlarming;
-
 	public EventConfirmRequest(Filter filter, String confirmPerson) {
-		this(filter, false, LanguageType.ZH_CN, confirmPerson, 1);
+		this(filter, LanguageType.ZH_CN, confirmPerson, 1);
 	}
 
 	public EventConfirmRequest(Filter filter, String confirmPerson, int value) {
-		this(filter, false, LanguageType.ZH_CN, confirmPerson, value);
+		this(filter, LanguageType.ZH_CN, confirmPerson, value);
 	}
 
-	public EventConfirmRequest(Filter filter, boolean isAlarming, String confirmPerson, int value) {
-		this(filter, isAlarming, LanguageType.ZH_CN, confirmPerson, value);
-	}
-
-	public EventConfirmRequest(Filter filter, boolean isAlarming, LanguageType language, String confirmPerson,
-			int value) {
+	public EventConfirmRequest(Filter filter, LanguageType language, String confirmPerson, int value) {
 		this.filter = filter;
 		this.confirmPerson = confirmPerson;
 		this.value = value;
-		this.isAlarming = isAlarming;
 		this.language = language;
 	}
 
@@ -57,7 +49,6 @@ public class EventConfirmRequest implements EnvisionRequest<EventConfirmGetRespo
 		params.put("confirmPerson", confirmPerson);
 		params.put("value", String.valueOf(value));
 		params.put("language", language.toString());
-		params.put("isAlarming", isAlarming?"true":"false");
 		return params;
 	}
 

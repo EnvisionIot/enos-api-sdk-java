@@ -21,21 +21,14 @@ public class EventSRStatusRequest implements EnvisionRequest<EventSRStatusGetRes
 
 	private LanguageType language;
 
-	private boolean isAlarming;
-
 	public EventSRStatusRequest(Filter filter, String status) {
-		this(filter, false, LanguageType.ZH_CN, status);
+		this(filter, LanguageType.ZH_CN, status);
 	}
 
-	public EventSRStatusRequest(Filter filter, boolean isAlarming, String status) {
-		this(filter, isAlarming, LanguageType.ZH_CN, status);
-	}
-
-	public EventSRStatusRequest(Filter filter, boolean isAlarming, LanguageType language, String status) {
+	public EventSRStatusRequest(Filter filter, LanguageType language, String status) {
 		this.filter = filter;
 		this.status = status;
 
-		this.isAlarming = isAlarming;
 		this.language = language;
 	}
 
@@ -50,7 +43,6 @@ public class EventSRStatusRequest implements EnvisionRequest<EventSRStatusGetRes
 		params.put("filter", EventJsonParser.toJson(filter));
 		params.put("status", status);
 		params.put("language", language.toString());
-		params.put("isAlarming", isAlarming ? "true" : "false");
 		return params;
 	}
 
