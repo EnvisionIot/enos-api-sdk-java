@@ -16,6 +16,8 @@ import java.util.Map;
 public class ImportStartGetRequest implements EnvisionRequest<ImportStartGetResponse> {
     private static final String API_METHOD = "/importService/startTask";
 
+    private String customerId;
+
     @Override
     public String getApiMethodName() {
         return API_METHOD;
@@ -24,8 +26,15 @@ public class ImportStartGetRequest implements EnvisionRequest<ImportStartGetResp
     public ImportStartGetRequest() {
     }
 
+    public ImportStartGetRequest(String customerId) {
+        this.customerId = customerId;
+    }
+
     public Map<String, String> getTextParams() {
         EnvisionHashMap txtParams = new EnvisionHashMap();
+
+        txtParams.put("customerId", customerId);
+
         return txtParams;
     }
 

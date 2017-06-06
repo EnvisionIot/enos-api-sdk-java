@@ -18,9 +18,6 @@ import java.util.Map;
  */
 public class ImportServiceGetRequestTest {
 
-//    private final static String GATEWAY = "http://localhost:8080";
-//    private final static String GATEWAY = "http://10.21.10.12:8080/eeop";
-//    private final static String GATEWAY = "http://172.16.33.223:8080/eeop";
     private final static String GATEWAY = "https://eos.envisioncn.com/eeop";
 
     @Test

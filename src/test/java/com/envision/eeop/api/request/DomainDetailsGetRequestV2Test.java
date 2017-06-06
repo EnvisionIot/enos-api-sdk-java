@@ -28,14 +28,14 @@ public class DomainDetailsGetRequestV2Test {
 
         System.out.println("---------DomainDetailsGetRequestV2--------------");
 
-        String mdmId = "17dcaf11379e0000";
+        String mdmId = "WF0024WTG0001,WF0024WTG0002";
         String metric = "WNAC.WindSpeed";
         List<String> mdmIds = Lists.newArrayList();
         List<String> metrics = Lists.newArrayList();
         mdmIds.add(mdmId);
         metrics.add(metric);
-        String beginTime = "2017-05-21 00:00:00";
-        String endTime = "2017-05-22 00:00:00";
+        String beginTime = "2017-06-01 00:00:00";
+        String endTime = "2017-06-04 00:00:00";
         int interval = 600;
         Integer limit = null;
 
@@ -50,6 +50,8 @@ public class DomainDetailsGetRequestV2Test {
             for (Map<String, String> m : response.getDomainMetricList()) {
                 System.out.println(m);
             }
+
+            System.out.println(response.getBody());
         }
     }
 }
