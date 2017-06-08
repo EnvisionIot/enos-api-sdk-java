@@ -22,7 +22,7 @@ public class LicensedClient extends MdmObjectAttributes
     {
         super();
     }
-
+    
     public LicensedClient(String siteID, Map<String,String> attributes)
     {
         super(attributes);
