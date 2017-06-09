@@ -83,6 +83,5 @@ public class LicensedObjectRegisterRequest implements EnvisionRequest<EnvisionRe
     {
         RuleCheckUtils.checkNotEmpty(licenseFingerprint, "licFp");
         RuleCheckUtils.checkNotEmpty(uid, "uid");
-        RuleCheckUtils.checkNotEmpty(mdmID, "mdmid");
     }
 }
