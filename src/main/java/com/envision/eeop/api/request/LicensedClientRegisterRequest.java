@@ -10,12 +10,12 @@ package com.envision.eeop.api.request;
 import java.util.Map;
 
 import com.envision.eeop.api.EnvisionRequest;
+import com.envision.eeop.api.EnvisionResponse;
 import com.envision.eeop.api.exception.EnvisionRuleException;
-import com.envision.eeop.api.response.LicensedClientRegisterResponse;
 import com.envision.eeop.api.util.EnvisionHashMap;
 import com.envision.eeop.api.util.RuleCheckUtils;
 
-public class LicensedClientRegisterRequest implements EnvisionRequest<LicensedClientRegisterResponse>
+public class LicensedClientRegisterRequest implements EnvisionRequest<EnvisionResponse>
 {
 
     private static final String API_METHOD = "/mdmService/registerLicensedClient";
@@ -75,9 +75,9 @@ public class LicensedClientRegisterRequest implements EnvisionRequest<LicensedCl
         return txtParams;
     }
 
-    public Class<LicensedClientRegisterResponse> getResponseClass()
+    public Class<EnvisionResponse> getResponseClass()
     {
-        return LicensedClientRegisterResponse.class;
+        return EnvisionResponse.class;
     }
 
     public void check() throws EnvisionRuleException
