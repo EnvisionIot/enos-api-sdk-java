@@ -23,12 +23,19 @@ public class LicensedClientRegisterRequest implements EnvisionRequest<EnvisionRe
     private String licenseFingerprint;              // mandatory
     private String clientSN;                        // mandatory
     private String siteID;                          // mandatory
+    private String desc;                            // optional
 
     public LicensedClientRegisterRequest(String licenseFingerprint, String clientSN, String siteID)
     {
         this.licenseFingerprint = licenseFingerprint;
         this.clientSN = clientSN;
         this.siteID = siteID;
+    }
+
+    public LicensedClientRegisterRequest(String licenseFingerprint, String clientSN, String siteID, String desc)
+    {
+        this(licenseFingerprint, clientSN, siteID);
+        this.desc = desc;
     }
 
     public String getLicenseFingerprint()
@@ -61,6 +68,16 @@ public class LicensedClientRegisterRequest implements EnvisionRequest<EnvisionRe
         this.siteID = siteID;
     }
 
+    public String getDesc()
+    {
+        return desc;
+    }
+
+    public void setDesc(String desc)
+    {
+        this.desc = desc;
+    }
+
     public String getApiMethodName()
     {
         return API_METHOD;
@@ -72,6 +89,7 @@ public class LicensedClientRegisterRequest implements EnvisionRequest<EnvisionRe
         txtParams.put("licFp", licenseFingerprint);
         txtParams.put("clientSn", clientSN);
         txtParams.put("siteid", siteID);
+        txtParams.put("desc", desc);
         return txtParams;
     }
 
