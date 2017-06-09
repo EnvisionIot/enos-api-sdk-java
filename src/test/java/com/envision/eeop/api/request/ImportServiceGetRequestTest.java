@@ -3,15 +3,10 @@ package com.envision.eeop.api.request;
 import com.envision.eeop.api.EnvisionClient;
 import com.envision.eeop.api.EnvisionDefaultClient;
 import com.envision.eeop.api.exception.EnvisionApiException;
-import com.envision.eeop.api.response.DomainMetricsGetResponse;
 import com.envision.eeop.api.response.ImportFinishGetResponse;
 import com.envision.eeop.api.response.ImportRunGetResponse;
 import com.envision.eeop.api.response.ImportStartGetResponse;
 import org.junit.Test;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Created by changyi.yuan on 2016/6/17.

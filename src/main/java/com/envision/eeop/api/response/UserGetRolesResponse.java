@@ -24,6 +24,9 @@ public class UserGetRolesResponse extends EnvisionResponse {
     }
 
     public class Role implements Serializable{
+
+        private static final long serialVersionUID = 9138941805796274705L;
+        
         @SerializedName("roleId")
         private String roleId;
         @SerializedName("roleName")

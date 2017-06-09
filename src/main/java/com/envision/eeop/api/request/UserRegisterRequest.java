@@ -71,7 +71,7 @@ public class UserRegisterRequest implements EnvisionRequest<UserRegisterResponse
     }
 
     @Override
-    public Class getResponseClass() {
+    public Class<UserRegisterResponse> getResponseClass() {
         return UserRegisterResponse.class;
     }
 

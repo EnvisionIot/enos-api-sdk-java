@@ -38,7 +38,7 @@ public class UserGetRolesRequest implements EnvisionRequest<UserGetRolesResponse
     }
 
     @Override
-    public Class getResponseClass() {
+    public Class<UserGetRolesResponse> getResponseClass() {
         return UserGetRolesResponse.class;
     }
 

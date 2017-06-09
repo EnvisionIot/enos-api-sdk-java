@@ -9,9 +9,6 @@ import com.envision.eeop.api.response.EventQueryGetResponse;
 import com.envision.eeop.api.util.EventJsonParser;
 import com.envision.eeop.api.util.RuleCheckUtils;
 import com.envision.eos.event.api.bo.EventQuery;
-import com.envision.eos.event.api.expression.Column;
-import com.envision.eos.event.api.expression.Filter;
-import com.envision.eos.event.api.expression.LiteralFilter;
 
 public class EventQueryRequest implements EnvisionRequest<EventQueryGetResponse> {
 
@@ -75,7 +72,8 @@ public class EventQueryRequest implements EnvisionRequest<EventQueryGetResponse>
 	
 	public static void main(String[] args) {
 		String query = "{\"start\":\"2017-05-01+00:00:00\",\"end\":\"2017-06-01+00:00:00\",\"timezone\":\"local\",\"filter\":{\"column\": \"LEVEL\", \"literals\": [\"999\"], \"type\": \"LiteralFilter\"},\"s\":0,\"n\":3,\"isShowTotal\":true,\"language\":\"ZH_CN\"}";
-		EventQuery eventQuery = EventJsonParser.fromJson(query, EventQuery.class);
+		@SuppressWarnings("unused")
+        EventQuery eventQuery = EventJsonParser.fromJson(query, EventQuery.class);
 		System.out.println(query);
 
 	}

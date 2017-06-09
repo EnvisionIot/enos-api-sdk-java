@@ -1,10 +1,7 @@
 package com.envision.eeop.api.response;
 
 import com.envision.eeop.api.EnvisionResponse;
-import com.google.gson.annotations.SerializedName;
 
-import java.util.List;
-import java.util.Map;
 
 /**
  * Created by changyi.yuan on 2016/6/19.

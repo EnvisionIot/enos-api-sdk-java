@@ -1,7 +1,6 @@
 package com.envision.eeop.api.request;
 
 import com.envision.eeop.api.EnvisionRequest;
-import com.envision.eeop.api.domain.UserSetUserSiteVo;
 import com.envision.eeop.api.exception.EnvisionRuleException;
 import com.envision.eeop.api.response.UserSetUserSiteResponse;
 import com.envision.eeop.api.util.EnvisionHashMap;
@@ -37,7 +36,7 @@ public class UserSetUserSiteRequest implements EnvisionRequest<UserSetUserSiteRe
     }
 
     @Override
-    public Class getResponseClass() {
+    public Class<UserSetUserSiteResponse> getResponseClass() {
         return UserSetUserSiteResponse.class;
     }
 

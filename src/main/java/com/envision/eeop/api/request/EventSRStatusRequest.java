@@ -5,7 +5,6 @@ import java.util.Map;
 
 import com.envision.eeop.api.EnvisionRequest;
 import com.envision.eeop.api.exception.EnvisionRuleException;
-import com.envision.eeop.api.response.EventConfirmGetResponse;
 import com.envision.eeop.api.response.EventSRStatusGetResponse;
 import com.envision.eeop.api.util.EventJsonParser;
 import com.envision.eeop.api.util.RuleCheckUtils;

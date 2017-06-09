@@ -41,7 +41,7 @@ public class UserLoginRequest implements EnvisionRequest<UserLoginResponse> {
     }
 
     @Override
-    public Class getResponseClass() {
+    public Class<UserLoginResponse> getResponseClass() {
         return UserLoginResponse.class;
     }
 
@@ -51,6 +51,7 @@ public class UserLoginRequest implements EnvisionRequest<UserLoginResponse> {
         RuleCheckUtils.checkNotEmpty(this.password, "password");
     }
 
+    @SuppressWarnings("unused")
     private boolean passwordCheckStrong (String password){
         if (password == null || password.trim().length() == 0){
             return false;

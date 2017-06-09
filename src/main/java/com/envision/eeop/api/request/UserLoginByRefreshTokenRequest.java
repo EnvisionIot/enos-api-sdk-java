@@ -38,7 +38,7 @@ public class UserLoginByRefreshTokenRequest implements EnvisionRequest<UserLogin
     }
 
     @Override
-    public Class getResponseClass() {
+    public Class<UserLoginByRefreshTokenResponse> getResponseClass() {
         return UserLoginByRefreshTokenResponse.class;
     }
 

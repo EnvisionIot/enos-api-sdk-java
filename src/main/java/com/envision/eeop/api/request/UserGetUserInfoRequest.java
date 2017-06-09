@@ -34,7 +34,7 @@ public class UserGetUserInfoRequest implements EnvisionRequest<UserGetUserInfoRe
     }
 
     @Override
-    public Class getResponseClass() {
+    public Class<UserGetUserInfoResponse> getResponseClass() {
         return UserGetUserInfoResponse.class;
     }
 

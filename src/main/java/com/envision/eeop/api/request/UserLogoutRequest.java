@@ -38,7 +38,7 @@ public class UserLogoutRequest  implements EnvisionRequest<UserLogoutResponse> {
     }
 
     @Override
-    public Class getResponseClass() {
+    public Class<UserLogoutResponse> getResponseClass() {
         return UserLogoutResponse.class;
     }
 

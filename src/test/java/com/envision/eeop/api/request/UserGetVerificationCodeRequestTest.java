@@ -3,7 +3,6 @@ package com.envision.eeop.api.request;
 import com.alibaba.fastjson.JSON;
 import com.envision.eeop.api.EnvisionClient;
 import com.envision.eeop.api.EnvisionDefaultClient;
-import com.envision.eeop.api.domain.UserSetUserSiteVo;
 import com.envision.eeop.api.exception.EnvisionApiException;
 import com.envision.eeop.api.response.*;
 import org.junit.Test;
@@ -39,6 +38,7 @@ public class UserGetVerificationCodeRequestTest {
         }
     }
 
+    @SuppressWarnings("unused")
     @Test
     public void testRegisterStep1(){
         testLogin();
@@ -64,6 +64,7 @@ public class UserGetVerificationCodeRequestTest {
             e.printStackTrace();
         }
     }
+    @SuppressWarnings("unused")
     @Test
     public void testRegisterStep2(){
         testLogin();
@@ -212,6 +213,7 @@ public class UserGetVerificationCodeRequestTest {
         }
     }
 
+    @SuppressWarnings("unused")
     @Test
     public void testAddContactSetp1(){
         this.name = "zikyTest004";
@@ -234,6 +236,7 @@ public class UserGetVerificationCodeRequestTest {
             e.printStackTrace();
         }
     }
+    @SuppressWarnings("unused")
     @Test
     public void testAddContactStep2(){
         this.name = "zikyTest004";
