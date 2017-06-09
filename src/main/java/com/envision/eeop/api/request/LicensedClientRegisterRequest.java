@@ -102,6 +102,5 @@ public class LicensedClientRegisterRequest implements EnvisionRequest<EnvisionRe
     {
         RuleCheckUtils.checkNotEmpty(licenseFingerprint, "licFp");
         RuleCheckUtils.checkNotEmpty(clientSN, "clientSn");
-        RuleCheckUtils.checkNotEmpty(siteID, "siteid");
     }
 }
