@@ -90,7 +90,7 @@ public class LicensedRequestTest
     public void testRegisterObject() throws EnvisionApiException
     {
         String licenseFingerprint = "2ccc509e-9ac0-4afd-b2b3-eb7914e77072@#@D2A893DC3544D48492984AB0AAB8288D25171889";
-        String uid = "SPREE_1201";
+        String uid = "SPREE_1202";
         String mdmID = "";
         LicensedObjectRegisterRequest request = new LicensedObjectRegisterRequest(licenseFingerprint, uid, mdmID);
         EnvisionResponse response = client.execute(request, "token-white-line");
@@ -99,8 +99,8 @@ public class LicensedRequestTest
         System.out.println(response.getBody());
 
         licenseFingerprint = "2ccc509e-9ac0-4afd-b2b3-eb7914e77072@#@D2A893DC3544D48492984AB0AAB8288D25171889";
-        uid = "SPREE_1201";
-        mdmID = "17c7e1f89143e000";
+        uid = "SPREE_1202";
+        mdmID = "17c7e1f8f143e000";
         request = new LicensedObjectRegisterRequest(licenseFingerprint, uid, mdmID);
         response = client.execute(request, "token-white-line");
 

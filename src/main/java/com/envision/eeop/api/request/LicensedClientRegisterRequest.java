@@ -22,7 +22,7 @@ public class LicensedClientRegisterRequest implements EnvisionRequest<EnvisionRe
 
     private String licenseFingerprint;              // mandatory
     private String clientSN;                        // mandatory
-    private String siteID;                          // mandatory
+    private String siteID;                          // optional
     private String desc;                            // optional
 
     public LicensedClientRegisterRequest(String licenseFingerprint, String clientSN, String siteID)

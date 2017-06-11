@@ -21,7 +21,7 @@ public class LicensedObjectRegisterRequest implements EnvisionRequest<EnvisionRe
 
     private String licenseFingerprint;              // mandatory
     private String uid;                             // mandatory
-    private String mdmID;                           // mandatory
+    private String mdmID;                           // optional
 
     public LicensedObjectRegisterRequest(String licenseFingerprint, String uid, String mdmID)
     {
