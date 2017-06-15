@@ -3,7 +3,7 @@ package com.envision.eeop.api.response;
 import java.util.List;
 
 import com.envision.eeop.api.EnvisionResponse;
-import com.envision.eeop.internal.event.Event;
+import com.envision.event.api.Event;
 
 public class EventQueryGetResponse extends EnvisionResponse{
 

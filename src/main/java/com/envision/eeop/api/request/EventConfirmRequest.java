@@ -8,8 +8,8 @@ import com.envision.eeop.api.exception.EnvisionRuleException;
 import com.envision.eeop.api.response.EventConfirmGetResponse;
 import com.envision.eeop.api.util.EventJsonParser;
 import com.envision.eeop.api.util.RuleCheckUtils;
-import com.envision.eeop.internal.event.Filter;
-import com.envision.eeop.internal.event.LanguageType;
+import com.envision.event.api.Filter;
+import com.envision.event.api.LanguageType;
 
 public class EventConfirmRequest implements EnvisionRequest<EventConfirmGetResponse> {
 
