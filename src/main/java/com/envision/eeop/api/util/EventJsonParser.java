@@ -2,7 +2,7 @@ package com.envision.eeop.api.util;
 
 import java.lang.reflect.Type;
 
-import com.envision.eeop.event.Filter;
+import com.envision.eeop.internal.event.Filter;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonDeserializationContext;
