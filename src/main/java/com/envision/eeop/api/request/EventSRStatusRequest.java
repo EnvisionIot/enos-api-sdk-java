@@ -8,8 +8,8 @@ import com.envision.eeop.api.exception.EnvisionRuleException;
 import com.envision.eeop.api.response.EventSRStatusGetResponse;
 import com.envision.eeop.api.util.EventJsonParser;
 import com.envision.eeop.api.util.RuleCheckUtils;
-import com.envision.eos.event.api.bo.LanguageType;
-import com.envision.eos.event.api.expression.Filter;
+import com.envision.eeop.event.Filter;
+import com.envision.eeop.event.LanguageType;
 
 public class EventSRStatusRequest implements EnvisionRequest<EventSRStatusGetResponse> {
 
