@@ -9,16 +9,16 @@ public class EventQueryGetResponse extends EnvisionResponse{
 
 	private static final long serialVersionUID = -1727770275915497602L;
 
-	private List<Event> alarmList;
+	private List<Event> eventList;
 
 	private Integer total;
 
-	public List<Event> getAlarmList() {
-		return alarmList;
+	public List<Event> getEventList() {
+		return eventList;
 	}
 
-	public void setAlarmList(List<Event> alarmList) {
-		this.alarmList = alarmList;
+	public void setEventList(List<Event> alarmList) {
+		this.eventList = alarmList;
 	}
 
 	public Integer getTotal() {
