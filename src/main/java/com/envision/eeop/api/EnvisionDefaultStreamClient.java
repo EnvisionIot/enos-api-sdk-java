@@ -72,12 +72,17 @@ public class EnvisionDefaultStreamClient implements EnvisionStreamClient {
 
     @Override
     public boolean download(AbstractEnvisionStreamRequest request, String token) throws EnvisionApiException, IOException {
+        Map<String, String> textParams = request.getTextParams();
+        if (token != null && !token.isEmpty()) {
+            textParams.put(Constants.TOKEN, token);
+        }
+
         @SuppressWarnings("unchecked")
-        String url = makeUrl(request.getTextParams(), request.getApiMethodName());
+        String url = makeUrl(textParams, request.getApiMethodName());
         CloseableHttpClient client = HttpClients.createDefault();
 
         @SuppressWarnings("unchecked")
-        HttpResponse response = execute(client, url, null, request.getTextParams());
+        HttpResponse response = execute(client, url, null, textParams);
 
         if (response == null || response.getStatusLine().getStatusCode() != 200)
             return false;
@@ -98,12 +103,17 @@ public class EnvisionDefaultStreamClient implements EnvisionStreamClient {
     }
 
     public boolean upload(AbstractEnvisionStreamRequest request, String token) throws EnvisionApiException, IOException {
+        Map<String, String> textParams = request.getTextParams();
+        if (token != null && !token.isEmpty()) {
+            textParams.put(Constants.TOKEN, token);
+        }
+
         @SuppressWarnings("unchecked")
-        String url = makeUrl(request.getTextParams(), request.getApiMethodName());
+        String url = makeUrl(textParams, request.getApiMethodName());
         CloseableHttpClient client = HttpClients.createDefault();
 
         @SuppressWarnings("unchecked")
-        HttpResponse response = execute(client, url, request.getFile(), request.getTextParams());
+        HttpResponse response = execute(client, url, request.getFile(), textParams);
 
         if (response == null || response.getStatusLine().getStatusCode() != 200)
             return false;
