@@ -10,11 +10,11 @@ package com.envision.eeop.api.response;
 
 import java.util.Map;
 
-import com.envision.eeop.api.EnvisionResponse;
+import com.envision.eeop.api.EnvisionPaginationResponse;
 import com.google.gson.annotations.SerializedName;
 
 
-public class DimensionsGetResponse extends EnvisionResponse {
+public class DimensionsGetResponse extends EnvisionPaginationResponse {
 
 	private static final long serialVersionUID = 627716959003640263L;
 	

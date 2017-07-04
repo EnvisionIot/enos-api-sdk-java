@@ -6,7 +6,9 @@ import java.util.List;
 
 public class View implements Expression {
 
-	private List<Column> views = new ArrayList<Column>();
+    private static final long serialVersionUID = 5472829666638290908L;
+
+    private List<Column> views = new ArrayList<Column>();
 
 	public View() {
 	};

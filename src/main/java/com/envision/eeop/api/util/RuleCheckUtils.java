@@ -148,4 +148,14 @@ public class RuleCheckUtils {
 			}
 		}
 	}
+
+    public static void checkRange(int value, int minInclusive, int maxInclusive, String fieldName) throws EnvisionRuleException
+    {
+        if (value < minInclusive || value > maxInclusive)
+        {
+            throw new EnvisionRuleException(ERROR_CODE_ARGUMENTS_INVALID,
+                    "client-error:Invalid Arguments:the value of " + fieldName + " must be in range ["
+                    + minInclusive + ", " + maxInclusive + "].");
+        }
+    }
 }
