@@ -3,7 +3,7 @@ package com.envision.eeop.api;
 /**
  * Client Pagination Response
  */
-public class EnvisionPaginationResponse extends EnvisionResponse
+public abstract class EnvisionPaginationResponse extends EnvisionResponse
 {
     private static final long serialVersionUID = -2395824269031360535L;
 
@@ -28,4 +28,10 @@ public class EnvisionPaginationResponse extends EnvisionResponse
     {
         return remainingPages == 0;
     }
+    
+    /**
+     * Merge another response
+     * @param another
+     */
+    public abstract EnvisionPaginationResponse merge(EnvisionPaginationResponse another);
 }

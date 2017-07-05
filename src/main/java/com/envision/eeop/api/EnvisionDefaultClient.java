@@ -95,7 +95,7 @@ public class EnvisionDefaultClient implements EnvisionClient {
 		return doExecute(request, token);
 	}
 
-	private <T extends EnvisionResponse> T doExecute(
+	protected <T extends EnvisionResponse> T doExecute(
 			EnvisionRequest<T> request, String token)
 			throws EnvisionApiException {
 		try {
