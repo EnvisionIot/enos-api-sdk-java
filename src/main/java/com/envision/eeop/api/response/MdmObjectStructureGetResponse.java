@@ -2,11 +2,11 @@ package com.envision.eeop.api.response;
 
 import java.util.List;
 
-import com.envision.eeop.api.EnvisionResponse;
+import com.envision.eeop.api.EnvisionSkipAndLimitResponse;
 import com.envision.eeop.api.domain.MdmObject;
 import com.google.gson.annotations.SerializedName;
 
-public class MdmObjectStructureGetResponse extends EnvisionResponse
+public class MdmObjectStructureGetResponse extends EnvisionSkipAndLimitResponse
 {
     private static final long serialVersionUID = 943451741324250846L;
 
@@ -21,5 +21,29 @@ public class MdmObjectStructureGetResponse extends EnvisionResponse
     public void setMdmObjects(List<MdmObject> mdmObjects)
     {
         this.mdmObjects = mdmObjects;
+    }
+
+    @Override
+    public EnvisionSkipAndLimitResponse merge(EnvisionSkipAndLimitResponse another)
+    {
+        if (another.isSuccess() && 
+            another instanceof MdmObjectStructureGetResponse)
+        {
+            mdmObjects.addAll(((MdmObjectStructureGetResponse) another).mdmObjects);
+        }
+        return this;
+    }
+
+    @Override
+    public String getLastElement()
+    {
+        if (!mdmObjects.isEmpty())
+        {
+            return mdmObjects.get(mdmObjects.size() - 1).getMdmID();
+        }
+        else
+        {
+            return null;
+        }
     }
 }

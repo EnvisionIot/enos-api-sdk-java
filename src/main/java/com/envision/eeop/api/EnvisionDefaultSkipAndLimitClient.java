@@ -6,7 +6,7 @@ import com.envision.eeop.api.exception.EnvisionApiException;
  * This class implements a client to execute a request page-by-page
  * @author jieyuan.shen
  */
-public class EnvisionDefaultPaginationClient extends EnvisionDefaultClient
+public class EnvisionDefaultSkipAndLimitClient extends EnvisionDefaultClient
 {
     private int pageSize = 200;
     
@@ -15,18 +15,18 @@ public class EnvisionDefaultPaginationClient extends EnvisionDefaultClient
     
     // TODO: support parallism later
     
-    public EnvisionDefaultPaginationClient(String serverUrl, String appKey, String appSecret)
+    public EnvisionDefaultSkipAndLimitClient(String serverUrl, String appKey, String appSecret)
     {
         super(serverUrl, appKey, appSecret);
     }
 
-    public EnvisionDefaultPaginationClient(String serverUrl, String appKey, String appSecret, int pageSize)
+    public EnvisionDefaultSkipAndLimitClient(String serverUrl, String appKey, String appSecret, int pageSize)
     {
        super(serverUrl, appKey, appSecret);
         this.pageSize = pageSize;
     }
 
-    public EnvisionDefaultPaginationClient(String serverUrl, String appKey, String appSecret, int pageSize, int executeTimeout)
+    public EnvisionDefaultSkipAndLimitClient(String serverUrl, String appKey, String appSecret, int pageSize, int executeTimeout)
     {
         super(serverUrl, appKey, appSecret);
         this.pageSize = pageSize;
@@ -37,13 +37,9 @@ public class EnvisionDefaultPaginationClient extends EnvisionDefaultClient
     @Override
     public <T extends EnvisionResponse> T execute(EnvisionRequest<T> request) throws EnvisionApiException
     {
-        if (request instanceof EnvisionPaginationRequest)
+        if (request instanceof EnvisionSkipAndLimitRequest)
         {
             return (T) doPaginationRequest((EnvisionPaginationRequest<EnvisionPaginationResponse>) request, null);
-        }
-        else if (request instanceof EnvisionSkipAndLimitRequest)
-        {
-            return (T) doSkipAndLimitRequest((EnvisionSkipAndLimitRequest<EnvisionSkipAndLimitResponse>) request, null);
         }
         else
         {
@@ -58,10 +54,6 @@ public class EnvisionDefaultPaginationClient extends EnvisionDefaultClient
         if (request instanceof EnvisionPaginationRequest)
         {
             return (T) doPaginationRequest((EnvisionPaginationRequest<EnvisionPaginationResponse>) request, token);
-        }
-        else if (request instanceof EnvisionSkipAndLimitRequest)
-        {
-            return (T) doSkipAndLimitRequest((EnvisionSkipAndLimitRequest<EnvisionSkipAndLimitResponse>) request, token);
         }
         else
         {
@@ -107,47 +99,6 @@ public class EnvisionDefaultPaginationClient extends EnvisionDefaultClient
             ++pageNo;
         } 
         while (!partialResponse.isLastPage());
-        return response;
-    }
-
-    @SuppressWarnings("unchecked")
-    private <T extends EnvisionSkipAndLimitResponse> T doSkipAndLimitRequest(EnvisionSkipAndLimitRequest<T> request, String token)
-    throws EnvisionApiException
-    {
-        long startTime = System.currentTimeMillis();
-        String exclusiveFrom = null;
-        T response = null;
-        T partialResponse;
-        request.setPageSize(pageSize);
-        do
-        {
-            request.setExclusiveFrom(exclusiveFrom);
-            partialResponse = super.doExecute(request, token);
-            if (partialResponse.isSuccess())
-            {
-                if (response == null)
-                {
-                    response = partialResponse;
-                }
-                else
-                {
-                    response = (T) response.merge(partialResponse);
-                }
-            }
-            else
-            {
-                throw new EnvisionApiException(request.getApiMethodName() + " failed from: " + exclusiveFrom + ", page size: " + pageSize);
-            }
-            
-            long currTime = System.currentTimeMillis();
-            if (currTime - startTime > executeTimeout)
-            {
-                throw new EnvisionApiException(request.getApiMethodName() + " expired, limit: " + executeTimeout + ", actural: " + (currTime - startTime));
-            }
-            
-            exclusiveFrom = partialResponse.getLastElement();
-        } 
-        while (!partialResponse.isLastPage() && exclusiveFrom != null);
         return response;
     }
 }

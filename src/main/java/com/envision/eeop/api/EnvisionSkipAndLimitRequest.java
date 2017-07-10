@@ -7,26 +7,15 @@ import com.envision.eeop.api.util.EnvisionHashMap;
 import com.envision.eeop.api.util.RuleCheckUtils;
 
 /**
- * Client Pagination Request
- *
- * @param <T>
+ * Client Limited Request
+ * @param <T>   Response class type
  */
-public abstract class EnvisionPaginationRequest<T extends EnvisionPaginationResponse>
+public abstract class EnvisionSkipAndLimitRequest<T extends EnvisionSkipAndLimitResponse>
 implements EnvisionRequest<T>
 {
-    private int pageNo = 0;         // optional
-
     private int pageSize = 0;       // optional
 
-    protected int getPageNo()
-    {
-        return pageNo;
-    }
-
-    protected void setPageNo(int pageNo)
-    {
-        this.pageNo = pageNo;
-    }
+    private String exclusiveFrom;        // optional
 
     protected int getPageSize()
     {
@@ -36,6 +25,16 @@ implements EnvisionRequest<T>
     protected void setPageSize(int pageSize)
     {
         this.pageSize = pageSize;
+    }
+
+    public String getExclusiveFrom()
+    {
+        return exclusiveFrom;
+    }
+
+    public void setExclusiveFrom(String exclusiveFrom)
+    {
+        this.exclusiveFrom = exclusiveFrom;
     }
 
     /**
@@ -52,8 +51,11 @@ implements EnvisionRequest<T>
         EnvisionHashMap txtParams = new EnvisionHashMap();
         if (pageSize > 0)
         {
-            txtParams.put("page_no", String.valueOf(pageNo));
             txtParams.put("page_size", String.valueOf(pageSize));
+        }
+        if (exclusiveFrom != null)
+        {
+            txtParams.put("exclusive_from", exclusiveFrom);
         }
         return txtParams;
     }
@@ -63,7 +65,6 @@ implements EnvisionRequest<T>
      */
     public void check() throws EnvisionRuleException
     {
-        RuleCheckUtils.checkRange(pageNo, 0, Integer.MAX_VALUE, "page_no");
         RuleCheckUtils.checkRange(pageSize, 0, 200, "page_size");
     }
 }
