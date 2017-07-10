@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import com.envision.eeop.api.EnvisionRequest;
+import com.envision.eeop.api.EnvisionSkipAndLimitRequest;
 import com.envision.eeop.api.exception.EnvisionRuleException;
 import com.envision.eeop.api.response.MdmObjectStructureGetResponse;
 import com.envision.eeop.api.util.EnvisionHashMap;
@@ -24,9 +24,8 @@ import com.envision.eeop.api.util.StringUtils;
  * 
  * @author jieyuan.shen
  */
-public class MdmFilteredObjectsGetRequest implements EnvisionRequest<MdmObjectStructureGetResponse>
+public class MdmFilteredObjectsGetRequest extends EnvisionSkipAndLimitRequest<MdmObjectStructureGetResponse>
 {
-
     private static final String API_METHOD = "/mdmService/getFilteredObjects";
 
     private String token;               // mandatory
@@ -38,6 +37,7 @@ public class MdmFilteredObjectsGetRequest implements EnvisionRequest<MdmObjectSt
 
     public MdmFilteredObjectsGetRequest(String token, String type)
     {
+        super();
         this.token = token;
         this.type = type;
         this.filterList = JsonParser.toJson(new ArrayList<>());
@@ -54,6 +54,7 @@ public class MdmFilteredObjectsGetRequest implements EnvisionRequest<MdmObjectSt
     public MdmFilteredObjectsGetRequest(String token, String type, List<Filter> filterList, 
             List<AppointedFilter> appointedFilterList, List<String> attributeList)
     {
+        super();
         this.token = token;
         this.type = type;
         this.filterList = JsonParser.toJson(filterList);
@@ -145,6 +146,7 @@ public class MdmFilteredObjectsGetRequest implements EnvisionRequest<MdmObjectSt
         {
             txtParams.put("locale", locale);
         }
+        txtParams.putAll(getPaginationParams());
 
         return txtParams;
     }
@@ -156,6 +158,7 @@ public class MdmFilteredObjectsGetRequest implements EnvisionRequest<MdmObjectSt
 
     public void check() throws EnvisionRuleException
     {
+        super.check();
         RuleCheckUtils.checkNotEmpty(token, "token");
         RuleCheckUtils.checkNotEmpty(type, "type");
         RuleCheckUtils.checkFilterFormat(filterList, "filter");
