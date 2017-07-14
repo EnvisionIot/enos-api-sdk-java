@@ -29,7 +29,6 @@ public class UserGetUserInfoRequest implements EnvisionRequest<UserGetUserInfoRe
     @Override
     public Map<String, String> getTextParams() {
         EnvisionHashMap txtParams = new EnvisionHashMap();
-        txtParams.put("userId", this.userId);
         return txtParams;
     }
 
@@ -40,7 +39,6 @@ public class UserGetUserInfoRequest implements EnvisionRequest<UserGetUserInfoRe
 
     @Override
     public void check() throws EnvisionRuleException {
-        RuleCheckUtils.checkNotEmpty(this.userId, "userId");
     }
 
     public String getUserId() {
