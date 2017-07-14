@@ -4,7 +4,6 @@ import com.envision.eeop.api.EnvisionRequest;
 import com.envision.eeop.api.exception.EnvisionRuleException;
 import com.envision.eeop.api.response.UserGetUserInfoResponse;
 import com.envision.eeop.api.util.EnvisionHashMap;
-import com.envision.eeop.api.util.RuleCheckUtils;
 
 import java.util.Map;
 
