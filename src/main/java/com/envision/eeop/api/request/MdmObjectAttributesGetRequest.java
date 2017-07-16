@@ -96,6 +96,7 @@ extends EnvisionSkipAndLimitRequest<MdmObjectAttributesGetResponse>
         {
             txtParams.put("locale", locale);
         }
+        txtParams.putAll(getPaginationParams());
 
         return txtParams;
     }
@@ -107,6 +108,7 @@ extends EnvisionSkipAndLimitRequest<MdmObjectAttributesGetResponse>
 
     public void check() throws EnvisionRuleException
     {
+        super.check();
         RuleCheckUtils.checkNotEmpty(mdmIDList, "mdmids");
     }
 }
