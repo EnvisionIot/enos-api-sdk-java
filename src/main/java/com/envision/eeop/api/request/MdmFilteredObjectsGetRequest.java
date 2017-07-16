@@ -24,7 +24,8 @@ import com.envision.eeop.api.util.StringUtils;
  * 
  * @author jieyuan.shen
  */
-public class MdmFilteredObjectsGetRequest extends EnvisionSkipAndLimitRequest<MdmObjectStructureGetResponse>
+public class MdmFilteredObjectsGetRequest 
+extends EnvisionSkipAndLimitRequest<MdmObjectStructureGetResponse>
 {
     private static final String API_METHOD = "/mdmService/getFilteredObjects";
 
