@@ -1,8 +1,7 @@
 /**
  * Project: eos-core
  * 
- * Copyright http://www.envisioncn.com/
- * All rights reserved.
+ * Copyright http://www.envisioncn.com/ All rights reserved.
  *
  * @author xiaomin.zhou
  */
@@ -12,33 +11,45 @@ import java.util.Map;
 
 import com.google.gson.annotations.SerializedName;
 
-public class MdmObject extends MdmObjectAttributes {
+public class MdmObject extends MdmObjectAttributes
+implements Comparable<MdmObject>
+{
+    private static final long serialVersionUID = -4914612001721892494L;
 
-	private static final long serialVersionUID = -4914612001721892494L;
+    @SerializedName("mdmid")
+    private String mdmID;
 
-	@SerializedName("mdmid")
-	private String mdmID;
-	
-	public MdmObject() {
-		super();
-	}
+    public MdmObject()
+    {
+        super();
+    }
 
-	public MdmObject(String mdmID, Map<String,String> attributes) {
-		super(attributes);
-		this.mdmID = mdmID;
-	}
-	
-	public MdmObject(String mdmID, String attributesJson) {
-		super(attributesJson);
-		this.mdmID = mdmID;
-	}
+    public MdmObject(String mdmID, Map<String, String> attributes)
+    {
+        super(attributes);
+        this.mdmID = mdmID;
+    }
 
-	public String getMdmID() {
-		return mdmID;
-	}
+    public MdmObject(String mdmID, String attributesJson)
+    {
+        super(attributesJson);
+        this.mdmID = mdmID;
+    }
 
-	@Override
-	public String toString() {
-		return "MdmObject [mdmID=" + mdmID + ", attributes=" + attributes + "]";
-	}
+    public String getMdmID()
+    {
+        return mdmID;
+    }
+
+    @Override
+    public String toString()
+    {
+        return "MdmObject [mdmID=" + mdmID + ", attributes=" + attributes + "]";
+    }
+
+    @Override
+    public int compareTo(MdmObject o)
+    {
+        return mdmID.compareTo(o.mdmID);
+    }
 }

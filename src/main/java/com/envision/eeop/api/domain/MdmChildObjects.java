@@ -7,8 +7,12 @@
  */
 package com.envision.eeop.api.domain;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.TreeSet;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -53,5 +57,45 @@ public class MdmChildObjects extends MdmObjectAttributes
     public String toString()
     {
         return "MdmChildObjects [mdmObjects=" + mdmObjectList + ", attributes=" + attributes + "]";
+    }
+    
+    public MdmChildObjects merge(MdmChildObjects another)
+    {
+        for (Entry<String,List<MdmObject>> anotherEntry: another.getMdmObjectList().entrySet())
+        {
+            String type = anotherEntry.getKey();
+            List<MdmObject> mdmObjects = anotherEntry.getValue();
+            if (mdmObjectList.containsKey(type))
+            {
+                TreeSet<MdmObject> mergeMdmObjects = new TreeSet<>(mdmObjectList.get(type));
+                mergeMdmObjects.addAll(mdmObjects);
+                mdmObjectList.put(type, new ArrayList<>(mergeMdmObjects));
+            }
+            else
+            {
+                mdmObjectList.put(type, mdmObjects);
+            }
+        }
+        return this;
+    }
+    
+    public String getLastElement()
+    {
+        List<String> maxMdmIDs = new ArrayList<>();
+        for (List<MdmObject> mdmObjects: mdmObjectList.values())
+        {
+            if (!mdmObjects.isEmpty())
+            {
+                maxMdmIDs.add(mdmObjects.get(mdmObjects.size() - 1).getMdmID());
+            }
+        }
+        if (!maxMdmIDs.isEmpty())
+        {
+            return Collections.max(maxMdmIDs);
+        }
+        else
+        {
+            return "";
+        }
     }
 }

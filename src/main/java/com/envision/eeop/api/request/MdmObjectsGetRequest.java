@@ -10,16 +10,16 @@ package com.envision.eeop.api.request;
 import java.util.List;
 import java.util.Map;
 
-import com.envision.eeop.api.EnvisionRequest;
+import com.envision.eeop.api.EnvisionSkipAndLimitRequest;
 import com.envision.eeop.api.exception.EnvisionRuleException;
 import com.envision.eeop.api.response.MdmObjectsGetResponse;
 import com.envision.eeop.api.util.EnvisionHashMap;
 import com.envision.eeop.api.util.RuleCheckUtils;
 import com.envision.eeop.api.util.StringUtils;
 
-public class MdmObjectsGetRequest implements EnvisionRequest<MdmObjectsGetResponse>
+public class MdmObjectsGetRequest 
+extends EnvisionSkipAndLimitRequest<MdmObjectsGetResponse>
 {
-
     private static final String API_METHOD = "/mdmService/getObjects";
 
     private String mdmIDList;           // mandatory
@@ -102,6 +102,7 @@ public class MdmObjectsGetRequest implements EnvisionRequest<MdmObjectsGetRespon
         {
             txtParams.put("locale", locale);
         }
+        txtParams.putAll(getPaginationParams());
 
         return txtParams;
     }
@@ -113,6 +114,7 @@ public class MdmObjectsGetRequest implements EnvisionRequest<MdmObjectsGetRespon
 
     public void check() throws EnvisionRuleException
     {
+        super.check();
         RuleCheckUtils.checkNotEmpty(mdmIDList, "mdmids");
     }
 }

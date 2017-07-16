@@ -50,6 +50,13 @@ public class MdmObjectAttributesGetResponse extends EnvisionSkipAndLimitResponse
     @Override
     public String getLastElement()
     {
-        return Collections.max(mdmObjects.keySet());
+        if (!mdmObjects.isEmpty())
+        {
+            return Collections.max(mdmObjects.keySet());
+        }
+        else
+        {
+            return "";
+        }
     }
 }

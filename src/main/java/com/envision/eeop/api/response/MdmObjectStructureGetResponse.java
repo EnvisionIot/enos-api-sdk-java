@@ -43,7 +43,7 @@ public class MdmObjectStructureGetResponse extends EnvisionSkipAndLimitResponse
         }
         else
         {
-            return null;
+            return "";
         }
     }
 }
