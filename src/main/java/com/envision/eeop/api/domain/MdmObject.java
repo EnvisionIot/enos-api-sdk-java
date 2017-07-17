@@ -52,4 +52,28 @@ implements Comparable<MdmObject>
     {
         return mdmID.compareTo(o.mdmID);
     }
+
+    @Override
+    public int hashCode()
+    {
+        final int prime = 31;
+        int result = super.hashCode();
+        result = prime * result + ((mdmID == null) ? 0 : mdmID.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj)
+    {
+        if(this == obj) return true;
+        if(!super.equals(obj)) return false;
+        if(getClass() != obj.getClass()) return false;
+        MdmObject other = (MdmObject) obj;
+        if(mdmID == null)
+        {
+            if(other.mdmID != null) return false;
+        }
+        else if(!mdmID.equals(other.mdmID)) return false;
+        return true;
+    }
 }

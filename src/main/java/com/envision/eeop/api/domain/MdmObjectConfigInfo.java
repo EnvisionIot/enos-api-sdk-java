@@ -55,4 +55,30 @@ public class MdmObjectConfigInfo implements Serializable
     {
         return "MdmObjectConfigInfo [mdmID=" + mdmID + ", domainID=" + domainID + "]";
     }
+
+    @Override
+    public int hashCode()
+    {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + domainID;
+        result = prime * result + ((mdmID == null) ? 0 : mdmID.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj)
+    {
+        if(this == obj) return true;
+        if(obj == null) return false;
+        if(getClass() != obj.getClass()) return false;
+        MdmObjectConfigInfo other = (MdmObjectConfigInfo) obj;
+        if(domainID != other.domainID) return false;
+        if(mdmID == null)
+        {
+            if(other.mdmID != null) return false;
+        }
+        else if(!mdmID.equals(other.mdmID)) return false;
+        return true;
+    }
 }

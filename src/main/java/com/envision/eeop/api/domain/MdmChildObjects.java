@@ -53,12 +53,6 @@ public class MdmChildObjects extends MdmObjectAttributes
         this.mdmObjectList = mdmObjectList;
     }
 
-    @Override
-    public String toString()
-    {
-        return "MdmChildObjects [mdmObjects=" + mdmObjectList + ", attributes=" + attributes + "]";
-    }
-    
     public MdmChildObjects merge(MdmChildObjects another)
     {
         for (Entry<String,List<MdmObject>> anotherEntry: another.getMdmObjectList().entrySet())
@@ -97,5 +91,35 @@ public class MdmChildObjects extends MdmObjectAttributes
         {
             return "";
         }
+    }
+
+    @Override
+    public String toString()
+    {
+        return "MdmChildObjects [mdmObjects=" + mdmObjectList + ", attributes=" + attributes + "]";
+    }
+
+    @Override
+    public int hashCode()
+    {
+        final int prime = 31;
+        int result = super.hashCode();
+        result = prime * result + ((mdmObjectList == null) ? 0 : mdmObjectList.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj)
+    {
+        if(this == obj) return true;
+        if(!super.equals(obj)) return false;
+        if(getClass() != obj.getClass()) return false;
+        MdmChildObjects other = (MdmChildObjects) obj;
+        if(mdmObjectList == null)
+        {
+            if(other.mdmObjectList != null) return false;
+        }
+        else if(!mdmObjectList.equals(other.mdmObjectList)) return false;
+        return true;
     }
 }

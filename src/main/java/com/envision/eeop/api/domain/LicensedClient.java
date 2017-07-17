@@ -44,4 +44,28 @@ public class LicensedClient extends MdmObjectAttributes
     {
         return "LicensedClient [siteID=" + siteID + ", attributes=" + attributes + "]";
     }
+
+    @Override
+    public int hashCode()
+    {
+        final int prime = 31;
+        int result = super.hashCode();
+        result = prime * result + ((siteID == null) ? 0 : siteID.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj)
+    {
+        if(this == obj) return true;
+        if(!super.equals(obj)) return false;
+        if(getClass() != obj.getClass()) return false;
+        LicensedClient other = (LicensedClient) obj;
+        if(siteID == null)
+        {
+            if(other.siteID != null) return false;
+        }
+        else if(!siteID.equals(other.siteID)) return false;
+        return true;
+    } 
 }
