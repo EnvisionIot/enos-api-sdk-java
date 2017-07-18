@@ -7,6 +7,7 @@
  */
 package com.envision.eeop.api.domain;
 
+import java.util.Comparator;
 import java.util.Map;
 
 import com.google.gson.annotations.SerializedName;
@@ -15,6 +16,15 @@ public class MdmObject extends MdmObjectAttributes
 implements Comparable<MdmObject>
 {
     private static final long serialVersionUID = -4914612001721892494L;
+    
+    private static final Comparator<MdmObject> comparator = new Comparator<MdmObject>()
+    {
+        @Override
+        public int compare(MdmObject o1, MdmObject o2)
+        {
+            return o1.compareTo(o2);
+        }
+    };
 
     @SerializedName("mdmid")
     private String mdmID;
@@ -45,6 +55,11 @@ implements Comparable<MdmObject>
     public String toString()
     {
         return "MdmObject [mdmID=" + mdmID + ", attributes=" + attributes + "]";
+    }
+    
+    public static Comparator<MdmObject> getComparator()
+    {
+        return comparator;
     }
 
     @Override
