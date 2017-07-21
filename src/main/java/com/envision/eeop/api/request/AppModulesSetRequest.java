@@ -47,7 +47,7 @@ public class AppModulesSetRequest implements EnvisionRequest<AppModulesSetRespon
             RuleCheckUtils.checkNotEmpty(m.id, "modules.id");
             RuleCheckUtils.checkNotEmpty(m.name, "modules.name");
 
-            if (m.GROUPTYPE_LIST.contains(m.getGroupType())){
+            if (!m.GROUPTYPE_LIST.contains(m.getGroupType())){
                 throw new EnvisionRuleException(RuleCheckUtils.ERROR_CODE_ARGUMENTS_INVALID,
                         "client-error:Invalid Arguments:the value of groupType should be one of " + JsonParser.toJson(m.GROUPTYPE_LIST));
             }
