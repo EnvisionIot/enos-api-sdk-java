@@ -14,26 +14,26 @@ import com.envision.eeop.api.util.RuleCheckUtils;
 public abstract class EnvisionPaginationRequest<T extends EnvisionPaginationResponse>
 implements EnvisionRequest<T>
 {
-    private int pageNo = 0;         // optional
+    protected int pageNo = 0;         // optional
 
-    private int pageSize = 0;       // optional
+    protected int pageSize = 0;       // optional
 
-    protected int getPageNo()
+    public int getPageNo()
     {
         return pageNo;
     }
 
-    protected void setPageNo(int pageNo)
+    public void setPageNo(int pageNo)
     {
         this.pageNo = pageNo;
     }
 
-    protected int getPageSize()
+    public int getPageSize()
     {
         return pageSize;
     }
 
-    protected void setPageSize(int pageSize)
+    public void setPageSize(int pageSize)
     {
         this.pageSize = pageSize;
     }
@@ -58,9 +58,7 @@ implements EnvisionRequest<T>
         return txtParams;
     }
 
-    /*
-     * check request
-     */
+    @Override
     public void check() throws EnvisionRuleException
     {
         RuleCheckUtils.checkRange(pageNo, 0, Integer.MAX_VALUE, "page_no");

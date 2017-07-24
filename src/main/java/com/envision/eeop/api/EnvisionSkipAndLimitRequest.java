@@ -13,16 +13,16 @@ import com.envision.eeop.api.util.RuleCheckUtils;
 public abstract class EnvisionSkipAndLimitRequest<T extends EnvisionSkipAndLimitResponse>
 implements EnvisionRequest<T>
 {
-    private int pageSize = 0;       // optional
+    protected int pageSize = 0;       // optional
 
-    private String exclusiveFrom;        // optional
+    protected String exclusiveFrom;        // optional
 
-    protected int getPageSize()
+    public int getPageSize()
     {
         return pageSize;
     }
 
-    protected void setPageSize(int pageSize)
+    public void setPageSize(int pageSize)
     {
         this.pageSize = pageSize;
     }
@@ -60,9 +60,7 @@ implements EnvisionRequest<T>
         return txtParams;
     }
 
-    /*
-     * check request
-     */
+    @Override
     public void check() throws EnvisionRuleException
     {
         RuleCheckUtils.checkRange(pageSize, 0, 200, "page_size");
