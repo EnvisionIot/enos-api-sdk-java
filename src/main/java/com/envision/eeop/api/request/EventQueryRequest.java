@@ -12,6 +12,7 @@ import com.envision.event.api.Column;
 import com.envision.event.api.EventQuery;
 import com.envision.event.api.Filter;
 import com.envision.event.api.LiteralFilter;
+import com.envision.event.api.View;
 
 
 public class EventQueryRequest implements EnvisionRequest<EventQueryGetResponse> {
@@ -57,6 +58,7 @@ public class EventQueryRequest implements EnvisionRequest<EventQueryGetResponse>
 		// 以下等价limit 10,20 可用来分页
 		 query.setS(0);
 		 query.setN(20);
+		 query.setSelectView(new View().addColumnView(Column.DEVICE_ID).addColumnView(Column.CODE));
 		// 以下表示只查询总数，相当于select count(*) from xxxx
 		//query.setShowTotal(true);
 		String json = EventJsonParser.toJson(query);

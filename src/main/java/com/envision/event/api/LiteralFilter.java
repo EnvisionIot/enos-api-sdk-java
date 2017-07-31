@@ -11,23 +11,19 @@ public class LiteralFilter extends Filter {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private  Column column;
+	private Column column;
 
-	private  Set<String> literals = new HashSet<String>();
-	
-	public LiteralFilter(){}
+	private Set<String> literals = new HashSet<String>();
+
+	public LiteralFilter() {
+	}
 
 	public LiteralFilter(Column column) {
-		this.column = column;
-	}
-	
-	public LiteralFilter(Column column,String literals ) {
-		if (column==null || literals == null) {
+		if (column == null) {
 			throw new NullPointerException("Please do not pass null");
 		}
-		if(!column.isIndex()){
-			throw new IllegalArgumentException(
-					"This column does not apply to filter because it is not a index type");
+		if (!column.isIndex()) {
+			throw new IllegalArgumentException("This column does not apply to filter because it is not a index type");
 		}
 		this.column = column;
 
@@ -60,7 +56,5 @@ public class LiteralFilter extends Filter {
 	public void setLiterals(Set<String> literals) {
 		this.literals = literals;
 	}
-	
-	
 
 }
