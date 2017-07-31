@@ -8,11 +8,11 @@ import com.envision.eeop.api.exception.EnvisionRuleException;
 import com.envision.eeop.api.response.EventQueryGetResponse;
 import com.envision.eeop.api.util.EventJsonParser;
 import com.envision.eeop.api.util.RuleCheckUtils;
-import com.envision.event.api.Column;
-import com.envision.event.api.EventQuery;
-import com.envision.event.api.Filter;
-import com.envision.event.api.LiteralFilter;
-import com.envision.event.api.View;
+import com.envision.eos.event.api.bo.EventQuery;
+import com.envision.eos.event.api.expression.Column;
+import com.envision.eos.event.api.expression.Filter;
+import com.envision.eos.event.api.expression.LiteralFilter;
+import com.envision.eos.event.api.expression.View;
 
 
 public class EventQueryRequest implements EnvisionRequest<EventQueryGetResponse> {

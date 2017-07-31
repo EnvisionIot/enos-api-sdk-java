@@ -2,7 +2,7 @@ package com.envision.eeop.api.util;
 
 import java.lang.reflect.Type;
 
-import com.envision.event.api.Filter;
+import com.envision.eos.event.api.expression.Filter;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonDeserializationContext;
@@ -17,8 +17,8 @@ public class EventJsonParser {
 
 	private static final Gson gson = new GsonBuilder().registerTypeAdapter(Filter.class, new FilterDeserializer())
 			.create();
-	
-	private static final String  FILTER_PREFIX="com.envision.eos.event.api.expression.";
+
+	private static final String FILTER_PREFIX = "com.envision.eos.event.api.expression.";
 
 	private EventJsonParser() {
 	}
@@ -42,8 +42,8 @@ public class EventJsonParser {
 				throws JsonParseException {
 			try {
 				String type = ((JsonObject) json).get("type").getAsString();
-				
-				type=FILTER_PREFIX+type;
+
+				type = FILTER_PREFIX + type;
 
 				Class<?> klass = Class.forName(type);
 
