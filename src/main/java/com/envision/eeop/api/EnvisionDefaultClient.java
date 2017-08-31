@@ -1,6 +1,8 @@
 package com.envision.eeop.api;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -151,5 +153,22 @@ public class EnvisionDefaultClient implements EnvisionClient {
 		url.append(sign);
 
 		return url.toString();
+	}
+	
+	public static void main(String[] args){
+		String appKey="4d11b129-ebe1-41e5-8991-e15b240158f9";	
+		String appSecret="09EA19A0B9E8694B2C38B62B0A28F8D3";
+		Map<String,String> map=new HashMap<>();
+		String query="{\"selectView\":{\"views\":[\"GLOBAL_ID\",\"DEVICE_ID\",\"CODE\"]},\"start\":\"2017-08-23+00:00:00\",\"end\":\"2017-08-24+00:06:00\",\"timezone\":\"local\",\"filter\":{\"column\":\"SITE_ID\",\"literals\":[\"JSXY.T1_L1.WTG001\"],\"type\":\"LiteralFilter\"},\"s\":0,\"n\":300,\"isShowTotal\":true,\"language\":\"ZH_CN\"}";
+		//String ss="xxx";
+
+			//query=java.net.URLEncoder.encode("xx","UTF-8");
+			map.put("query", query);
+			map.put("token", "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDM1NDk5MzcsImNhdGVnb3J5X2xpc3QiOlsiMjEiXSwidXNlcl9pZCI6ImI2YzcyNzZkLWI1NWYtNDFiNy1hMGIzLTFjYjYzNTU0M2U0OSIsImNsaWVudF9pZCI6IjRkMTFiMTI5LWViZTEtNDFlNS04OTkxLWUxNWIyNDAxNThmOSJ9.jEY-VzdUlUXVaGTMbci1yEidCnjN5dyukt3RkhwAB2U");
+			String sign = Sign.sign(appKey, appSecret, map);
+			System.out.println(sign);
+
+		
+		
 	}
 }
