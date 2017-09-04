@@ -34,6 +34,10 @@ public class EventJsonParser {
 	public static String toJson(Object object) {
 		return gson.toJson(object);
 	}
+	
+	public static String toJson(Object object,Type typeOfT) {
+		return gson.toJson(object,typeOfT);
+	}
 
 	public static class FilterDeserializer implements JsonSerializer<Filter>, JsonDeserializer<Filter> {
 
