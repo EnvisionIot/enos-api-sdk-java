@@ -19,6 +19,10 @@ public class EventUpdateRequest implements EnvisionRequest<EventUpdateResponse> 
 
 	private static final String API_METHOD = "/eventService/update";
 
+	public static final Type typeOfEventUpdateList = new TypeToken<List<EventUpdate>>() {
+		private static final long serialVersionUID = 1L;
+	}.getType();
+
 	private List<EventUpdate> events;
 
 	public EventUpdateRequest(List<EventUpdate> events) {
@@ -33,11 +37,8 @@ public class EventUpdateRequest implements EnvisionRequest<EventUpdateResponse> 
 	@Override
 	public Map<String, String> getTextParams() {
 		Map<String, String> params = new HashMap<String, String>();
-		Type typeOfT = new TypeToken<List<EventUpdate>>() {
-			private static final long serialVersionUID = -7606322910326972105L;
-		}.getType();
-		
-		params.put("events", EventJsonParser.toJson(events, typeOfT));
+
+		params.put("events", EventJsonParser.toJson(events, typeOfEventUpdateList));
 		return params;
 	}
 
@@ -56,17 +57,14 @@ public class EventUpdateRequest implements EnvisionRequest<EventUpdateResponse> 
 		fs.put(Column.TAG, "xu");
 
 		EventUpdate event = new EventUpdate("64b1bf748a0e4d038960cb0e94611f55", fs);
-		Type typeOfT = new TypeToken<List<EventUpdate>>() {
-			private static final long serialVersionUID = -7606322910326972105L;
-		}.getType();
-		
-		List<EventUpdate> events=new ArrayList<>();
+
+		List<EventUpdate> events = new ArrayList<>();
 		events.add(event);
-		
-		System.out.println(EventJsonParser.toJson(events, typeOfT));
-		
-		String ori=EventJsonParser.toJson(events, typeOfT);
-		System.out.println(EventJsonParser.toJson(EventJsonParser.fromJson(ori, typeOfT)));
+
+		System.out.println(EventJsonParser.toJson(events, typeOfEventUpdateList));
+
+		String ori = EventJsonParser.toJson(events, typeOfEventUpdateList);
+		System.out.println(EventJsonParser.toJson(EventJsonParser.fromJson(ori, typeOfEventUpdateList)));
 
 	}
 
