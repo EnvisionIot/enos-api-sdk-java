@@ -27,6 +27,7 @@ public class MdmObjectDeleteRequest implements EnvisionRequest<EnvisionResponse>
     private static final String API_METHOD = "/mdmService/deleteObject";
 
     private String mdmIDList;           // mandatory
+    private String deleteSecret;		// hidden
 
     public MdmObjectDeleteRequest(List<String> mdmIDs)
     {
@@ -42,6 +43,11 @@ public class MdmObjectDeleteRequest implements EnvisionRequest<EnvisionResponse>
     {
         this.mdmIDList = StringUtils.listToString(mdmIDList, ',');
     }
+    
+    public void setDeleteSecret(String deleteSecret)
+    {
+    	this.deleteSecret = deleteSecret;
+    }
 
     public String getApiMethodName()
     {
@@ -52,6 +58,7 @@ public class MdmObjectDeleteRequest implements EnvisionRequest<EnvisionResponse>
     {
         EnvisionHashMap txtParams = new EnvisionHashMap();
         txtParams.put("mdmids", mdmIDList);
+        txtParams.put("deleteSecret", deleteSecret);
 
         return txtParams;
     }
