@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.envision.energy.sdk</groupId>
     <artifactId>eeop</artifactId>
-    <version>0.1.12-SNAPSHOT</version>
+    <version>0.1.13-SNAPSHOT</version>
     <name>Envision Energy Open Platform</name>
 
     <properties>
