@@ -63,6 +63,6 @@ implements EnvisionRequest<T>
     @Override
     public void check() throws EnvisionRuleException
     {
-        RuleCheckUtils.checkRange(pageSize, 0, 200, "page_size");
+        RuleCheckUtils.checkRange(pageSize, 0, 1000, "page_size");
     }
 }

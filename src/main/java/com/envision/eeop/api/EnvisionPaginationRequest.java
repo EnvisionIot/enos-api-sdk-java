@@ -62,6 +62,6 @@ implements EnvisionRequest<T>
     public void check() throws EnvisionRuleException
     {
         RuleCheckUtils.checkRange(pageNo, 0, Integer.MAX_VALUE, "page_no");
-        RuleCheckUtils.checkRange(pageSize, 0, 200, "page_size");
+        RuleCheckUtils.checkRange(pageSize, 0, 1000, "page_size");
     }
 }
