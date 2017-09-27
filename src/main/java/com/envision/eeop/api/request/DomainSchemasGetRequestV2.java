@@ -47,7 +47,16 @@ public class DomainSchemasGetRequestV2 implements EnvisionRequest<DomainSchemasG
         this.locale = locale;
     }
 
-
+    public DomainSchemasGetRequestV2(List<String> mdmIDList)
+    {
+        this.mdmIDList = StringUtils.listToString(mdmIDList, ',');
+    }
+    
+    public DomainSchemasGetRequestV2(List<String> mdmIDList, List<String> fieldList)
+    {
+        this.mdmIDList = StringUtils.listToString(mdmIDList, ',');
+        this.fieldList = StringUtils.listToString(fieldList, ',');
+    }
     public String getMdmIDList()
     {
         return mdmIDList;
