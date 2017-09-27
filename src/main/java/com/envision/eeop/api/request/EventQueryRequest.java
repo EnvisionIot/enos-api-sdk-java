@@ -1,5 +1,6 @@
 package com.envision.eeop.api.request;
 
+import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -49,27 +50,29 @@ public class EventQueryRequest implements EnvisionRequest<EventQueryGetResponse>
 
 	public static void main(String[] args) {
 
-		EventQuery query = new EventQuery("30m-ago", "now");
+//		EventQuery query = new EventQuery("30m-ago", "now");
+//
+//		Filter filter = new LiteralFilter(Column.SITE_ID).addLiteral("fac_idxxxx");
+//
+//		filter = filter.and(new LiteralFilter(Column.DEVICE_ID).addLiteral("deviceidxxxx"));
+//		query.setFilter(filter);
+//		// 以下等价limit 10,20 可用来分页
+//		 query.setS(0);
+//		 query.setN(20);
+//		 query.setSelectView(new View().addColumnView(Column.DEVICE_ID).addColumnView(Column.CODE));
+//		// 以下表示只查询总数，相当于select count(*) from xxxx
+//		//query.setShowTotal(true);
+//		String json = EventJsonParser.toJson(query);
+//		System.out.println(json);
+//		//json="{\"start\":\"30m-ago\",\"end\":\"now\",\"timezone\":\"local\",\"filter\":{\"left\":{\"column\":\"SITE_ID\",\"literals\":[\"fac_idxxxx\"],\"type\":\"LiteralFilter\"},\"right\":{\"column\":\"DEVICE_ID\",\"literals\":[\"deviceidxxxx\"],\"type\":\"LiteralFilter\"},\"type\":\"AndFilter\"},\"s\":0,\"n\":20}";
+//		System.out.println(json);
+//		EventQuery query1 = EventJsonParser.fromJson(json, EventQuery.class);
+//
+//		String json1 = EventJsonParser.toJson(query1);
+		
+		Timestamp tt =Timestamp.valueOf(("2017-09-22 07:06:01.0"));
 
-		Filter filter = new LiteralFilter(Column.SITE_ID).addLiteral("fac_idxxxx");
-
-		filter = filter.and(new LiteralFilter(Column.DEVICE_ID).addLiteral("deviceidxxxx"));
-		query.setFilter(filter);
-		// 以下等价limit 10,20 可用来分页
-		 query.setS(0);
-		 query.setN(20);
-		 query.setSelectView(new View().addColumnView(Column.DEVICE_ID).addColumnView(Column.CODE));
-		// 以下表示只查询总数，相当于select count(*) from xxxx
-		//query.setShowTotal(true);
-		String json = EventJsonParser.toJson(query);
-		System.out.println(json);
-		//json="{\"start\":\"30m-ago\",\"end\":\"now\",\"timezone\":\"local\",\"filter\":{\"left\":{\"column\":\"SITE_ID\",\"literals\":[\"fac_idxxxx\"],\"type\":\"LiteralFilter\"},\"right\":{\"column\":\"DEVICE_ID\",\"literals\":[\"deviceidxxxx\"],\"type\":\"LiteralFilter\"},\"type\":\"AndFilter\"},\"s\":0,\"n\":20}";
-		System.out.println(json);
-		EventQuery query1 = EventJsonParser.fromJson(json, EventQuery.class);
-
-		String json1 = EventJsonParser.toJson(query1);
-
-		System.out.println(json1);
+		System.out.println(tt);
 
 	}
 	

@@ -10,9 +10,14 @@ import org.slf4j.LoggerFactory;
 import com.envision.eeop.api.exception.EnvisionApiException;
 import com.envision.eeop.api.exception.EnvisionIOException;
 import com.envision.eeop.api.exception.EnvisionRuleException;
+import com.envision.eeop.api.request.EventQueryRequest;
 import com.envision.eeop.api.util.JsonParser;
 import com.envision.eeop.api.util.Sign;
 import com.envision.eeop.api.util.WebUtils;
+import com.envision.eos.event.api.bo.EventQuery;
+import com.envision.eos.event.api.expression.Column;
+import com.envision.eos.event.api.expression.Filter;
+import com.envision.eos.event.api.expression.LiteralFilter;
 
 public class EnvisionDefaultClient implements EnvisionClient {
 	private static Logger logger = LoggerFactory
@@ -154,20 +159,24 @@ public class EnvisionDefaultClient implements EnvisionClient {
 		return url.toString();
 	}
 	
-	public static void main(String[] args){
-		String appKey="4d11b129-ebe1-41e5-8991-e15b240158f9";	
-		String appSecret="09EA19A0B9E8694B2C38B62B0A28F8D3";
+	public static void main(String[] args) throws EnvisionApiException{
 		Map<String,String> map=new HashMap<>();
-		String query="{\"selectView\":{\"views\":[\"GLOBAL_ID\",\"DEVICE_ID\",\"CODE\"]},\"start\":\"2017-08-23+00:00:00\",\"end\":\"2017-08-24+00:06:00\",\"timezone\":\"local\",\"filter\":{\"column\":\"SITE_ID\",\"literals\":[\"JSXY.T1_L1.WTG001\"],\"type\":\"LiteralFilter\"},\"s\":0,\"n\":300,\"isShowTotal\":true,\"language\":\"ZH_CN\"}";
-		//String ss="xxx";
-
-			//query=java.net.URLEncoder.encode("xx","UTF-8");
-			map.put("query", query);
-			map.put("token", "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDM1NDk5MzcsImNhdGVnb3J5X2xpc3QiOlsiMjEiXSwidXNlcl9pZCI6ImI2YzcyNzZkLWI1NWYtNDFiNy1hMGIzLTFjYjYzNTU0M2U0OSIsImNsaWVudF9pZCI6IjRkMTFiMTI5LWViZTEtNDFlNS04OTkxLWUxNWIyNDAxNThmOSJ9.jEY-VzdUlUXVaGTMbci1yEidCnjN5dyukt3RkhwAB2U");
-			String sign = Sign.sign(appKey, appSecret, map);
-			System.out.println(sign);
-
+//		String query="{\"selectView\":{\"views\":[\"GLOBAL_ID\",\"DEVICE_ID\",\"CODE\"]},\"start\":\"2017-08-23+00:00:00\",\"end\":\"2017-08-24+00:06:00\",\"timezone\":\"local\",\"filter\":{\"column\":\"SITE_ID\",\"literals\":[\"JSXY.T1_L1.WTG001\"],\"type\":\"LiteralFilter\"},\"s\":0,\"n\":300,\"isShowTotal\":true,\"language\":\"ZH_CN\"}";
+//		//String ss="xxx";
+// 
+//			//query=java.net.URLEncoder.encode("xx","UTF-8");
+//			map.put("query", query);
+//			map.put("token", "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDM1NDk5MzcsImNhdGVnb3J5X2xpc3QiOlsiMjEiXSwidXNlcl9pZCI6ImI2YzcyNzZkLWI1NWYtNDFiNy1hMGIzLTFjYjYzNTU0M2U0OSIsImNsaWVudF9pZCI6IjRkMTFiMTI5LWViZTEtNDFlNS04OTkxLWUxNWIyNDAxNThmOSJ9.jEY-VzdUlUXVaGTMbci1yEidCnjN5dyukt3RkhwAB2U");
+//			String sign = Sign.sign(appKey, appSecret, map);
+//			System.out.println(sign);
+		EnvisionDefaultClient client=new EnvisionDefaultClient("http://172.16.33.223:8080/eeop", "xxx","xxx");
+		EventQuery query=new EventQuery("1y-ago","now");
+		Filter filter=new LiteralFilter(Column.SITE_ID).addLiteral("c5a29074-2a07-4335-9f29-ba751cd82abf");
+		query.setFilter(filter);
 		
+		EventQueryRequest request =new EventQueryRequest(query);
 		
+		System.out.println(client.doPost(request, "xxxx").getEventList());
+
 	}
 }
