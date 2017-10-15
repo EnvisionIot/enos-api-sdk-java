@@ -160,7 +160,8 @@ public class EnvisionDefaultClient implements EnvisionClient {
 	}
 	
 	public static void main(String[] args) throws EnvisionApiException{
-		Map<String,String> map=new HashMap<>();
+		@SuppressWarnings("unused")
+        Map<String,String> map=new HashMap<>();
 //		String query="{\"selectView\":{\"views\":[\"GLOBAL_ID\",\"DEVICE_ID\",\"CODE\"]},\"start\":\"2017-08-23+00:00:00\",\"end\":\"2017-08-24+00:06:00\",\"timezone\":\"local\",\"filter\":{\"column\":\"SITE_ID\",\"literals\":[\"JSXY.T1_L1.WTG001\"],\"type\":\"LiteralFilter\"},\"s\":0,\"n\":300,\"isShowTotal\":true,\"language\":\"ZH_CN\"}";
 //		//String ss="xxx";
 // 

@@ -13,14 +13,13 @@ import com.envision.eeop.api.util.EventJsonParser;
 import com.envision.eeop.api.util.RuleCheckUtils;
 import com.envision.eos.event.api.bo.EventUpdate;
 import com.envision.eos.event.api.expression.Column;
-import com.google.common.reflect.TypeToken;
+import com.google.gson.reflect.TypeToken;
 
 public class EventUpdateRequest implements EnvisionRequest<EventUpdateResponse> {
 
 	private static final String API_METHOD = "/eventService/update";
 
 	public static final Type typeOfEventUpdateList = new TypeToken<List<EventUpdate>>() {
-		private static final long serialVersionUID = 1L;
 	}.getType();
 
 	private List<EventUpdate> events;

@@ -29,12 +29,13 @@ extends EnvisionSkipAndLimitRequest<MdmObjectStructureGetResponse>
 {
     private static final String API_METHOD = "/mdmService/getFilteredObjects";
 
-    private String token;               // mandatory
-    private String type;                // mandatory
-    private String filterList;          // optional
-    private String appointedFilterList; // optional
-    private String attributeList;       // optional
-    private String locale;              // optional
+    private String token;                   // mandatory
+    private String type;                    // mandatory
+    private String filterList;              // optional
+    private String appointedFilterList;     // optional
+    private String attributeList;           // optional
+    private boolean queryOrgUnit = false;   // optional
+    private String locale;                  // optional
 
     public MdmFilteredObjectsGetRequest(String token, String type)
     {
@@ -46,10 +47,22 @@ extends EnvisionSkipAndLimitRequest<MdmObjectStructureGetResponse>
         this.attributeList = "";
     }
 
+    public MdmFilteredObjectsGetRequest(String token, String type, boolean queryOrgUnit)
+    {
+        this(token, type);
+        this.queryOrgUnit = queryOrgUnit;
+    }
+
     public MdmFilteredObjectsGetRequest(String token, String type, String locale)
     {
         this(token, type);
         this.locale = locale;
+    }
+    
+    public MdmFilteredObjectsGetRequest(String token, String type, boolean queryOrgUnit, String locale)
+    {
+        this(token, type, locale);
+        this.queryOrgUnit = queryOrgUnit;
     }
 
     public MdmFilteredObjectsGetRequest(String token, String type, List<Filter> filterList, 
@@ -64,10 +77,25 @@ extends EnvisionSkipAndLimitRequest<MdmObjectStructureGetResponse>
     }
 
     public MdmFilteredObjectsGetRequest(String token, String type, List<Filter> filterList, 
+            List<AppointedFilter> appointedFilterList, List<String> attributeList, boolean queryOrgUnit)
+    {
+        this(token, type, filterList, appointedFilterList, attributeList);
+        this.queryOrgUnit = queryOrgUnit;
+    }
+
+    public MdmFilteredObjectsGetRequest(String token, String type, List<Filter> filterList, 
             List<AppointedFilter> appointedFilterList, List<String> attributeList, String locale)
     {
         this(token, type, filterList, appointedFilterList, attributeList);
         this.locale = locale;
+    }
+
+    public MdmFilteredObjectsGetRequest(String token, String type, List<Filter> filterList, 
+            List<AppointedFilter> appointedFilterList, List<String> attributeList, 
+            boolean queryOrgUnit, String locale)
+    {
+        this(token, type, filterList, appointedFilterList, attributeList, locale);
+        this.queryOrgUnit = queryOrgUnit;
     }
 
     public String getToken()
@@ -120,6 +148,16 @@ extends EnvisionSkipAndLimitRequest<MdmObjectStructureGetResponse>
         this.attributeList = attributeList;
     }
 
+    public boolean isQueryOrgUnit()
+    {
+        return queryOrgUnit;
+    }
+
+    public void setQueryOrgUnit(boolean queryOrgUnit)
+    {
+        this.queryOrgUnit = queryOrgUnit;
+    }
+
     public String getLocale()
     {
         return locale;
@@ -143,6 +181,10 @@ extends EnvisionSkipAndLimitRequest<MdmObjectStructureGetResponse>
         txtParams.put("filter", filterList);
         txtParams.put("appointedFilter", appointedFilterList);
         txtParams.put("attributes", attributeList);
+        if (queryOrgUnit)
+        {
+            txtParams.put("queryOrgUnit", String.valueOf(true));
+        }
         if (!StringUtils.isEmpty(locale))
         {
             txtParams.put("locale", locale);

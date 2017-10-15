@@ -11,14 +11,13 @@ import com.envision.eeop.api.exception.EnvisionRuleException;
 import com.envision.eeop.api.response.EventInvalidResponse;
 import com.envision.eeop.api.util.EventJsonParser;
 import com.envision.eeop.api.util.RuleCheckUtils;
-import com.google.common.reflect.TypeToken;
+import com.google.gson.reflect.TypeToken;
 
 public class EventInvalidRequest implements EnvisionRequest<EventInvalidResponse> {
 
 	private static final String API_METHOD = "/eventService/invalid";
 	
 	public static final Type typeOfStringList = new TypeToken<List<String>>() {
-		private static final long serialVersionUID = 1L;
 	}.getType();
 	
 
