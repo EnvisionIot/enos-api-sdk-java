@@ -201,4 +201,13 @@ public class RuleCheckUtils
                     " must be in range [" + minInclusive + ", " + maxInclusive + "].");
         }
     }
+    
+    public static void checkArgument(boolean argument, String message) throws EnvisionRuleException
+    {
+        if (!argument)
+        {
+            throw new EnvisionRuleException(ERROR_CODE_ARGUMENTS_INVALID,
+                    "client-error:Invalid Arguments:" + message);
+        }
+    }
 }

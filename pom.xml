@@ -3,12 +3,13 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.envision.energy.sdk</groupId>
     <artifactId>eeop</artifactId>
-    <version>0.1.17-SNAPSHOT</version>
+    <version>0.1.18-SNAPSHOT</version>
     <name>Envision Energy Open Platform</name>
     
 	<description>
 		0.1.16-SNAPSHOT: 升级event api 1.7.0
 		0.1.17-SNAPSHOT: getFilteredObjects接口支持查询资产节点
+		0.1.18-SNAPSHOT: 添加getDeviceTemplates接口
 	</description>
 
     <properties>
