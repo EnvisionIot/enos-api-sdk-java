@@ -4,10 +4,10 @@ import java.util.Map;
 
 import com.envision.eeop.api.EnvisionRequest;
 import com.envision.eeop.api.exception.EnvisionRuleException;
-import com.envision.eeop.api.response.AuthorizedNodeGetResponse;
+import com.envision.eeop.api.response.AuthorizedNodesGetResponse;
 import com.envision.eeop.api.util.EnvisionHashMap;
 
-public class AuthorizedNodesGetRequest implements EnvisionRequest<AuthorizedNodeGetResponse>
+public class AuthorizedNodesGetRequest implements EnvisionRequest<AuthorizedNodesGetResponse>
 {
    private static final String API_METHOD = "/debugService/getAuthorizedNodes";
    
@@ -46,9 +46,9 @@ public void setCheckAppCategory(boolean checkAppCategory)
    }
 
    @Override
-   public Class<AuthorizedNodeGetResponse> getResponseClass()
+   public Class<AuthorizedNodesGetResponse> getResponseClass()
    {
-       return AuthorizedNodeGetResponse.class;
+       return AuthorizedNodesGetResponse.class;
    }
 
    @Override

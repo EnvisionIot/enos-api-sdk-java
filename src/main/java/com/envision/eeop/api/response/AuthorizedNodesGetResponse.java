@@ -5,7 +5,7 @@ import java.util.List;
 import com.envision.eeop.api.EnvisionResponse;
 import com.google.gson.annotations.SerializedName;
 
-public class AuthorizedNodeGetResponse extends EnvisionResponse
+public class AuthorizedNodesGetResponse extends EnvisionResponse
 {
     private static final long serialVersionUID = -5466908015271464893L;
 
@@ -25,6 +25,6 @@ public class AuthorizedNodeGetResponse extends EnvisionResponse
     @Override
     public String toString()
     {
-        return "AuthorizedNodeGetResponse [authNodes=" + authNodes + "]";
+        return "AuthorizedNodesGetResponse [authNodes=" + authNodes + "]";
     }
 }
