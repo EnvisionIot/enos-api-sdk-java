@@ -11,22 +11,39 @@ public class AuthorizedNodesGetRequest implements EnvisionRequest<AuthorizedNode
 {
    private static final String API_METHOD = "/debugService/getAuthorizedNodes";
    
+   private String operationCode;                // optional
    private boolean checkAppCategory = false;    // optional
 
-public AuthorizedNodesGetRequest(boolean checkAppCategory)
+   public AuthorizedNodesGetRequest(boolean checkAppCategory)
    {
        this.checkAppCategory = checkAppCategory;
    }
+
+   public AuthorizedNodesGetRequest(String operationCode, boolean checkAppCategory)
+   {
+       this.operationCode = operationCode;
+       this.checkAppCategory = checkAppCategory;
+   }
+
+   public String getOperationCode()
+   {
+       return operationCode;
+   }
+
+   public void setOperationCode(String operationCode)
+   {
+       this.operationCode = operationCode;
+   }
    
    public boolean isCheckAppCategory()
-{
-    return checkAppCategory;
-}
+   {
+       return checkAppCategory;
+   }
 
-public void setCheckAppCategory(boolean checkAppCategory)
-{
-    this.checkAppCategory = checkAppCategory;
-}
+   public void setCheckAppCategory(boolean checkAppCategory)
+   {
+       this.checkAppCategory = checkAppCategory;
+   }
 
    @Override
    public String getApiMethodName()
@@ -38,6 +55,10 @@ public void setCheckAppCategory(boolean checkAppCategory)
    public Map<String, String> getTextParams()
    {
        EnvisionHashMap txtParams = new EnvisionHashMap();
+       if (operationCode != null)
+       {
+           txtParams.put("operation", operationCode);
+       }
        if (checkAppCategory)
        {
            txtParams.put("checkAppCategory", String.valueOf(true));
