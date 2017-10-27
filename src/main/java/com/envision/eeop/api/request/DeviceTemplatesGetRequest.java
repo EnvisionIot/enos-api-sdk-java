@@ -13,30 +13,42 @@ public class DeviceTemplatesGetRequest implements EnvisionRequest<DeviceTemplate
 {
     private static final String API_METHOD = "/modelService/getDeviceTemplates";
     
+    private String namespace;               // mandatory
     private int categoryID = 0;             // conditional
     private int typeID = 0;                 // optional
     private boolean includeGlobal = false;  // optional
     private String locale;                  // optional
 
-    public DeviceTemplatesGetRequest()
+    public DeviceTemplatesGetRequest(String namespace)
     {
     }
     
-    public DeviceTemplatesGetRequest(int categoryID)
+    public DeviceTemplatesGetRequest(String namespace, int categoryID)
     {
+        this(namespace);
         this.categoryID = categoryID;
     }
     
-    public DeviceTemplatesGetRequest(int categoryID, int typeID)
+    public DeviceTemplatesGetRequest(String namespace, int categoryID, int typeID)
     {
-        this.categoryID = categoryID;
+        this(namespace, categoryID);
         this.typeID = typeID;
     }
     
-    public DeviceTemplatesGetRequest(int categoryID, int typeID, String locale)
+    public DeviceTemplatesGetRequest(String namespace, int categoryID, int typeID, String locale)
     {
-        this(categoryID, typeID);
+        this(namespace, categoryID, typeID);
         this.locale = locale;
+    }
+
+    public String getNamespace()
+    {
+        return namespace;
+    }
+
+    public void setNamespace(String namespace)
+    {
+        this.namespace = namespace;
     }
 
     public int getCategoryID()
@@ -89,6 +101,7 @@ public class DeviceTemplatesGetRequest implements EnvisionRequest<DeviceTemplate
     public Map<String, String> getTextParams()
     {
         EnvisionHashMap txtParams = new EnvisionHashMap();
+        txtParams.put("namespace", namespace);
         if (categoryID != 0)
         {
             txtParams.put("category", String.valueOf(categoryID));
@@ -117,6 +130,7 @@ public class DeviceTemplatesGetRequest implements EnvisionRequest<DeviceTemplate
     @Override
     public void check() throws EnvisionRuleException
     {
+        RuleCheckUtils.checkNotNull(namespace, "namespace is mandatory");
         RuleCheckUtils.checkArgument(typeID == 0 || categoryID != 0, "category is missing while type is provided");
     }
 }
