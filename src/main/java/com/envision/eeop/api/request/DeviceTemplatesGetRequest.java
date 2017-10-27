@@ -13,9 +13,10 @@ public class DeviceTemplatesGetRequest implements EnvisionRequest<DeviceTemplate
 {
     private static final String API_METHOD = "/modelService/getDeviceTemplates";
     
-    private int categoryID = 0;     // conditional
-    private int typeID = 0;         // optional
-    private String locale;          // optional
+    private int categoryID = 0;             // conditional
+    private int typeID = 0;                 // optional
+    private boolean includeGlobal = false;  // optional
+    private String locale;                  // optional
 
     public DeviceTemplatesGetRequest()
     {
@@ -58,6 +59,16 @@ public class DeviceTemplatesGetRequest implements EnvisionRequest<DeviceTemplate
         this.typeID = typeID;
     }
 
+    public boolean isIncludeGlobal()
+    {
+        return includeGlobal;
+    }
+
+    public void setIncludeGlobal(boolean includeGlobal)
+    {
+        this.includeGlobal = includeGlobal;
+    }
+
     public String getLocale()
     {
         return locale;
@@ -85,6 +96,10 @@ public class DeviceTemplatesGetRequest implements EnvisionRequest<DeviceTemplate
         if (typeID != 0)
         {
             txtParams.put("type", String.valueOf(typeID));
+        }
+        if (includeGlobal)
+        {
+            txtParams.put("includeGlobal", "true");
         }
         if (!StringUtils.isEmpty(locale))
         {
