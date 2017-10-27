@@ -8,6 +8,7 @@ public class DeviceTemplate implements Serializable
 {
     private static final long serialVersionUID = -5634636117426401978L;
     
+    private int deviceTemplateID;
     @SerializedName("category")
     private int categoryID;
     @SerializedName("type")
@@ -17,6 +18,16 @@ public class DeviceTemplate implements Serializable
     private String innerVer;
     private String protocolType;
     private String protocolName;
+
+    public int getDeviceTemplateID()
+    {
+        return deviceTemplateID;
+    }
+
+    public void setDeviceTemplateID(int deviceTemplateID)
+    {
+        this.deviceTemplateID = deviceTemplateID;
+    }
 
     public int getCategoryID()
     {
@@ -91,8 +102,8 @@ public class DeviceTemplate implements Serializable
     @Override
     public String toString()
     {
-        return "DeviceTemplate [categoryID=" + categoryID + ", typeID=" + typeID + ", brand=" + brand + ", model="
-                + model + ", innerVer=" + innerVer + ", protocolType=" + protocolType + ", protocolName=" + protocolName
-                + "]";
+        return "DeviceTemplate [deviceTemplateID=" + deviceTemplateID + ", categoryID=" + categoryID + ", typeID="
+                + typeID + ", brand=" + brand + ", model=" + model + ", innerVer=" + innerVer + ", protocolType="
+                + protocolType + ", protocolName=" + protocolName + "]";
     }
 }
