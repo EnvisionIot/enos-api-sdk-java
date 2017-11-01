@@ -27,7 +27,7 @@ public class CloudedgeAttachDeviceRequest implements EnvisionRequest<CloudedgeAt
 	 * @param mdmid 设备的主数据id
 	 * @param appId 云端盒子app的id号
 	 * @param device 设备模板id
-	 * @param attrs 诸如logicalID， realPointOffset_0，realPointOffset_1, realPointOffset_2等信息 
+	 * @param attrs 诸如logicalID, realPointOffset_0, realPointOffset_1, realPointOffset_2等信息 
 	 */
 	public CloudedgeAttachDeviceRequest(String mdmid, String appId, String device, Map<String, String> attrs){
 		this.appId=appId;
