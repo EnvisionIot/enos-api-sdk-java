@@ -41,8 +41,8 @@ public class CloudedgeAppGetRequest implements EnvisionRequest<CloudedgeAppGetRe
 	}
 
 	@Override
-	public Class<CloudedgeAttachDeviceResponse> getResponseClass() {
-		return CloudedgeAttachDeviceResponse.class;
+	public Class<CloudedgeAppGetResponse> getResponseClass() {
+		return CloudedgeAppGetResponse.class;
 	}
 
 	@Override
