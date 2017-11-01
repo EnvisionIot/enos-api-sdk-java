@@ -5,7 +5,6 @@ import java.util.Map;
 import com.envision.eeop.api.EnvisionRequest;
 import com.envision.eeop.api.exception.EnvisionRuleException;
 import com.envision.eeop.api.response.CloudedgeAppGetResponse;
-import com.envision.eeop.api.response.CloudedgeAttachDeviceResponse;
 import com.envision.eeop.api.util.EnvisionHashMap;
 import com.envision.eeop.api.util.RuleCheckUtils;
 
