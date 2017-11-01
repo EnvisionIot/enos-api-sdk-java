@@ -1,4 +1,4 @@
-package com.envision.eeop.api;
+package com.envision.eeop.api.domain;
 
 import java.io.Serializable;
 import java.util.Map;

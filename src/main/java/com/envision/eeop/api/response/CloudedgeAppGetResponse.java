@@ -2,8 +2,8 @@ package com.envision.eeop.api.response;
 
 import java.util.List;
 
-import com.envision.eeop.api.CloudedgeApp;
 import com.envision.eeop.api.EnvisionResponse;
+import com.envision.eeop.api.domain.CloudedgeApp;
 
 public class CloudedgeAppGetResponse extends EnvisionResponse {
 
