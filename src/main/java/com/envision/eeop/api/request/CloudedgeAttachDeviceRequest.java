@@ -19,21 +19,25 @@ public class CloudedgeAttachDeviceRequest implements EnvisionRequest<CloudedgeAt
 	final private String appId;
 	final private String mdmid;
 	final private int deviceTemplateId;
+	final private String namespace;
 	final private Map<String,String> attrs;
+	
 	
 	/**
 	 * 将设备mdmid添加到云端盒子app上，并发布
 	 * 
+	 * @param namespace 客户id
 	 * @param mdmid 设备的主数据id
-	 * @param appId 云端盒子app的id号
+	 * @param appId 云端盒子app id号
 	 * @param deviceTemplateId 设备模板id
 	 * @param attrs 诸如logicalID, realPointOffset_0, realPointOffset_1, realPointOffset_2等信息 
 	 */
-	public CloudedgeAttachDeviceRequest(String mdmid, String appId, int deviceTemplateId, Map<String, String> attrs){
+	public CloudedgeAttachDeviceRequest(String namespace, String mdmid, String appId, int deviceTemplateId, Map<String, String> attrs){
 		this.appId=appId;
 		this.mdmid=mdmid;
 		this.deviceTemplateId=deviceTemplateId;
 		this.attrs=attrs;
+		this.namespace=namespace;
 	}
 
 	@Override
@@ -48,6 +52,7 @@ public class CloudedgeAttachDeviceRequest implements EnvisionRequest<CloudedgeAt
         txtParams.put("mdmid", mdmid);
         txtParams.put("appid", appId);
         txtParams.put("devicetemplateid", deviceTemplateId);
+        txtParams.put("namespace", namespace);
         txtParams.put("attrs", gson.toJson(attrs));
 
         return txtParams;
@@ -62,6 +67,7 @@ public class CloudedgeAttachDeviceRequest implements EnvisionRequest<CloudedgeAt
 	public void check() throws EnvisionRuleException {
         RuleCheckUtils.checkNotEmpty(appId, "appid");
         RuleCheckUtils.checkNotEmpty(mdmid, "mdmid");
+        RuleCheckUtils.checkNotEmpty(namespace, "namespace");
         RuleCheckUtils.checkMinValue((long) deviceTemplateId,0, "devicetemplateid");
         RuleCheckUtils.checkNotNull(attrs, "attrs");
 	}

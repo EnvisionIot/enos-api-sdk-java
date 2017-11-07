@@ -12,7 +12,7 @@ public class CloudedgeAppGetRequest implements EnvisionRequest<CloudedgeAppGetRe
 
 	private static final String API_METHOD = "/cloudedge/apps/get";
 
-	private String uid;
+	private String namespace;
 
 	/**
 	 * 获取客户id创建的app请求列表
@@ -20,8 +20,15 @@ public class CloudedgeAppGetRequest implements EnvisionRequest<CloudedgeAppGetRe
 	 * @param uid
 	 *            客户id
 	 */
-	public CloudedgeAppGetRequest(String uid) {
-		this.uid = uid;
+	
+	
+	/**
+	 * 获取客户id创建的云端盒子app列表
+	 * 
+	 * @param namespace 客户id
+	 */
+	public CloudedgeAppGetRequest(String namespace) {
+		this.namespace = namespace;
 
 	}
 
@@ -34,7 +41,7 @@ public class CloudedgeAppGetRequest implements EnvisionRequest<CloudedgeAppGetRe
 	public Map<String, String> getTextParams() {
 		EnvisionHashMap txtParams = new EnvisionHashMap();
 
-		txtParams.put("uid", uid);
+		txtParams.put("namespace", namespace);
 
 		return txtParams;
 	}
@@ -46,7 +53,7 @@ public class CloudedgeAppGetRequest implements EnvisionRequest<CloudedgeAppGetRe
 
 	@Override
 	public void check() throws EnvisionRuleException {
-		RuleCheckUtils.checkNotEmpty(uid, "uid");
+		RuleCheckUtils.checkNotEmpty(namespace, "namespace");
 	}
 
 }
