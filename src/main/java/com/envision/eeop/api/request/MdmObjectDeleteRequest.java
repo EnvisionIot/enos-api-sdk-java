@@ -19,7 +19,7 @@ import com.envision.eeop.api.util.RuleCheckUtils;
 import com.envision.eeop.api.util.StringUtils;
 
 /**
- * Delete MDM object
+ * Delete MDM object ( site , project or devices only)
  * @author jieyuan.shen
  */
 public class MdmObjectDeleteRequest implements EnvisionRequest<EnvisionResponse>

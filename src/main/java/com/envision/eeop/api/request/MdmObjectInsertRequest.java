@@ -15,12 +15,13 @@ public class MdmObjectInsertRequest implements EnvisionRequest<MdmObjectInsertRe
 {
     private static final String API_METHOD = "/mdmService/insertObject";
 
-    private String parentID;            // mandatory
-    private String category;            // conditional
-    private String type;                // mandatory
-    private String attributes;          // optional
-    private String mdmID;               // optional
-    private String locale;              // optional
+    private String parentID;                // mandatory
+    private String category;                // conditional
+    private String type;                    // mandatory
+    private String attributes;              // optional
+    private String mdmID;                   // optional
+    private boolean asResource = false;     // optional
+    private String locale;                  // optional
 
     /**
      * Request to insert a partner, customer, site group or site
@@ -133,6 +134,16 @@ public class MdmObjectInsertRequest implements EnvisionRequest<MdmObjectInsertRe
         this.mdmID = mdmID;
     }
 
+    public boolean isAsResource()
+    {
+        return asResource;
+    }
+
+    public void setAsResource(boolean asResource)
+    {
+        this.asResource = asResource;
+    }
+
     public String getLocale()
     {
         return locale;
@@ -165,6 +176,10 @@ public class MdmObjectInsertRequest implements EnvisionRequest<MdmObjectInsertRe
         if(!StringUtils.isEmpty(mdmID))
         {
             txtParams.put("mdmid", mdmID);
+        }
+        if (asResource)
+        {
+            txtParams.put("asResource", String.valueOf(true));
         }
         if (!StringUtils.isEmpty(locale))
         {

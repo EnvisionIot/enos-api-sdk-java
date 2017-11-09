@@ -24,4 +24,17 @@ public class MdmObjectInsertResponse extends EnvisionResponse
     {
         this.mdmObject = mdmObject;
     }
+    
+    /**
+     * Get resource id for the object
+     * @return empty string if not exists
+     */
+    public String getResourceID()
+    {
+        if (mdmObject.getAttributes().containsKey("resourceID"))
+        {
+            return mdmObject.getAttributes().get("resourceID");
+        }
+        return "";
+    }
 }
