@@ -201,5 +201,10 @@ public class MdmObjectInsertRequest implements EnvisionRequest<MdmObjectInsertRe
         {
             RuleCheckUtils.checkNotEmpty(category, "category");
         }
+        if (asResource)
+        {
+            RuleCheckUtils.checkArgument(Integer.parseInt(type) <= 58, 
+                    "only SITE and above can be registered as resource");
+        }
     }
 }
