@@ -21,7 +21,7 @@ public class CloudedgeAttachDeviceRequest implements EnvisionRequest<CloudedgeAt
 	final private String appId;
 	final private List<CloudedgeDevice> devices;
 	final private String namespace;
-	final private boolean issubmit;
+	final private Boolean issubmit;
 
 	/**
 	 * 往云端盒子添加设备，并发布
@@ -68,6 +68,12 @@ public class CloudedgeAttachDeviceRequest implements EnvisionRequest<CloudedgeAt
 		txtParams.put("issubmit", issubmit);
 
 		return txtParams;
+	}
+	
+	public static void main(String [] args){
+		boolean is=false;
+		EnvisionHashMap txtParams = new EnvisionHashMap();
+		txtParams.put("xx", is)	;
 	}
 
 	@Override
