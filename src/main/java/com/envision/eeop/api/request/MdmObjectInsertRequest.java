@@ -20,7 +20,6 @@ public class MdmObjectInsertRequest implements EnvisionRequest<MdmObjectInsertRe
     private String type;                    // mandatory
     private String attributes;              // optional
     private String mdmID;                   // optional
-    private boolean asResource = false;     // optional
     private String locale;                  // optional
 
     /**
@@ -134,16 +133,6 @@ public class MdmObjectInsertRequest implements EnvisionRequest<MdmObjectInsertRe
         this.mdmID = mdmID;
     }
 
-    public boolean isAsResource()
-    {
-        return asResource;
-    }
-
-    public void setAsResource(boolean asResource)
-    {
-        this.asResource = asResource;
-    }
-
     public String getLocale()
     {
         return locale;
@@ -177,10 +166,6 @@ public class MdmObjectInsertRequest implements EnvisionRequest<MdmObjectInsertRe
         {
             txtParams.put("mdmid", mdmID);
         }
-        if (asResource)
-        {
-            txtParams.put("asResource", String.valueOf(true));
-        }
         if (!StringUtils.isEmpty(locale))
         {
             txtParams.put("locale", locale);
@@ -200,11 +185,6 @@ public class MdmObjectInsertRequest implements EnvisionRequest<MdmObjectInsertRe
         if (Integer.parseInt(type) >= 102)
         {
             RuleCheckUtils.checkNotEmpty(category, "category");
-        }
-        if (asResource)
-        {
-            RuleCheckUtils.checkArgument(Integer.parseInt(type) <= 58, 
-                    "only SITE and above can be registered as resource");
         }
     }
 }
