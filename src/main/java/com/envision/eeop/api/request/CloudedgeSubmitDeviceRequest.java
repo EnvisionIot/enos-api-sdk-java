@@ -1,40 +1,32 @@
 package com.envision.eeop.api.request;
 
-import java.util.List;
 import java.util.Map;
 
 import com.envision.eeop.api.EnvisionRequest;
-import com.envision.eeop.api.domain.CloudedgeDevice;
 import com.envision.eeop.api.exception.EnvisionRuleException;
-import com.envision.eeop.api.response.CloudedgeAttachDeviceResponse;
+import com.envision.eeop.api.response.CloudedgeSubmitDeviceResponse;
 import com.envision.eeop.api.util.EnvisionHashMap;
 import com.envision.eeop.api.util.RuleCheckUtils;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-public class CloudedgeAttachDeviceRequest implements EnvisionRequest<CloudedgeAttachDeviceResponse> {
+public class CloudedgeSubmitDeviceRequest implements EnvisionRequest<CloudedgeSubmitDeviceResponse> {
 
 	private static final String API_METHOD = "/cloudedge/device/attach";
 
 	private static final Gson gson = new GsonBuilder().create();
-
 	final private String appId;
-	final private List<CloudedgeDevice> devices;
 	final private String namespace;
 
 	/**
-	 * 往云端盒子添加设备，并发布
 	 * 
 	 * @param namespace
-	 *            客户id
 	 * @param appId
-	 *            云端盒子app id号
-	 * @param devices 设备列表
 	 */
-	public CloudedgeAttachDeviceRequest(String namespace, String appId, List<CloudedgeDevice> devices) {
+	public CloudedgeSubmitDeviceRequest(String namespace, String appId) {
 		this.appId = appId;
-		this.devices = devices;
-		this.namespace=namespace;
+
+		this.namespace = namespace;
 	}
 
 	@Override
@@ -45,22 +37,19 @@ public class CloudedgeAttachDeviceRequest implements EnvisionRequest<CloudedgeAt
 	@Override
 	public Map<String, String> getTextParams() {
 		EnvisionHashMap txtParams = new EnvisionHashMap();
-
 		txtParams.put("appid", appId);
-		txtParams.put("devices", gson.toJson(devices));
-
+		txtParams.put("namespace", namespace);
 		return txtParams;
 	}
 
 	@Override
-	public Class<CloudedgeAttachDeviceResponse> getResponseClass() {
-		return CloudedgeAttachDeviceResponse.class;
+	public Class<CloudedgeSubmitDeviceResponse> getResponseClass() {
+		return CloudedgeSubmitDeviceResponse.class;
 	}
 
 	@Override
 	public void check() throws EnvisionRuleException {
 		RuleCheckUtils.checkNotEmpty(appId, "appid");
-		RuleCheckUtils.checkNotEmpty(devices, "devices");
 		RuleCheckUtils.checkNotEmpty(namespace, "namespace");
 	}
 

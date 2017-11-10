@@ -14,13 +14,6 @@ public class CloudedgeAppGetRequest implements EnvisionRequest<CloudedgeAppGetRe
 
 	private String namespace;
 
-	/**
-	 * 获取客户id创建的app请求列表
-	 * 
-	 * @param uid
-	 *            客户id
-	 */
-	
 	
 	/**
 	 * 获取客户id创建的云端盒子app列表
