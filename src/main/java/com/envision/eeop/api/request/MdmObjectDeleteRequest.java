@@ -7,8 +7,6 @@
  */
 package com.envision.eeop.api.request;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 
 import com.envision.eeop.api.EnvisionRequest;
@@ -16,7 +14,6 @@ import com.envision.eeop.api.EnvisionResponse;
 import com.envision.eeop.api.exception.EnvisionRuleException;
 import com.envision.eeop.api.util.EnvisionHashMap;
 import com.envision.eeop.api.util.RuleCheckUtils;
-import com.envision.eeop.api.util.StringUtils;
 
 /**
  * Delete MDM object ( site , project or devices only)
@@ -26,23 +23,23 @@ public class MdmObjectDeleteRequest implements EnvisionRequest<EnvisionResponse>
 {
     private static final String API_METHOD = "/mdmService/deleteObject";
 
-    private String mdmIDList;           // mandatory
+    private String mdmID;           // mandatory
 
-    public MdmObjectDeleteRequest(List<String> mdmIDs)
+    public MdmObjectDeleteRequest(String mdmID)
     {
-        this.mdmIDList = StringUtils.listToString(mdmIDs, ',');
+        this.mdmID = mdmID;
     }
 
-    public List<String> getMdmIDList()
+    public String getMdmID()
     {
-        return Arrays.asList(StringUtils.split(mdmIDList, ","));
+        return mdmID;
     }
 
-    public void setMdmIDList(List<String> mdmIDList)
+    public void setMdmID(String mdmID)
     {
-        this.mdmIDList = StringUtils.listToString(mdmIDList, ',');
+        this.mdmID = mdmID;
     }
-    
+
     public String getApiMethodName()
     {
         return API_METHOD;
@@ -51,7 +48,7 @@ public class MdmObjectDeleteRequest implements EnvisionRequest<EnvisionResponse>
     public Map<String, String> getTextParams()
     {
         EnvisionHashMap txtParams = new EnvisionHashMap();
-        txtParams.put("mdmids", mdmIDList);
+        txtParams.put("mdmid", mdmID);
         return txtParams;
     }
 
@@ -62,6 +59,6 @@ public class MdmObjectDeleteRequest implements EnvisionRequest<EnvisionResponse>
 
     public void check() throws EnvisionRuleException
     {
-        RuleCheckUtils.checkNotEmpty(mdmIDList, "mdmids");
+        RuleCheckUtils.checkNotEmpty(mdmID, "mdmid");
     }
 }
