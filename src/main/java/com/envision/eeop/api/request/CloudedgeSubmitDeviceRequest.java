@@ -12,7 +12,7 @@ import com.google.gson.GsonBuilder;
 
 public class CloudedgeSubmitDeviceRequest implements EnvisionRequest<CloudedgeSubmitDeviceResponse> {
 
-	private static final String API_METHOD = "/cloudedge/device/attach";
+	private static final String API_METHOD = "/cloudedge/device/submit";
 
 	final private String appId;
 	final private String namespace;
