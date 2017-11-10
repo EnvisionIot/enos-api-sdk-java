@@ -21,6 +21,7 @@ public class CloudedgeAttachDeviceRequest implements EnvisionRequest<CloudedgeAt
 	final private String appId;
 	final private List<CloudedgeDevice> devices;
 	final private String namespace;
+	final private boolean issubmit;
 
 	/**
 	 * 往云端盒子添加设备，并发布
@@ -35,6 +36,22 @@ public class CloudedgeAttachDeviceRequest implements EnvisionRequest<CloudedgeAt
 		this.appId = appId;
 		this.devices = devices;
 		this.namespace=namespace;
+		this.issubmit=true;
+	}
+	
+	/**
+	 * 往云端盒子添加设备
+	 * 
+	 * @param namespace 客户id
+	 * @param appId 云端盒子app id号
+	 * @param devices 设备列表
+	 * @param isSubmit 是否需要发布，如果为false，需要额外再请求CloudedgeSubmitDeviceReqeust
+	 */
+	public CloudedgeAttachDeviceRequest(String namespace, String appId, List<CloudedgeDevice> devices, boolean isSubmit) {
+		this.appId = appId;
+		this.devices = devices;
+		this.namespace=namespace;
+		this.issubmit=isSubmit;
 	}
 
 	@Override
@@ -48,6 +65,7 @@ public class CloudedgeAttachDeviceRequest implements EnvisionRequest<CloudedgeAt
 
 		txtParams.put("appid", appId);
 		txtParams.put("devices", gson.toJson(devices));
+		txtParams.put("issubmit", issubmit);
 
 		return txtParams;
 	}
@@ -60,7 +78,7 @@ public class CloudedgeAttachDeviceRequest implements EnvisionRequest<CloudedgeAt
 	@Override
 	public void check() throws EnvisionRuleException {
 		RuleCheckUtils.checkNotEmpty(appId, "appid");
-		RuleCheckUtils.checkNotEmpty(devices, "devices");
+		RuleCheckUtils.checkNotNull(devices, "devices");
 		RuleCheckUtils.checkNotEmpty(namespace, "namespace");
 	}
 

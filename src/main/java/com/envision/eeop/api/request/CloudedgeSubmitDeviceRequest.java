@@ -14,14 +14,14 @@ public class CloudedgeSubmitDeviceRequest implements EnvisionRequest<CloudedgeSu
 
 	private static final String API_METHOD = "/cloudedge/device/attach";
 
-	private static final Gson gson = new GsonBuilder().create();
 	final private String appId;
 	final private String namespace;
 
 	/**
+	 * 发布已添加好的设备
 	 * 
-	 * @param namespace
-	 * @param appId
+	 * @param namespace 客户id
+	 * @param appId 云端盒子app id号
 	 */
 	public CloudedgeSubmitDeviceRequest(String namespace, String appId) {
 		this.appId = appId;
