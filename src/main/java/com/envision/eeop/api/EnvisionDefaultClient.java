@@ -18,6 +18,9 @@ import com.envision.eos.event.api.bo.EventQuery;
 import com.envision.eos.event.api.expression.Column;
 import com.envision.eos.event.api.expression.Filter;
 import com.envision.eos.event.api.expression.LiteralFilter;
+import com.envision.eos.event.api.expression.Order;
+import com.envision.eos.event.api.expression.OrderBy;
+import com.envision.eos.event.api.expression.Order.OrderEnum;
 
 public class EnvisionDefaultClient implements EnvisionClient {
 	private static Logger logger = LoggerFactory
@@ -123,6 +126,8 @@ public class EnvisionDefaultClient implements EnvisionClient {
 
 		String url = makeUrl(textParams, request.getApiMethodName());
 		
+		System.out.println(url);
+		
 		String ret = null;
 		try {
 			ret = WebUtils.doPost(url, textParams, WebUtils.DEFAULT_CHARSET,
@@ -174,6 +179,7 @@ public class EnvisionDefaultClient implements EnvisionClient {
 		EventQuery query=new EventQuery("1y-ago","now");
 		Filter filter=new LiteralFilter(Column.SITE_ID).addLiteral("c5a29074-2a07-4335-9f29-ba751cd82abf");
 		query.setFilter(filter);
+		query.setOrderBy(new OrderBy().addOrder(new Order(Column.OCCUR_TIME,OrderEnum.DESC)));
 		
 		EventQueryRequest request =new EventQueryRequest(query);
 		
