@@ -1,6 +1,7 @@
 package com.envision.eeop.api.domain;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Map;
 
 public class CloudedgeApp implements Serializable {
@@ -9,10 +10,12 @@ public class CloudedgeApp implements Serializable {
 
 	final private String appId;
 
-	final private Map<String, Serializable> properties;
+	final private String name;
 
-	public CloudedgeApp(String appId, Map<String, Serializable> properties) {
-		super();
+	final private Map<String, List<Map<String, String>>> properties;
+
+	public CloudedgeApp(String appId, String name, Map<String, List<Map<String, String>>> properties) {
+		this.name = name;
 		this.appId = appId;
 		this.properties = properties;
 	}
@@ -21,8 +24,13 @@ public class CloudedgeApp implements Serializable {
 		return appId;
 	}
 
-	public Map<String, Serializable> getProperties() {
+	public Map<String, List<Map<String, String>>> getProperties() {
 		return properties;
 	}
+
+	public String getName() {
+		return name;
+	}
+	
 
 }
