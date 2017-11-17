@@ -7,8 +7,6 @@ import com.envision.eeop.api.exception.EnvisionRuleException;
 import com.envision.eeop.api.response.CloudedgeSubmitDeviceResponse;
 import com.envision.eeop.api.util.EnvisionHashMap;
 import com.envision.eeop.api.util.RuleCheckUtils;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 public class CloudedgeSubmitDeviceRequest implements EnvisionRequest<CloudedgeSubmitDeviceResponse> {
 
