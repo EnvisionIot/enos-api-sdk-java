@@ -5,8 +5,8 @@ import com.envision.eeop.api.domain.EventRule;
 import com.envision.eeop.api.exception.EnvisionRuleException;
 import com.envision.eeop.api.response.EventRuleInsertResponse;
 import com.envision.eeop.api.util.EnvisionHashMap;
-import com.envision.eeop.api.util.JsonParser;
 import com.envision.eeop.api.util.RuleCheckUtils;
+import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
@@ -22,7 +22,7 @@ import java.util.Map;
 public class EventRuleInsertRequest implements EnvisionRequest<EventRuleInsertResponse> {
 
     private static final String APP_METHOD = "/eventService/insertrule";
-
+    private static final Gson gson = new Gson();
     private static final Type inputEventRuleList = new TypeToken<List<EventRule>>(){}.getType();
 
     private List<EventRule> ruleList;
@@ -39,7 +39,7 @@ public class EventRuleInsertRequest implements EnvisionRequest<EventRuleInsertRe
     @Override
     public Map<String, String> getTextParams() {
         EnvisionHashMap txtParams = new EnvisionHashMap();
-        txtParams.put("eventRules", JsonParser.toJson(ruleList, inputEventRuleList));
+        txtParams.put("eventRules", gson.toJson(ruleList, inputEventRuleList));
         return txtParams;
     }
 

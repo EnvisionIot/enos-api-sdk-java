@@ -5,8 +5,8 @@ import com.envision.eeop.api.domain.EventRule;
 import com.envision.eeop.api.exception.EnvisionRuleException;
 import com.envision.eeop.api.response.EventRuleUpdateResponse;
 import com.envision.eeop.api.util.EnvisionHashMap;
-import com.envision.eeop.api.util.JsonParser;
 import com.envision.eeop.api.util.RuleCheckUtils;
+import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
@@ -24,7 +24,7 @@ public class EventRuleUpdateRequest implements EnvisionRequest<EventRuleUpdateRe
     private static final String APP_METHOD = "/eventService/updaterule";
 
     private static final Type inputEventRuleList = new TypeToken<List<EventRule>>(){}.getType();
-
+    private static final Gson gson = new Gson();
     private List<EventRule> ruleList;
 
     public EventRuleUpdateRequest(List<EventRule> ruleList) {
@@ -39,7 +39,7 @@ public class EventRuleUpdateRequest implements EnvisionRequest<EventRuleUpdateRe
     @Override
     public Map<String, String> getTextParams() {
         EnvisionHashMap txtParams = new EnvisionHashMap();
-        txtParams.put("ruleList", JsonParser.toJson(ruleList, inputEventRuleList));
+        txtParams.put("ruleList", gson.toJson(ruleList, inputEventRuleList));
 
         return txtParams;
     }
