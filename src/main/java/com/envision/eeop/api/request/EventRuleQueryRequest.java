@@ -36,7 +36,7 @@ public class EventRuleQueryRequest implements EnvisionRequest<EventRuleQueryResp
         EnvisionHashMap txtParams = new EnvisionHashMap();
         txtParams.put("mdmIdList", mdmIdList);
         txtParams.put("includeInvalid", String.valueOf(includeInvalid));
-        return null;
+        return txtParams;
     }
 
     @Override
