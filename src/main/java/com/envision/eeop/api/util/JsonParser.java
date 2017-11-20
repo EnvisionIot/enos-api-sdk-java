@@ -42,7 +42,7 @@ public class JsonParser
         return gson.toJson(object);
     }
 
-    public static String toJson(Object object, Type type) {
-        return gson.toJson(object, type);
+    public static <T> String toJson(Object object, Class<T> classOfT) {
+        return gson.toJson(object, classOfT);
     }
 }
