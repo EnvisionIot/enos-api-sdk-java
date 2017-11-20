@@ -1,17 +1,22 @@
 package com.envision.eeop.api;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.envision.eeop.api.domain.CloudedgeDevice;
 import com.envision.eeop.api.exception.EnvisionApiException;
 import com.envision.eeop.api.exception.EnvisionIOException;
 import com.envision.eeop.api.exception.EnvisionRuleException;
 import com.envision.eeop.api.request.CloudedgeAppGetRequest;
+import com.envision.eeop.api.request.CloudedgeAttachDeviceRequest;
 import com.envision.eeop.api.request.EventQueryRequest;
+import com.envision.eeop.api.response.CloudedgeAppGetResponse;
 import com.envision.eeop.api.util.JsonParser;
 import com.envision.eeop.api.util.Sign;
 import com.envision.eeop.api.util.WebUtils;
@@ -168,7 +173,7 @@ public class EnvisionDefaultClient implements EnvisionClient {
 	public static void main(String[] args) throws EnvisionApiException{
 		@SuppressWarnings("unused")
         Map<String,String> map=new HashMap<>();
-		EnvisionDefaultClient client=new EnvisionDefaultClient("http://172.16.33.223:8080/eeop", "xxx","xxx");
+		EnvisionDefaultClient client=new EnvisionDefaultClient("http://10.21.10.13:8080/eeop", "EEOP_TEST","xxx");
 //		EventQuery query=new EventQuery("1y-ago","now");
 //		Filter filter=new LiteralFilter(Column.SITE_ID).addLiteral("c5a29074-2a07-4335-9f29-ba751cd82abf");
 //		query.setFilter(filter);
@@ -177,9 +182,16 @@ public class EnvisionDefaultClient implements EnvisionClient {
 //		EventQueryRequest request =new EventQueryRequest(query);
 //		
 //		System.out.println(client.doPost(request, "xxxx").getEventList());
-		CloudedgeAppGetRequest request=new CloudedgeAppGetRequest("57baab5ed3eb4806104b045d");
+//		CloudedgeAppGetRequest request=new CloudedgeAppGetRequest("57baab5ed3eb4806104b045d");
+//		
+//		CloudedgeAppGetResponse reponse = client.doPost(request, "xxxx");
 		
-		client.doPost(request, "xxxx");
+		List<CloudedgeDevice> ds =new ArrayList<>();
+		CloudedgeDevice d1=new CloudedgeDevice("19da212352800000",1046,new HashMap());
+		ds.add(d1);
+		
+		CloudedgeAttachDeviceRequest attachrequest=new CloudedgeAttachDeviceRequest("57baab5ed3eb4806104b045d","edge-1510908865188-00003",ds);
+		client.doPost(attachrequest, "xxx");
 
 	}
 }

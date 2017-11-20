@@ -64,6 +64,7 @@ public class CloudedgeAttachDeviceRequest implements EnvisionRequest<CloudedgeAt
 		EnvisionHashMap txtParams = new EnvisionHashMap();
 
 		txtParams.put("appid", appId);
+		txtParams.put("namespace", namespace);
 		txtParams.put("devices", gson.toJson(devices));
 		txtParams.put("issubmit", issubmit);
 

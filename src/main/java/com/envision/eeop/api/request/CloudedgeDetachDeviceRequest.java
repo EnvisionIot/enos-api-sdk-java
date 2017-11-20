@@ -26,7 +26,7 @@ public class CloudedgeDetachDeviceRequest implements EnvisionRequest<CloudedgeDe
 	 * @param mdmid 设备的主数据id
 	 * @param appid 云端盒子app id号
 	 */
-	public CloudedgeDetachDeviceRequest(String namespace, String mdmid, String appid) {
+	public CloudedgeDetachDeviceRequest(String namespace, String appid,String mdmid) {
 		this.mdmid = mdmid;
 		this.namespace=namespace;
 		this.appid=appid;
