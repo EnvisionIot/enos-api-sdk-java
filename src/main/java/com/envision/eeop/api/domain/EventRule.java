@@ -11,15 +11,9 @@ import java.io.Serializable;
 public class EventRule implements Serializable {
     private static final long serialVersionUID = 566953763637154337L;
 
-    public EventRule() {
-    }
-
     private int id;
 
-    /**
-     * 客户ID
-     */
-    private String customerId;
+    private String mdmId;
 
     /**
      * 领域类型, 风:21, 光:22
@@ -45,10 +39,6 @@ public class EventRule implements Serializable {
      * SR复位时效
      */
     private int interval;
-
-    private String pointId;
-    private String deviceId;
-    private String siteId;
 
     /**
      * 触发阈值, 格式为json
@@ -86,12 +76,12 @@ public class EventRule implements Serializable {
         this.id = id;
     }
 
-    public String getCustomerId() {
-        return customerId;
+    public String getMdmId() {
+        return mdmId;
     }
 
-    public void setCustomerId(String customerId) {
-        this.customerId = customerId;
+    public void setMdmId(String mdmId) {
+        this.mdmId = mdmId;
     }
 
     public String getCategory() {
@@ -132,30 +122,6 @@ public class EventRule implements Serializable {
 
     public void setInterval(int interval) {
         this.interval = interval;
-    }
-
-    public String getPointId() {
-        return pointId;
-    }
-
-    public void setPointId(String pointId) {
-        this.pointId = pointId;
-    }
-
-    public String getDeviceId() {
-        return deviceId;
-    }
-
-    public void setDeviceId(String deviceId) {
-        this.deviceId = deviceId;
-    }
-
-    public String getSiteId() {
-        return siteId;
-    }
-
-    public void setSiteId(String siteId) {
-        this.siteId = siteId;
     }
 
     public String getThreshold() {
@@ -203,37 +169,31 @@ public class EventRule implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        EventRule eventRule = (EventRule) o;
+        EventRule rule = (EventRule) o;
 
-        if (id != eventRule.id) return false;
-        if (interval != eventRule.interval) return false;
-        if (isValid != eventRule.isValid) return false;
-        if (!customerId.equals(eventRule.customerId)) return false;
-        if (!category.equals(eventRule.category)) return false;
-        if (!warnType.equals(eventRule.warnType)) return false;
-        if (!childWarnType.equals(eventRule.childWarnType)) return false;
-        if (!code.equals(eventRule.code)) return false;
-        if (pointId != null ? !pointId.equals(eventRule.pointId) : eventRule.pointId != null) return false;
-        if (deviceId != null ? !deviceId.equals(eventRule.deviceId) : eventRule.deviceId != null) return false;
-        if (siteId != null ? !siteId.equals(eventRule.siteId) : eventRule.siteId != null) return false;
-        if (!threshold.equals(eventRule.threshold)) return false;
-        if (attributes != null ? !attributes.equals(eventRule.attributes) : eventRule.attributes != null) return false;
-        if (!ruleDesc.equals(eventRule.ruleDesc)) return false;
-        return operator != null ? operator.equals(eventRule.operator) : eventRule.operator == null;
+        if (id != rule.id) return false;
+        if (interval != rule.interval) return false;
+        if (isValid != rule.isValid) return false;
+        if (!mdmId.equals(rule.mdmId)) return false;
+        if (!category.equals(rule.category)) return false;
+        if (!warnType.equals(rule.warnType)) return false;
+        if (!childWarnType.equals(rule.childWarnType)) return false;
+        if (!code.equals(rule.code)) return false;
+        if (!threshold.equals(rule.threshold)) return false;
+        if (attributes != null ? !attributes.equals(rule.attributes) : rule.attributes != null) return false;
+        if (!ruleDesc.equals(rule.ruleDesc)) return false;
+        return operator != null ? operator.equals(rule.operator) : rule.operator == null;
     }
 
     @Override
     public int hashCode() {
         int result = id;
-        result = 31 * result + customerId.hashCode();
+        result = 31 * result + mdmId.hashCode();
         result = 31 * result + category.hashCode();
         result = 31 * result + warnType.hashCode();
         result = 31 * result + childWarnType.hashCode();
         result = 31 * result + code.hashCode();
         result = 31 * result + interval;
-        result = 31 * result + (pointId != null ? pointId.hashCode() : 0);
-        result = 31 * result + (deviceId != null ? deviceId.hashCode() : 0);
-        result = 31 * result + (siteId != null ? siteId.hashCode() : 0);
         result = 31 * result + threshold.hashCode();
         result = 31 * result + (attributes != null ? attributes.hashCode() : 0);
         result = 31 * result + isValid;
@@ -246,15 +206,12 @@ public class EventRule implements Serializable {
     public String toString() {
         return "EventRule{" +
                 "id=" + id +
-                ", customerId='" + customerId + '\'' +
+                ", mdmId='" + mdmId + '\'' +
                 ", category='" + category + '\'' +
                 ", warnType='" + warnType + '\'' +
                 ", childWarnType='" + childWarnType + '\'' +
                 ", code='" + code + '\'' +
                 ", interval=" + interval +
-                ", pointId='" + pointId + '\'' +
-                ", deviceId='" + deviceId + '\'' +
-                ", siteId='" + siteId + '\'' +
                 ", threshold='" + threshold + '\'' +
                 ", attributes='" + attributes + '\'' +
                 ", isValid=" + isValid +
