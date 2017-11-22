@@ -21,6 +21,7 @@ public class DeviceTemplatesGetRequest implements EnvisionRequest<DeviceTemplate
 
     public DeviceTemplatesGetRequest(String namespace)
     {
+        this.namespace = namespace;
     }
     
     public DeviceTemplatesGetRequest(String namespace, int categoryID)
