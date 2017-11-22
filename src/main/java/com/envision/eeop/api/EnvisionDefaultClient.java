@@ -13,20 +13,10 @@ import com.envision.eeop.api.domain.CloudedgeDevice;
 import com.envision.eeop.api.exception.EnvisionApiException;
 import com.envision.eeop.api.exception.EnvisionIOException;
 import com.envision.eeop.api.exception.EnvisionRuleException;
-import com.envision.eeop.api.request.CloudedgeAppGetRequest;
 import com.envision.eeop.api.request.CloudedgeAttachDeviceRequest;
-import com.envision.eeop.api.request.EventQueryRequest;
-import com.envision.eeop.api.response.CloudedgeAppGetResponse;
 import com.envision.eeop.api.util.JsonParser;
 import com.envision.eeop.api.util.Sign;
 import com.envision.eeop.api.util.WebUtils;
-import com.envision.eos.event.api.bo.EventQuery;
-import com.envision.eos.event.api.expression.Column;
-import com.envision.eos.event.api.expression.Filter;
-import com.envision.eos.event.api.expression.LiteralFilter;
-import com.envision.eos.event.api.expression.Order;
-import com.envision.eos.event.api.expression.OrderBy;
-import com.envision.eos.event.api.expression.Order.OrderEnum;
 
 public class EnvisionDefaultClient implements EnvisionClient {
 	private static Logger logger = LoggerFactory
@@ -170,7 +160,8 @@ public class EnvisionDefaultClient implements EnvisionClient {
 		return url.toString();
 	}
 	
-	public static void main(String[] args) throws EnvisionApiException{
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+    public static void main(String[] args) throws EnvisionApiException{
 		@SuppressWarnings("unused")
         Map<String,String> map=new HashMap<>();
 		EnvisionDefaultClient client=new EnvisionDefaultClient("http://10.21.10.13:8080/eeop", "EEOP_TEST","xxx");
