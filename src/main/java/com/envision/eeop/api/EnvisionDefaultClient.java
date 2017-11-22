@@ -178,10 +178,10 @@ public class EnvisionDefaultClient implements EnvisionClient {
 //		CloudedgeAppGetResponse reponse = client.doPost(request, "xxxx");
 		
 		List<CloudedgeDevice> ds =new ArrayList<>();
-		CloudedgeDevice d1=new CloudedgeDevice("19da212352800000",1046,new HashMap());
+		CloudedgeDevice d1=new CloudedgeDevice("19e516f836000000",200,new HashMap());
 		ds.add(d1);
 		
-		CloudedgeAttachDeviceRequest attachrequest=new CloudedgeAttachDeviceRequest("57baab5ed3eb4806104b045d","edge-1510908865188-00003",ds);
+		CloudedgeAttachDeviceRequest attachrequest=new CloudedgeAttachDeviceRequest("287774c7-881c-4b5b-850d-9240bbb96fb2","edge-1511247419758-00015",ds);
 		client.doPost(attachrequest, "xxx");
 
 	}

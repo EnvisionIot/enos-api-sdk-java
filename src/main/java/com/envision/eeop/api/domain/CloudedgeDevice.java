@@ -1,6 +1,7 @@
 package com.envision.eeop.api.domain;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.Map;
 
 public class CloudedgeDevice implements Serializable {
@@ -22,6 +23,13 @@ public class CloudedgeDevice implements Serializable {
 		this.mdmid = mdmid;
 		this.deviceTemplateId = deviceTemplateId;
 		this.attrs = attrs;
+	}
+	
+	public CloudedgeDevice(String mdmid, int deviceTemplateId) {
+		super();
+		this.mdmid = mdmid;
+		this.deviceTemplateId = deviceTemplateId;
+		this.attrs = new HashMap<String, String>();
 	}
 
 	public String getMdmid() {
