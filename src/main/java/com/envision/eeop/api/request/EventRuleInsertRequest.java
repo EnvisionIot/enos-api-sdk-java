@@ -27,6 +27,14 @@ public class EventRuleInsertRequest implements EnvisionRequest<EventRuleInsertRe
 
     private List<EventRule> ruleList;
 
+    public List<EventRule> getRuleList() {
+        return ruleList;
+    }
+
+    public void setRuleList(List<EventRule> ruleList) {
+        this.ruleList = ruleList;
+    }
+
     public EventRuleInsertRequest(List<EventRule> ruleList) {
         this.ruleList = ruleList;
     }

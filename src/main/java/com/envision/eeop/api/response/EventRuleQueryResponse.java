@@ -1,7 +1,8 @@
 package com.envision.eeop.api.response;
 
-import com.envision.eeop.api.EnvisionResponse;
+import com.envision.eeop.api.EnvisionPaginationResponse;
 import com.envision.eeop.api.domain.EventRule;
+import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
@@ -11,11 +12,11 @@ import java.util.List;
  *
  * @author jonnas.li
  */
-public class EventRuleQueryResponse extends EnvisionResponse {
+public class EventRuleQueryResponse extends EnvisionPaginationResponse {
     private static final long serialVersionUID = 7067120480125036591L;
 
+    @SerializedName("data")
     private List<EventRule> eventRules;
-    private Integer total;
 
     public List<EventRule> getEventRules() {
         return eventRules;
@@ -25,11 +26,12 @@ public class EventRuleQueryResponse extends EnvisionResponse {
         this.eventRules = eventRules;
     }
 
-    public Integer getTotal() {
-        return total;
-    }
-
-    public void setTotal(Integer total) {
-        this.total = total;
+    @Override
+    public EnvisionPaginationResponse merge(EnvisionPaginationResponse another) {
+        if (another.isSuccess() &&
+                another instanceof EventRuleQueryResponse) {
+            eventRules.addAll(((EventRuleQueryResponse) another).eventRules);
+        }
+        return this;
     }
 }

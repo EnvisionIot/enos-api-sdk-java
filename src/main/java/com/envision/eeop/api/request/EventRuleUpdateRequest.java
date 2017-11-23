@@ -25,6 +25,7 @@ public class EventRuleUpdateRequest implements EnvisionRequest<EventRuleUpdateRe
 
     private static final Type inputEventRuleList = new TypeToken<List<EventRule>>(){}.getType();
     private static final Gson gson = new Gson();
+
     private List<EventRule> ruleList;
 
     public EventRuleUpdateRequest(List<EventRule> ruleList) {
@@ -52,6 +53,14 @@ public class EventRuleUpdateRequest implements EnvisionRequest<EventRuleUpdateRe
     @Override
     public void check() throws EnvisionRuleException {
         RuleCheckUtils.checkNotNull(ruleList, "ruleList");
+    }
+
+    public List<EventRule> getRuleList() {
+        return ruleList;
+    }
+
+    public void setRuleList(List<EventRule> ruleList) {
+        this.ruleList = ruleList;
     }
 }
 

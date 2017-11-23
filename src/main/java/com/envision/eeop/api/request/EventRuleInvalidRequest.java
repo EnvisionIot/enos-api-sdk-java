@@ -20,6 +20,14 @@ public class EventRuleInvalidRequest implements EnvisionRequest<EventRuleInvalid
 
     private String ruleIds;
 
+    public String getRuleIds() {
+        return ruleIds;
+    }
+
+    public void setRuleIds(String ruleIds) {
+        this.ruleIds = ruleIds;
+    }
+
     public EventRuleInvalidRequest(String ruleIds) {
         this.ruleIds = ruleIds;
     }
