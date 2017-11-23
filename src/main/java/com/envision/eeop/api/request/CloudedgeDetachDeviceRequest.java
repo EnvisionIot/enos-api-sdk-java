@@ -16,20 +16,16 @@ public class CloudedgeDetachDeviceRequest implements EnvisionRequest<CloudedgeDe
 	
 	private String namespace;
 	
-	private String appid;
-
 	
 	/**
 	 * detach一个设备
 	 * 
 	 * @param namespace 客户id
 	 * @param mdmid 设备的主数据id
-	 * @param appid 云端盒子app id号
 	 */
-	public CloudedgeDetachDeviceRequest(String namespace, String appid,String mdmid) {
+	public CloudedgeDetachDeviceRequest(String namespace,String mdmid) {
 		this.mdmid = mdmid;
 		this.namespace=namespace;
-		this.appid=appid;
 
 	}
 
@@ -43,7 +39,6 @@ public class CloudedgeDetachDeviceRequest implements EnvisionRequest<CloudedgeDe
 		EnvisionHashMap txtParams = new EnvisionHashMap();
 		txtParams.put("mdmid", mdmid);
 		txtParams.put("namespace", namespace);
-		txtParams.put("appid", appid);
 
 		return txtParams;
 	}
@@ -56,7 +51,6 @@ public class CloudedgeDetachDeviceRequest implements EnvisionRequest<CloudedgeDe
 	@Override
 	public void check() throws EnvisionRuleException {
 		RuleCheckUtils.checkNotEmpty(mdmid, "mdmid");
-        RuleCheckUtils.checkNotEmpty(appid, "appid");
         RuleCheckUtils.checkNotEmpty(namespace, "namespace");
 	}
 
