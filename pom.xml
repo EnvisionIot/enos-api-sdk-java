@@ -15,6 +15,7 @@
 		0.1.20-SNAPSHOT: 添加CloudedgeAttachDeviceRequest，CloudedgeDetachDeviceRequest接口
 		0.1.23-SNAPSHOT: 升级event api 2.0.1
 		0.1.24-SNAPSHOT: 添加AttachedDeviceTemplatesGetRequest接口
+		0.1.25-SNAPSHOT: （麻烦写下为啥升到0.1.25）
 	</description>
 
     <properties>
