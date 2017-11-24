@@ -13,15 +13,23 @@ import com.envision.eeop.api.domain.CloudedgeDevice;
 import com.envision.eeop.api.exception.EnvisionApiException;
 import com.envision.eeop.api.exception.EnvisionIOException;
 import com.envision.eeop.api.exception.EnvisionRuleException;
+import com.envision.eeop.api.request.CloudedgeAppGetRequest;
 import com.envision.eeop.api.request.CloudedgeAttachDeviceRequest;
-import com.envision.eeop.api.request.CloudedgeDetachDeviceRequest;
+import com.envision.eeop.api.request.EventQueryRequest;
+import com.envision.eeop.api.response.CloudedgeAppGetResponse;
 import com.envision.eeop.api.util.JsonParser;
 import com.envision.eeop.api.util.Sign;
 import com.envision.eeop.api.util.WebUtils;
+import com.envision.eos.event.api.bo.EventQuery;
+import com.envision.eos.event.api.expression.Column;
+import com.envision.eos.event.api.expression.Filter;
+import com.envision.eos.event.api.expression.LiteralFilter;
+import com.envision.eos.event.api.expression.Order;
+import com.envision.eos.event.api.expression.Order.OrderEnum;
+import com.envision.eos.event.api.expression.OrderBy;
 
 public class EnvisionDefaultClient implements EnvisionClient {
-	private static Logger logger = LoggerFactory
-			.getLogger(EnvisionDefaultClient.class);
+	private static Logger logger = LoggerFactory.getLogger(EnvisionDefaultClient.class);
 
 	private String serverUrl;
 
@@ -40,8 +48,7 @@ public class EnvisionDefaultClient implements EnvisionClient {
 	 * @param appKey
 	 * @param appSecret
 	 */
-	public EnvisionDefaultClient(String serverUrl, String appKey,
-			String appSecret) {
+	public EnvisionDefaultClient(String serverUrl, String appKey, String appSecret) {
 		super();
 		this.serverUrl = serverUrl;
 		this.appKey = appKey;
@@ -55,8 +62,8 @@ public class EnvisionDefaultClient implements EnvisionClient {
 	 * @param connectTimeout
 	 * @param readTimeout
 	 */
-	public EnvisionDefaultClient(String serverUrl, String appKey,
-			String appSecret, int connectTimeout, int readTimeout) {
+	public EnvisionDefaultClient(String serverUrl, String appKey, String appSecret, int connectTimeout,
+			int readTimeout) {
 		super();
 		this.serverUrl = serverUrl;
 		this.appKey = appKey;
@@ -90,19 +97,17 @@ public class EnvisionDefaultClient implements EnvisionClient {
 	}
 
 	@Override
-	public <T extends EnvisionResponse> T execute(EnvisionRequest<T> request)
-			throws EnvisionApiException {
+	public <T extends EnvisionResponse> T execute(EnvisionRequest<T> request) throws EnvisionApiException {
 		return doExecute(request, null);
 	}
 
 	@Override
-	public <T extends EnvisionResponse> T execute(EnvisionRequest<T> request,
-			String token) throws EnvisionApiException {
+	public <T extends EnvisionResponse> T execute(EnvisionRequest<T> request, String token)
+			throws EnvisionApiException {
 		return doExecute(request, token);
 	}
 
-	protected <T extends EnvisionResponse> T doExecute(
-			EnvisionRequest<T> request, String token)
+	protected <T extends EnvisionResponse> T doExecute(EnvisionRequest<T> request, String token)
 			throws EnvisionApiException {
 		try {
 			request.check();
@@ -114,21 +119,20 @@ public class EnvisionDefaultClient implements EnvisionClient {
 		return doPost(request, token);
 	}
 
-	private <T extends EnvisionResponse> T doPost(EnvisionRequest<T> request,
-			String token) throws EnvisionApiException {
+	private <T extends EnvisionResponse> T doPost(EnvisionRequest<T> request, String token)
+			throws EnvisionApiException {
 		Map<String, String> textParams = request.getTextParams();
 		if (token != null && !token.isEmpty()) {
 			textParams.put(Constants.TOKEN, token);
 		}
 
 		String url = makeUrl(textParams, request.getApiMethodName());
-		
+
 		System.out.println(url);
-		
+
 		String ret = null;
 		try {
-			ret = WebUtils.doPost(url, textParams, WebUtils.DEFAULT_CHARSET,
-					this.connectTimeout, this.readTimeout);
+			ret = WebUtils.doPost(url, textParams, WebUtils.DEFAULT_CHARSET, this.connectTimeout, this.readTimeout);
 			logger.debug("result:" + ret);
 		} catch (IOException e) {
 			logger.error("Execute Post Request Failed!", e);
@@ -160,33 +164,36 @@ public class EnvisionDefaultClient implements EnvisionClient {
 
 		return url.toString();
 	}
-	
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-    public static void main(String[] args) throws EnvisionApiException{
-		@SuppressWarnings("unused")
-        Map<String,String> map=new HashMap<>();
-		EnvisionDefaultClient client=new EnvisionDefaultClient("http://10.21.10.13:8080/eeop", "EEOP_TEST","xxx");
-//		EventQuery query=new EventQuery("1y-ago","now");
-//		Filter filter=new LiteralFilter(Column.SITE_ID).addLiteral("c5a29074-2a07-4335-9f29-ba751cd82abf");
-//		query.setFilter(filter);
-//		query.setOrderBy(new OrderBy().addOrder(new Order(Column.OCCUR_TIME,OrderEnum.DESC)));
-//		
-//		EventQueryRequest request =new EventQueryRequest(query);
-//		
-//		System.out.println(client.doPost(request, "xxxx").getEventList());
-//		CloudedgeAppGetRequest request=new CloudedgeAppGetRequest("57baab5ed3eb4806104b045d");
-//		
-//		CloudedgeAppGetResponse reponse = client.doPost(request, "xxxx");
-		
-		List<CloudedgeDevice> ds =new ArrayList<>();
-		CloudedgeDevice d1=new CloudedgeDevice("19ebba76e6800000",1100,new HashMap());
+
+	public static void eventTest(String[] args) throws EnvisionApiException {
+		Map<String, String> map = new HashMap<>();
+		EnvisionDefaultClient client = new EnvisionDefaultClient("http://10.21.10.13:8080/eeop", "EEOP_TEST", "xxx");
+		EventQuery query = new EventQuery("1y-ago", "now");
+		Filter filter = new LiteralFilter(Column.SITE_ID).addLiteral("c5a29074-2a07-4335-9f29-ba751cd82abf");
+		query.setFilter(filter);
+		query.setOrderBy(new OrderBy().addOrder(new Order(Column.OCCUR_TIME, OrderEnum.DESC)));
+
+		EventQueryRequest request = new EventQueryRequest(query);
+
+		System.out.println(client.doPost(request, "xxxx").getEventList());
+	}
+
+	public static void main(String[] args) throws EnvisionApiException {
+		Map<String, String> map = new HashMap<>();
+		EnvisionDefaultClient client = new EnvisionDefaultClient("http://10.21.10.13:8080/eeop", "EEOP_TEST", "xxx");
+
+		CloudedgeAppGetRequest request = new CloudedgeAppGetRequest("57baab5ed3eb4806104b045d");
+
+		CloudedgeAppGetResponse reponse = client.doPost(request, "xxxx");
+
+		List<CloudedgeDevice> ds = new ArrayList<>();
+		CloudedgeDevice d1 = new CloudedgeDevice("19ebba76e6800000", 1100, new HashMap());
 		ds.add(d1);
-		
-		CloudedgeAttachDeviceRequest attachrequest=new CloudedgeAttachDeviceRequest("57baab5ed3eb4806104b045d","edge-1511493159229-00033",ds);
+
+		CloudedgeAttachDeviceRequest attachrequest = new CloudedgeAttachDeviceRequest("57baab5ed3eb4806104b045d",
+				"edge-1511493159229-00033", ds);
 		client.doPost(attachrequest, "xxx");
-		
-//		CloudedgeDetachDeviceRequest detachrequest=new CloudedgeDetachDeviceRequest("287774c7-881c-4b5b-850d-9240bbb96fb2","edge-1511247419758-00015");
-//		client.doPost(detachrequest, "xxx");
+
 
 	}
 }
