@@ -17,6 +17,7 @@ import com.envision.eeop.api.request.CloudedgeAppGetRequest;
 import com.envision.eeop.api.request.CloudedgeAttachDeviceRequest;
 import com.envision.eeop.api.request.EventQueryRequest;
 import com.envision.eeop.api.response.CloudedgeAppGetResponse;
+import com.envision.eeop.api.response.CloudedgeAttachDeviceResponse;
 import com.envision.eeop.api.util.JsonParser;
 import com.envision.eeop.api.util.Sign;
 import com.envision.eeop.api.util.WebUtils;
@@ -179,11 +180,11 @@ public class EnvisionDefaultClient implements EnvisionClient {
 	}
 
 	public static void main(String[] args) throws EnvisionApiException {
-		Map<String, String> map = new HashMap<>();
 		EnvisionDefaultClient client = new EnvisionDefaultClient("http://10.21.10.13:8080/eeop", "EEOP_TEST", "xxx");
 
 		CloudedgeAppGetRequest request = new CloudedgeAppGetRequest("57baab5ed3eb4806104b045d");
 
+		@SuppressWarnings("unused")
 		CloudedgeAppGetResponse reponse = client.doPost(request, "xxxx");
 
 		List<CloudedgeDevice> ds = new ArrayList<>();
@@ -192,8 +193,8 @@ public class EnvisionDefaultClient implements EnvisionClient {
 
 		CloudedgeAttachDeviceRequest attachrequest = new CloudedgeAttachDeviceRequest("57baab5ed3eb4806104b045d",
 				"edge-1511493159229-00033", ds);
-		client.doPost(attachrequest, "xxx");
-
+		@SuppressWarnings("unused")
+		CloudedgeAttachDeviceResponse attachreponse = client.doPost(attachrequest, "xxx");
 
 	}
 }
