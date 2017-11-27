@@ -1,6 +1,6 @@
 package com.envision.eeop.api.request;
 
-import com.envision.eeop.api.EnvisionPaginationRequest;
+import com.envision.eeop.api.EnvisionRequest;
 import com.envision.eeop.api.exception.EnvisionRuleException;
 import com.envision.eeop.api.response.EventSRQueryResponse;
 import com.envision.eeop.api.util.EnvisionHashMap;
@@ -18,7 +18,7 @@ import java.util.Map;
  *
  * @author jonnas.li
  */
-public class EventSRQueryRequest extends EnvisionPaginationRequest<EventSRQueryResponse> {
+public class EventSRQueryRequest implements EnvisionRequest<EventSRQueryResponse> {
     private static final String API_METHOD = "/eventService/querysr";
 
     private static Type eventSRQueryTypeToken = new TypeToken<EventSRQuery>(){}.getType();
@@ -32,8 +32,6 @@ public class EventSRQueryRequest extends EnvisionPaginationRequest<EventSRQueryR
 
     public EventSRQueryRequest(EventSRQuery query, int pageNo, int pageSize) {
         this.query = query;
-        setPageNo(pageNo);
-        setPageSize(pageSize);
     }
 
     @Override
@@ -45,7 +43,6 @@ public class EventSRQueryRequest extends EnvisionPaginationRequest<EventSRQueryR
     public Map<String, String> getTextParams() {
         EnvisionHashMap txtParams = new EnvisionHashMap();
         txtParams.put("querysr", gson.toJson(query, eventSRQueryTypeToken));
-        txtParams.putAll(getPaginationParams());
         return txtParams;
     }
 
