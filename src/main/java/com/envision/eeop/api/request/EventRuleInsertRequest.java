@@ -19,6 +19,7 @@ import java.util.Map;
  *
  * @author jonnas.li
  */
+@Deprecated
 public class EventRuleInsertRequest implements EnvisionRequest<EventRuleInsertResponse> {
 
     private static final String APP_METHOD = "/eventService/insertrule";

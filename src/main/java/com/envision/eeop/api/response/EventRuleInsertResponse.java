@@ -8,6 +8,7 @@ import com.envision.eeop.api.EnvisionResponse;
  *
  * @author jonnas.li
  */
+@Deprecated
 public class EventRuleInsertResponse extends EnvisionResponse {
     private static final long serialVersionUID = -7419526041174591615L;
 }

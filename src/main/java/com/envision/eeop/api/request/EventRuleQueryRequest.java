@@ -16,6 +16,7 @@ import java.util.Map;
  *
  * @author jonnas.li
  */
+@Deprecated
 public class EventRuleQueryRequest extends EnvisionPaginationRequest<EventRuleQueryResponse> {
     private static final String APP_METHOD = "/eventService/queryrule";
 

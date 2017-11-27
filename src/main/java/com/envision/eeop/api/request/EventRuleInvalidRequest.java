@@ -14,6 +14,7 @@ import java.util.Map;
  *
  * @author jonnas.li
  */
+@Deprecated
 public class EventRuleInvalidRequest implements EnvisionRequest<EventRuleInvalidResponse> {
 
     private static final String APP_METHOD = "/eventService/invalidrule";

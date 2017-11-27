@@ -12,6 +12,7 @@ import java.util.List;
  *
  * @author jonnas.li
  */
+@Deprecated
 public class EventRuleQueryResponse extends EnvisionPaginationResponse {
     private static final long serialVersionUID = 7067120480125036591L;
 

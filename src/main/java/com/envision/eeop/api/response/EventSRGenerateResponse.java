@@ -8,7 +8,6 @@ import com.envision.eeop.api.EnvisionResponse;
  *
  * @author jonnas.li
  */
-@Deprecated
-public class EventRuleUpdateResponse extends EnvisionResponse {
-    private static final long serialVersionUID = -5226247955889877367L;
+public class EventSRGenerateResponse extends EnvisionResponse {
+    private static final long serialVersionUID = -1086908471295293756L;
 }
