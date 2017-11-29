@@ -171,7 +171,7 @@ public class EnvisionDefaultClient implements EnvisionClient {
 		return url.toString();
 	}
 
-	public static void eventTest(String[] args) throws EnvisionApiException {
+	public static void main(String[] args) throws EnvisionApiException {
 		Map<String, String> map = new HashMap<>();
 		EnvisionDefaultClient client = new EnvisionDefaultClient("http://10.21.10.13:8080/eeop", "EEOP_TEST", "xxx");
 		EventQuery query = new EventQuery("1d-ago", "now");
@@ -196,7 +196,7 @@ public class EnvisionDefaultClient implements EnvisionClient {
 		System.out.println(client.doPost(request, "xxxx").getEventList());
 	}
 
-	public static void main(String[] args) throws EnvisionApiException {
+	public static void cloudedgeTest(String[] args) throws EnvisionApiException {
 		EnvisionDefaultClient client = new EnvisionDefaultClient("http://10.21.10.13:8080/eeop", "EEOP_TEST", "xxx");
 
 		CloudedgeAppGetRequest request = new CloudedgeAppGetRequest("57baab5ed3eb4806104b045d");
