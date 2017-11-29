@@ -22,12 +22,17 @@ import com.envision.eeop.api.util.JsonParser;
 import com.envision.eeop.api.util.Sign;
 import com.envision.eeop.api.util.WebUtils;
 import com.envision.eos.event.api.bo.EventQuery;
+import com.envision.eos.event.api.expression.Aggregate;
 import com.envision.eos.event.api.expression.Column;
+import com.envision.eos.event.api.expression.DateExpr;
 import com.envision.eos.event.api.expression.Filter;
+import com.envision.eos.event.api.expression.GroupBy;
+import com.envision.eos.event.api.expression.HourExpr;
 import com.envision.eos.event.api.expression.LiteralFilter;
 import com.envision.eos.event.api.expression.Order;
 import com.envision.eos.event.api.expression.Order.OrderEnum;
 import com.envision.eos.event.api.expression.OrderBy;
+import com.envision.eos.event.api.expression.Aggregate.AggregateType;
 
 public class EnvisionDefaultClient implements EnvisionClient {
 	private static Logger logger = LoggerFactory.getLogger(EnvisionDefaultClient.class);
@@ -169,10 +174,22 @@ public class EnvisionDefaultClient implements EnvisionClient {
 	public static void eventTest(String[] args) throws EnvisionApiException {
 		Map<String, String> map = new HashMap<>();
 		EnvisionDefaultClient client = new EnvisionDefaultClient("http://10.21.10.13:8080/eeop", "EEOP_TEST", "xxx");
-		EventQuery query = new EventQuery("1y-ago", "now");
-		Filter filter = new LiteralFilter(Column.SITE_ID).addLiteral("c5a29074-2a07-4335-9f29-ba751cd82abf");
+		EventQuery query = new EventQuery("1d-ago", "now");
+		Filter filter = new LiteralFilter(Column.SITE_ID).addLiteral("7a40b31aa5014e0e84843c4dad4c9dae");
+
 		query.setFilter(filter);
-		query.setOrderBy(new OrderBy().addOrder(new Order(Column.OCCUR_TIME, OrderEnum.DESC)));
+		
+		Aggregate aggregate = new Aggregate(AggregateType.COUNT, Column.ID);
+		GroupBy groupBy = new GroupBy();
+		groupBy.addColumn(Column.WARN_TYPE);
+		groupBy.addExpr(new DateExpr(Column.OCCUR_TIME));
+		groupBy.addExpr(new HourExpr(Column.OCCUR_TIME));
+
+		query.addAggregate(aggregate);
+		query.setGroupBy(groupBy);
+		query.setS(0);
+		query.setN(1000);
+		query.setShowTotal(true);
 
 		EventQueryRequest request = new EventQueryRequest(query);
 
