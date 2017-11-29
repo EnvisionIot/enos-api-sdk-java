@@ -19,6 +19,7 @@ import com.google.gson.JsonSerializer;
 public class EventJsonParser {
 
 	private static final Gson gson = new GsonBuilder().registerTypeAdapter(Expression.class, new ExpressionDeserializer())
+			.registerTypeAdapter(Filter.class, new FilterDeserializer())
 
 			.create();
 
@@ -75,7 +76,7 @@ public class EventJsonParser {
 	public static class ExpressionDeserializer implements JsonSerializer<Expression>, JsonDeserializer<Expression> {
 
 		@Override
-		public Filter deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
+		public Expression deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
 				throws JsonParseException {
 			try {
 				String type = ((JsonObject) json).get("type").getAsString();

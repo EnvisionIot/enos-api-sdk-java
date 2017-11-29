@@ -10,6 +10,15 @@ import com.envision.eeop.api.response.EventQueryGetResponse;
 import com.envision.eeop.api.util.EventJsonParser;
 import com.envision.eeop.api.util.RuleCheckUtils;
 import com.envision.eos.event.api.bo.EventQuery;
+import com.envision.eos.event.api.expression.LiteralFilter;
+import com.envision.eos.event.api.expression.View;
+import com.envision.eos.event.api.expression.Aggregate.AggregateType;
+import com.envision.eos.event.api.expression.Aggregate;
+import com.envision.eos.event.api.expression.Column;
+import com.envision.eos.event.api.expression.DateExpr;
+import com.envision.eos.event.api.expression.Filter;
+import com.envision.eos.event.api.expression.GroupBy;
+import com.envision.eos.event.api.expression.HourExpr;
 
 
 public class EventQueryRequest implements EnvisionRequest<EventQueryGetResponse> {
@@ -56,19 +65,30 @@ public class EventQueryRequest implements EnvisionRequest<EventQueryGetResponse>
 //		 query.setS(0);
 //		 query.setN(20);
 //		 query.setSelectView(new View().addColumnView(Column.DEVICE_ID).addColumnView(Column.CODE));
-//		// 以下表示只查询总数，相当于select count(*) from xxxx
-//		//query.setShowTotal(true);
-//		String json = EventJsonParser.toJson(query);
-//		System.out.println(json);
-//		//json="{\"start\":\"30m-ago\",\"end\":\"now\",\"timezone\":\"local\",\"filter\":{\"left\":{\"column\":\"SITE_ID\",\"literals\":[\"fac_idxxxx\"],\"type\":\"LiteralFilter\"},\"right\":{\"column\":\"DEVICE_ID\",\"literals\":[\"deviceidxxxx\"],\"type\":\"LiteralFilter\"},\"type\":\"AndFilter\"},\"s\":0,\"n\":20}";
-//		System.out.println(json);
-//		EventQuery query1 = EventJsonParser.fromJson(json, EventQuery.class);
-//
-//		String json1 = EventJsonParser.toJson(query1);
 		
-		Timestamp tt =Timestamp.valueOf(("2017-09-22 07:06:01.0"));
+		EventQuery query = new EventQuery("1d-ago", "now");
+		Filter filter = new LiteralFilter(Column.SITE_ID).addLiteral("7a40b31aa5014e0e84843c4dad4c9dae");
 
-		System.out.println(tt);
+		query.setFilter(filter);
+		
+		Aggregate aggregate = new Aggregate(AggregateType.COUNT, Column.ID);
+		GroupBy groupBy = new GroupBy();
+		groupBy.addColumn(Column.WARN_TYPE);
+		groupBy.addExpr(new DateExpr(Column.OCCUR_TIME));
+		groupBy.addExpr(new HourExpr(Column.OCCUR_TIME));
+
+		query.addAggregate(aggregate);
+		query.setGroupBy(groupBy);
+		query.setS(0);
+		query.setN(1000);
+		query.setShowTotal(true);
+
+		String json = EventJsonParser.toJson(query);
+		System.out.println(json);
+		EventQuery query1 = EventJsonParser.fromJson(json, EventQuery.class);
+		String json1 = EventJsonParser.toJson(query1);
+
+		System.out.println(json1);
 
 	}
 	
