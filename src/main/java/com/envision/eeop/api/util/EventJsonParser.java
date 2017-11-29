@@ -18,9 +18,8 @@ import com.google.gson.JsonSerializer;
 
 public class EventJsonParser {
 
-	private static final Gson gson = new GsonBuilder().registerTypeAdapter(Filter.class, new FilterDeserializer())
-			.registerTypeAdapter(DateExpr.class, new ExpressionDeserializer())
-			.registerTypeAdapter(HourExpr.class, new ExpressionDeserializer())
+	private static final Gson gson = new GsonBuilder().registerTypeAdapter(Expression.class, new ExpressionDeserializer())
+
 			.create();
 
 	private static final String FILTER_PREFIX = "com.envision.eos.event.api.expression.";
