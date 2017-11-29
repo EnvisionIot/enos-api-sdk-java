@@ -189,7 +189,7 @@ public class EnvisionDefaultClient implements EnvisionClient {
 		query.setGroupBy(groupBy);
 		query.setS(0);
 		query.setN(1000);
-		query.setShowTotal(true);
+//		query.setShowTotal(true);
 
 		EventQueryRequest request = new EventQueryRequest(query);
 

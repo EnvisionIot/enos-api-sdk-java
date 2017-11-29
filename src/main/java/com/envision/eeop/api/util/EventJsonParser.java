@@ -2,10 +2,8 @@ package com.envision.eeop.api.util;
 
 import java.lang.reflect.Type;
 
-import com.envision.eos.event.api.expression.DateExpr;
 import com.envision.eos.event.api.expression.Expression;
 import com.envision.eos.event.api.expression.Filter;
-import com.envision.eos.event.api.expression.HourExpr;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonDeserializationContext;
