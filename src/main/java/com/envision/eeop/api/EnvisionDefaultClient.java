@@ -175,7 +175,7 @@ public class EnvisionDefaultClient implements EnvisionClient {
 		Map<String, String> map = new HashMap<>();
 		EnvisionDefaultClient client = new EnvisionDefaultClient("http://10.21.10.13:8080/eeop", "EEOP_TEST", "xxx");
 		EventQuery query = new EventQuery("1d-ago", "now");
-		Filter filter = new LiteralFilter(Column.SITE_ID).addLiteral("7a40b31aa5014e0e84843c4dad4c9dae");
+		Filter filter = new LiteralFilter(Column.SITE_ID).addLiteral("LHSA");
 
 		query.setFilter(filter);
 		
