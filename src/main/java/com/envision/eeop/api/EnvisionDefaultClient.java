@@ -193,7 +193,7 @@ public class EnvisionDefaultClient implements EnvisionClient {
 
 		EventQueryRequest request = new EventQueryRequest(query);
 
-		System.out.println(client.doPost(request, "xxxx").getEventList());
+		System.out.println(client.execute(request, "xxxx").getEventList());
 	}
 
 	public static void cloudedgeTest(String[] args) throws EnvisionApiException {
