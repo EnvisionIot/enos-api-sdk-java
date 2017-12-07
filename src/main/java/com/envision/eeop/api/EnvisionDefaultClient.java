@@ -174,16 +174,15 @@ public class EnvisionDefaultClient implements EnvisionClient {
 	public static void main(String[] args) throws EnvisionApiException {
 		Map<String, String> map = new HashMap<>();
 		EnvisionDefaultClient client = new EnvisionDefaultClient("http://10.21.10.13:8080/eeop", "EEOP_TEST", "xxx");
-		EventQuery query = new EventQuery("1d-ago", "now");
-		Filter filter = new LiteralFilter(Column.SITE_ID).addLiteral("LHSA");
+		EventQuery query = new EventQuery("2017-12-05 00:00:00", "2017-12-06 12:00:00");
+		Filter filter = new LiteralFilter(Column.SITE_ID).addLiteral("FQSA");
+		filter=filter.and(new LiteralFilter(Column.DEVICE_ID).addLiteral("FQSA.T1_L1.WTG001"));
 
 		query.setFilter(filter);
 		
 		Aggregate aggregate = new Aggregate(AggregateType.COUNT, Column.ID);
 		GroupBy groupBy = new GroupBy();
-		groupBy.addColumn(Column.WARN_TYPE);
 		groupBy.addExpr(new DateExpr(Column.OCCUR_TIME));
-		groupBy.addExpr(new HourExpr(Column.OCCUR_TIME));
 
 		query.addAggregate(aggregate);
 		query.setGroupBy(groupBy);
