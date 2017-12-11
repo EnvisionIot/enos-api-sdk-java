@@ -29,6 +29,7 @@ import com.envision.eos.event.api.expression.Filter;
 import com.envision.eos.event.api.expression.GroupBy;
 import com.envision.eos.event.api.expression.HourExpr;
 import com.envision.eos.event.api.expression.LiteralFilter;
+import com.envision.eos.event.api.expression.MinuteExpr;
 import com.envision.eos.event.api.expression.Order;
 import com.envision.eos.event.api.expression.Order.OrderEnum;
 import com.envision.eos.event.api.expression.OrderBy;
@@ -183,6 +184,8 @@ public class EnvisionDefaultClient implements EnvisionClient {
 		Aggregate aggregate = new Aggregate(AggregateType.COUNT, Column.ID);
 		GroupBy groupBy = new GroupBy();
 		groupBy.addExpr(new DateExpr(Column.OCCUR_TIME));
+		groupBy.addExpr(new HourExpr(Column.OCCUR_TIME));
+		groupBy.addExpr(new MinuteExpr(Column.OCCUR_TIME));
 
 		query.addAggregate(aggregate);
 		query.setGroupBy(groupBy);
