@@ -174,10 +174,10 @@ public class EnvisionDefaultClient implements EnvisionClient {
 
 	public static void main(String[] args) throws EnvisionApiException {
 		Map<String, String> map = new HashMap<>();
-		EnvisionDefaultClient client = new EnvisionDefaultClient("http://10.21.10.13:8080/eeop", "EEOP_TEST", "xxx");
-		EventQuery query = new EventQuery("2017-12-05 00:00:00", "2017-12-06 12:00:00");
-		Filter filter = new LiteralFilter(Column.SITE_ID).addLiteral("FQSA");
-		filter=filter.and(new LiteralFilter(Column.DEVICE_ID).addLiteral("FQSA.T1_L1.WTG001"));
+		EnvisionDefaultClient client = new EnvisionDefaultClient("http://172.16.33.223:8080/eeop", "EEOP_TEST", "xxx");
+		EventQuery query = new EventQuery("10d-ago", "now");
+		Filter filter = new LiteralFilter(Column.SITE_ID).addLiteral("186cc225d7590000");
+//		filter=filter.and(new LiteralFilter(Column.DEVICE_ID).addLiteral("FQSA.T1_L1.WTG001"));
 
 		query.setFilter(filter);
 		
