@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.envision.energy.sdk</groupId>
     <artifactId>eeop</artifactId>
-    <version>0.1.28-SNAPSHOT</version>
+    <version>0.1.29-SNAPSHOT</version>
 
     <name>Envision Energy Open Platform</name>
     
@@ -19,6 +19,7 @@
 		0.1.26-SNAPSHOT: 升級event api 到 2.0.4-SNAPSHOT，支持date，hour函數
 		0.1.27-SNAPSHOT: 升級event api 到 2.0.5，支持minute函數
 		0.1.28-SNAPSHOT: eventSR查询支持Orderby
+		0.1.29-SNAPSHOT: 支持eeop入告警
 	</description>
 
     <properties>
