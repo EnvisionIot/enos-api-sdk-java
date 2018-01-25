@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.envision.energy.sdk</groupId>
     <artifactId>eeop</artifactId>
-    <version>0.1.30-SNAPSHOT</version>
+    <version>0.1.32-SNAPSHOT</version>
 
     <name>Envision Energy Open Platform</name>
     
@@ -22,6 +22,7 @@
 		0.1.29-SNAPSHOT: 支持eeop入告警
 		0.1.30-SNAPSHOT: 添加参数检测规则
 		0.1.31-SNAPSHOT: 支持同时控制多个控制点
+		0.1.32-SNAPSHOT: detailsV2接口支持船舶的数据补齐功能
 	</description>
 
     <properties>
