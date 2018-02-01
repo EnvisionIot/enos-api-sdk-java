@@ -73,4 +73,12 @@ public class UserLoginResponse extends EnvisionResponse {
     public void setAttributeMap(Map<String, String> attributeMap) {
         this.attributeMap = attributeMap;
     }
+
+    @Override
+    public String toString()
+    {
+        return "UserLoginResponse [userId=" + userId + ", userName=" + userName + ", accessToken=" + accessToken
+                + ", accessTokenExpire=" + accessTokenExpire + ", refreshToken=" + refreshToken
+                + ", refreshTokenExpire=" + refreshTokenExpire + ", attributeMap=" + attributeMap + "]";
+    }
 }
