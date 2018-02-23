@@ -19,15 +19,16 @@ public class LocBaseNearFilter extends AppointedFilter {
 	public LocBaseNearFilter() {
 		super();
 	}
-	
-	public LocBaseNearFilter(Map<String,Map<String,String>> filter) {
+
+
+	public LocBaseNearFilter(Map<String,Object> filter){
 		super();
-		putAll(filter);
+		put(OPERATOR, filter);
 	}
 	
 	public LocBaseNearFilter(double longitude, double latitude, double maxDistance) {
 		super();
-		Map<String,String> spec = new HashMap<>();
+		Map<String,Object> spec = new HashMap<>();
 		spec.put(KEY_LONGITUDE, String.valueOf(longitude));
 		spec.put(KEY_LATITUDE, String.valueOf(latitude));
 		spec.put(KEY_MAX_DISTANCE, String.valueOf(maxDistance));
@@ -35,14 +36,14 @@ public class LocBaseNearFilter extends AppointedFilter {
 	}
 	
 	public double getLongitude() {
-		return Double.parseDouble(get(OPERATOR).get(KEY_LONGITUDE));
+		return Double.parseDouble((String) get(OPERATOR).get(KEY_LONGITUDE));
 	}
 	
 	public double getLatitude() {
-		return Double.parseDouble(get(OPERATOR).get(KEY_LATITUDE));
+		return Double.parseDouble((String) get(OPERATOR).get(KEY_LATITUDE));
 	}
 	
 	public double getMaxDistance() {
-		return Double.parseDouble(get(OPERATOR).get(KEY_MAX_DISTANCE));
+		return Double.parseDouble((String)get(OPERATOR).get(KEY_MAX_DISTANCE));
 	}
 }
