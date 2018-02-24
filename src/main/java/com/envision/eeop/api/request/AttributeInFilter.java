@@ -36,9 +36,8 @@ public class AttributeInFilter extends AppointedFilter{
     }
 
     public AttributeInFilter append(String fieldname, List<String>values ){
-        Map<String, Object> spec = new HashMap<>();
+        Map<String, Object> spec = get(OPERATOR);
         spec.put(fieldname,  values);
-        put(OPERATOR, spec);
         return this;
     }
 
