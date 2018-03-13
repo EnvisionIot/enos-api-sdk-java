@@ -95,7 +95,10 @@ public class EnvisionDefaultPaginationClient extends EnvisionDefaultClient
             }
             else
             {
-                throw new EnvisionApiException(request.getApiMethodName() + " failed at page no.: " + pageNo + ", page size: " + pageSize);
+                throw new EnvisionApiException(request.getApiMethodName() + 
+                        " failed at page no.: " + pageNo + ", page size: " + pageSize +
+                        " , status: " + partialResponse.getStatus() + ", msg: " + 
+                        partialResponse.getMsg() + " / " + partialResponse.getSubmsg());
             }
             
             long currTime = System.currentTimeMillis();

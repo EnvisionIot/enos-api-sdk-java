@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.envision.energy.sdk</groupId>
     <artifactId>eeop</artifactId>
-    <version>0.1.35-SNAPSHOT</version>
+    <version>0.1.36-SNAPSHOT</version>
     <name>Envision Energy Open Platform</name>
     
 	<description>
@@ -25,6 +25,7 @@
 		0.1.33-SNAPSHOT: 支持cloudedge更多信息
 		0.1.34-SNAPSHOT: getFilterObject支持In操作
 		0.1.35-SNAPSHOT: 适配多通道接入配置
+		0.1.36-SNAPSHOT: 丰富分页客户端执行请求失败时的日志
 	</description>
 
     <properties>
