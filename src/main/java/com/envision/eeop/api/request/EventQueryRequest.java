@@ -1,6 +1,5 @@
 package com.envision.eeop.api.request;
 
-import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,7 +10,6 @@ import com.envision.eeop.api.util.EventJsonParser;
 import com.envision.eeop.api.util.RuleCheckUtils;
 import com.envision.eos.event.api.bo.EventQuery;
 import com.envision.eos.event.api.expression.LiteralFilter;
-import com.envision.eos.event.api.expression.View;
 import com.envision.eos.event.api.expression.Aggregate.AggregateType;
 import com.envision.eos.event.api.expression.Aggregate;
 import com.envision.eos.event.api.expression.Column;

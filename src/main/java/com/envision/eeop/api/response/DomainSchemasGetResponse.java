@@ -13,6 +13,7 @@ import com.google.gson.annotations.SerializedName;
 /**
  * Domain schemas
  * @author jieyuan.shen
+ * @deprecated use DomainSchemasGetResponseV2 instead
  */
 public class DomainSchemasGetResponse extends EnvisionResponse
 {

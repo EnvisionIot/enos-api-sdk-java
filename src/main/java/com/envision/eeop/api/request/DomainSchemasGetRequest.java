@@ -11,6 +11,10 @@ import com.envision.eeop.api.util.EnvisionHashMap;
 import com.envision.eeop.api.util.RuleCheckUtils;
 import com.envision.eeop.api.util.StringUtils;
 
+/**
+ * @deprecated use DomainSchemasGetRequestV2 instead
+ * @author shenjieyuan
+ */
 public class DomainSchemasGetRequest implements EnvisionRequest<DomainSchemasGetResponse>
 {
     private static final String API_METHOD = "/mdmService/getSchemas";

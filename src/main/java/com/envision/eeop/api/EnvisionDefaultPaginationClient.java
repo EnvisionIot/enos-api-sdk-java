@@ -8,10 +8,10 @@ import com.envision.eeop.api.exception.EnvisionApiException;
  */
 public class EnvisionDefaultPaginationClient extends EnvisionDefaultClient
 {
-    private int pageSize = 200;
+    private int pageSize = 3000;
     
     // Execution Timeout(ms)
-    private int executeTimeout = 300000;
+    private int executeTimeout = Integer.MAX_VALUE;
     
     // TODO: support parallism later
     

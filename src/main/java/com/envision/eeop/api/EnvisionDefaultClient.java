@@ -1,39 +1,17 @@
 package com.envision.eeop.api;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.envision.eeop.api.domain.CloudedgeDevice;
 import com.envision.eeop.api.exception.EnvisionApiException;
 import com.envision.eeop.api.exception.EnvisionIOException;
 import com.envision.eeop.api.exception.EnvisionRuleException;
-import com.envision.eeop.api.request.CloudedgeAppGetRequest;
-import com.envision.eeop.api.request.CloudedgeAttachDeviceRequest;
-import com.envision.eeop.api.request.EventQueryRequest;
-import com.envision.eeop.api.response.CloudedgeAppGetResponse;
-import com.envision.eeop.api.response.CloudedgeAttachDeviceResponse;
 import com.envision.eeop.api.util.JsonParser;
 import com.envision.eeop.api.util.Sign;
 import com.envision.eeop.api.util.WebUtils;
-import com.envision.eos.event.api.bo.EventQuery;
-import com.envision.eos.event.api.expression.Aggregate;
-import com.envision.eos.event.api.expression.Column;
-import com.envision.eos.event.api.expression.DateExpr;
-import com.envision.eos.event.api.expression.Filter;
-import com.envision.eos.event.api.expression.GroupBy;
-import com.envision.eos.event.api.expression.HourExpr;
-import com.envision.eos.event.api.expression.LiteralFilter;
-import com.envision.eos.event.api.expression.MinuteExpr;
-import com.envision.eos.event.api.expression.Order;
-import com.envision.eos.event.api.expression.Order.OrderEnum;
-import com.envision.eos.event.api.expression.OrderBy;
-import com.envision.eos.event.api.expression.Aggregate.AggregateType;
 
 public class EnvisionDefaultClient implements EnvisionClient {
 	private static Logger logger = LoggerFactory.getLogger(EnvisionDefaultClient.class);
@@ -170,50 +148,5 @@ public class EnvisionDefaultClient implements EnvisionClient {
 		url.append(sign);
 
 		return url.toString();
-	}
-
-	public static void testEvent(String[] args) throws EnvisionApiException {
-		Map<String, String> map = new HashMap<>();
-		EnvisionDefaultClient client = new EnvisionDefaultClient("http://eos.envisioncn.com/eeop", "EOS-QA", "xxx");
-		EventQuery query = new EventQuery("3d-ago", "now");
-		Filter filter = new LiteralFilter(Column.SITE_ID).addLiteral("65a216c43a8141f18cec63dbe7aa69b0");
-//		filter=filter.and(new LiteralFilter(Column.DEVICE_ID).addLiteral("FQSA.T1_L1.WTG001"));
-
-		query.setFilter(filter);
-		
-//		Aggregate aggregate = new Aggregate(AggregateType.COUNT, Column.ID);
-//		GroupBy groupBy = new GroupBy();
-//		groupBy.addExpr(new DateExpr(Column.OCCUR_TIME));
-//		groupBy.addExpr(new HourExpr(Column.OCCUR_TIME));
-//		groupBy.addExpr(new MinuteExpr(Column.OCCUR_TIME));
-
-//		query.addAggregate(aggregate);
-//		query.setGroupBy(groupBy);
-		query.setS(0);
-		query.setN(3000);
-//		query.setShowTotal(true);
-
-		EventQueryRequest request = new EventQueryRequest(query);
-
-		System.out.println(client.execute(request, "xxxx").getEventList());
-	}
-
-	public static void main(String[] args) throws EnvisionApiException {
-		EnvisionDefaultClient client = new EnvisionDefaultClient("http://10.21.10.13:8080/eeop", "EEOP_TEST", "xxx");
-
-		CloudedgeAppGetRequest request = new CloudedgeAppGetRequest("57baab5ed3eb4806104b045d");
-
-		@SuppressWarnings("unused")
-		CloudedgeAppGetResponse reponse = client.doPost(request, "xxxx");
-
-		List<CloudedgeDevice> ds = new ArrayList<>();
-		CloudedgeDevice d1 = new CloudedgeDevice("19ebba76e6800000", 1100, new HashMap());
-		ds.add(d1);
-
-		CloudedgeAttachDeviceRequest attachrequest = new CloudedgeAttachDeviceRequest("57baab5ed3eb4806104b045d",
-				"edge-1511493159229-00033", ds);
-		@SuppressWarnings("unused")
-		CloudedgeAttachDeviceResponse attachreponse = client.doPost(attachrequest, "xxx");
-
 	}
 }

@@ -2,7 +2,9 @@ package com.envision.eeop.api.domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class DomainInfo implements Serializable
 {
@@ -84,5 +86,35 @@ public class DomainInfo implements Serializable
     public void setDomainName(String domainName)
     {
         this.domainName = domainName;
+    }
+
+    /**
+     * This is based on the multiple collects collecting one device feature. <br>
+     * domain ID and domain name shall be the same among all domain infos.
+     * schemas and passthroughPoints shall be merged.
+     * @param domainInfos
+     * @return
+     */
+    public static DomainInfo merge(List<DomainInfo> domainInfos)
+    {
+        if (domainInfos == null || domainInfos.isEmpty())
+        {
+            return null;
+        }
+        DomainInfo result = new DomainInfo();
+        result.domainID = domainInfos.iterator().next().domainID;
+        result.domainName = domainInfos.iterator().next().domainName;
+
+        // merge schemas and passthrough points.
+        Set<DomainSchema> mergedSchemas = new HashSet<>();
+        Set<DomainSchema> mergedPassthroughPoints = new HashSet<>();
+        for (DomainInfo domainInfo: domainInfos)
+        {
+            mergedSchemas.addAll(domainInfo.schemas);
+            mergedPassthroughPoints.addAll(domainInfo.passthroughPoints);
+        }
+        result.schemas = new ArrayList<DomainSchema>(mergedSchemas);
+        result.passthroughPoints = new ArrayList<DomainSchema>(mergedPassthroughPoints);
+        return result;
     }
 }

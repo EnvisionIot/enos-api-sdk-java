@@ -70,4 +70,47 @@ public class DomainSchema implements Serializable
     {
         return "DomainSchema [schema=" + schema + ", desc=" + desc + ", metadata=" + metadata + "]";
     }
+
+    @Override
+    public int hashCode()
+    {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((desc == null) ? 0 : desc.hashCode());
+        result = prime * result + ((metadata == null) ? 0 : metadata.hashCode());
+        result = prime * result + ((schema == null) ? 0 : schema.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj)
+    {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        DomainSchema other = (DomainSchema) obj;
+        if (desc == null)
+        {
+            if (other.desc != null)
+                return false;
+        } else if (!desc.equals(other.desc))
+            return false;
+        if (metadata == null)
+        {
+            if (other.metadata != null)
+                return false;
+        } else if (!metadata.equals(other.metadata))
+            return false;
+        if (schema == null)
+        {
+            if (other.schema != null)
+                return false;
+        } else if (!schema.equals(other.schema))
+            return false;
+        return true;
+    }
+
 }
