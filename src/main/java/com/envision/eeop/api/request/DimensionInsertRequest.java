@@ -23,7 +23,7 @@ public class DimensionInsertRequest implements
 
 	private String key; // optional
 
-	private String columes; // mandatory
+	private String columns; // mandatory
 
 	public DimensionInsertRequest(String mdmid, String table, String key,
 			Map<String, Object> columnMap) {
@@ -36,7 +36,7 @@ public class DimensionInsertRequest implements
 		super();
 		this.mdmid = mdmid;
 		this.table = table;
-		this.columes = JsonParser.toJson(columnMap);
+		this.columns = JsonParser.toJson(columnMap);
 	}
 
 	public String getMdmid() {
@@ -63,12 +63,26 @@ public class DimensionInsertRequest implements
 		this.key = key;
 	}
 
-	public String getColumes() {
-		return columes;
+	public String getColumns() {
+		return columns;
 	}
 
+	/**
+	 * @deprecated use {@link #getColumns()} instead
+	 */
+	public String getColumes() {
+		return getColumns();
+	}
+
+	public void setColumns(String columns) {
+		this.columns = columns;
+	}
+
+	/**
+	 * @deprecated use {@link #setColumns(String)} instead
+	 */
 	public void setColumes(String columes) {
-		this.columes = columes;
+	    setColumns(columes);
 	}
 
 	@Override
@@ -85,7 +99,9 @@ public class DimensionInsertRequest implements
 		if (!StringUtils.isEmpty(key)) {
 			txtParams.put("key", key);
 		}
-		txtParams.put("columes", columes);
+		txtParams.put("columns", columns);
+		// TODO deprecated parameters
+		txtParams.put("columes", columns);
 
 		return txtParams;
 	}
@@ -99,6 +115,6 @@ public class DimensionInsertRequest implements
 	public void check() throws EnvisionRuleException {
 		RuleCheckUtils.checkNotEmpty(mdmid, "mdmid");
 		RuleCheckUtils.checkNotEmpty(table, "table");
-		RuleCheckUtils.checkNotEmpty(columes, "columes");
+		RuleCheckUtils.checkNotEmpty(columns, "columns");
 	}
 }

@@ -41,6 +41,7 @@ public class AttributeInFilter extends AppointedFilter{
         return this;
     }
 
+    @SuppressWarnings("unchecked")
     public Map<String ,List<String >> getInValues() {
         Map<String, Object> spec = get(OPERATOR);
         Map<String, List<String>> vals = new HashMap<>();
