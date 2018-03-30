@@ -29,6 +29,8 @@ public class DomainDetailsGetRequestV2 implements EnvisionRequest<DomainMetricsG
 
     private Integer align;
 
+    private String tsFormat;
+
     @Override
     public String getApiMethodName() {
         return API_METHOD;
@@ -81,6 +83,18 @@ public class DomainDetailsGetRequestV2 implements EnvisionRequest<DomainMetricsG
         this.align = align;
     }
 
+    public DomainDetailsGetRequestV2(List<String> mdmIds,
+                                     List<String> metrics,
+                                     String beginTime,
+                                     String endTime,
+                                     Integer interval,
+                                     Integer limit,
+                                     Integer align,
+                                     String tsFormat) {
+        this(mdmIds, metrics, beginTime, endTime, interval, limit, align);
+        this.tsFormat = tsFormat;
+    }
+
     @Override
     public Map<String, String> getTextParams() {
         EnvisionHashMap txtParams = new EnvisionHashMap();
@@ -92,6 +106,7 @@ public class DomainDetailsGetRequestV2 implements EnvisionRequest<DomainMetricsG
         txtParams.put("interval", interval);
         txtParams.put("limit", limit);
         txtParams.put("align", align);
+        txtParams.put("tsFormat", tsFormat);
 
         return txtParams;
     }
@@ -108,4 +123,5 @@ public class DomainDetailsGetRequestV2 implements EnvisionRequest<DomainMetricsG
 //        RuleCheckUtils.checkNotEmpty(beginTime, "begin_time");
 //        RuleCheckUtils.checkDateFormat(beginTime, "begin_time", endTime, "end_time");
     }
+
 }
