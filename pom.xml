@@ -1,9 +1,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.envision.energy.sdk</groupId>
+    <groupId>com.envisioniot</groupId>
     <artifactId>eeop</artifactId>
-    <version>0.1.39-SNAPSHOT</version>
+    <version>0.1.41-SNAPSHOT</version>
     <name>Envision Energy Open Platform</name>
     
 	<description>
@@ -29,6 +29,7 @@
 		0.1.37-SNAPSHOT: 升级event api 2.0.7，支持EventUpdate对code_desc的语言选择
 		0.1.38-SNAPSHOT: 增加接入状态查询接口, 修正Dimension接口typo-fault
 		0.1.39-SNAPSHOT: detailsV2接口返回结果支持毫秒数
+		0.1.41-SNAPSHOT: 扩充connect config接口
 	</description>
 
     <properties>
@@ -204,7 +205,7 @@
 		<repository>
 			<id>envision.repo</id>
 			<name>envision internal repository for released artifacts</name>
-			<url>http://nexus.envisioncn.com/content/repositories/envision</url>
+			<url>http://nexus.envisioncn.com/content/repositories/releases</url>
 		</repository>
 		<snapshotRepository>
 			<id>envision.repo.snapshots</id>
