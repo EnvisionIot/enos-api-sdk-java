@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.envisioniot</groupId>
     <artifactId>eeop</artifactId>
-    <version>0.1.41-SNAPSHOT</version>
+    <version>0.1.42-SNAPSHOT</version>
     <name>Envision Energy Open Platform</name>
     
 	<description>
@@ -30,6 +30,7 @@
 		0.1.38-SNAPSHOT: 增加接入状态查询接口, 修正Dimension接口typo-fault
 		0.1.39-SNAPSHOT: detailsV2接口返回结果支持毫秒数
 		0.1.41-SNAPSHOT: 扩充connect config接口
+		0.1.42-SNAPSHOT: 添加tsdb的采样数据查询接口
 	</description>
 
     <properties>
