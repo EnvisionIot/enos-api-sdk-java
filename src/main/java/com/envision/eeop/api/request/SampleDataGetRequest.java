@@ -20,9 +20,9 @@ public class SampleDataGetRequest implements EnvisionRequest<SampleDataGetRespon
 
     private String table;
 
-    private long beginTime;
+    private Long beginTime;
 
-    private long endTime;
+    private Long endTime;
 
     private String columns;
 
@@ -53,7 +53,7 @@ public class SampleDataGetRequest implements EnvisionRequest<SampleDataGetRespon
     public Map<String, String> getTextParams() {
         EnvisionHashMap txtParams = new EnvisionHashMap();
 
-        txtParams.put("asset_id", assetIds);
+        txtParams.put("asset_ids", assetIds);
         txtParams.put("table", table);
         txtParams.put("begin_time", beginTime);
         txtParams.put("end_time", endTime);
