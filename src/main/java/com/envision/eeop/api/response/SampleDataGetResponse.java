@@ -16,7 +16,7 @@ public class SampleDataGetResponse extends EnvisionResponse {
     private String nextOffset;
 
     @SerializedName("result")
-    private List<Map<String, String>> domainMetricList;
+    private List<Map<String, String>> result;
 
     public String getNextOffset() {
         return nextOffset;
@@ -26,11 +26,11 @@ public class SampleDataGetResponse extends EnvisionResponse {
         this.nextOffset = nextOffset;
     }
 
-    public List<Map<String, String>> getDomainMetricList() {
-        return domainMetricList;
+    public List<Map<String, String>> getResult() {
+        return result;
     }
 
-    public void setDomainMetricList(List<Map<String, String>> domainMetricList) {
-        this.domainMetricList = domainMetricList;
+    public void setResult(List<Map<String, String>> result) {
+        this.result = result;
     }
 }
