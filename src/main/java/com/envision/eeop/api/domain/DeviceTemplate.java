@@ -16,6 +16,7 @@ public class DeviceTemplate implements Serializable
     private String brand;
     private String model;
     private String innerVer;
+    private String name;
     private String protocolType;
     private String protocolName;
 
@@ -79,6 +80,16 @@ public class DeviceTemplate implements Serializable
         this.innerVer = innerVer;
     }
 
+    public String getName()
+    {
+        return name;
+    }
+
+    public void setName(String name)
+    {
+        this.name = name;
+    }
+
     public String getProtocolType()
     {
         return protocolType;
@@ -103,7 +114,7 @@ public class DeviceTemplate implements Serializable
     public String toString()
     {
         return "DeviceTemplate [deviceTemplateID=" + deviceTemplateID + ", categoryID=" + categoryID + ", typeID="
-                + typeID + ", brand=" + brand + ", model=" + model + ", innerVer=" + innerVer + ", protocolType="
-                + protocolType + ", protocolName=" + protocolName + "]";
+                + typeID + ", brand=" + brand + ", model=" + model + ", innerVer=" + innerVer + ", name=" + name
+                + ", protocolType=" + protocolType + ", protocolName=" + protocolName + "]";
     }
 }
