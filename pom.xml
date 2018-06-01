@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.envisioniot</groupId>
     <artifactId>eeop</artifactId>
-    <version>0.1.43-SNAPSHOT</version>
+    <version>0.1.44-SNAPSHOT</version>
     <name>Envision Energy Open Platform</name>
     
 	<description>
@@ -32,6 +32,7 @@
 		0.1.41-SNAPSHOT: 扩充connect config接口
 		0.1.42-SNAPSHOT: 添加tsdb的采样数据查询接口
 		0.1.43-SNAPSHOT: 在DeviceTemplate中添加name字段
+		0.1.44-SNAPSHOT: 新增getusertokeninfobysessionid，getuserinfo，geteventtype，geteventrank，geteventcontent，getappresource接口
 	</description>
 
     <properties>
