@@ -1,6 +1,7 @@
 package com.envision.eeop.api.domain;
 
 import java.io.Serializable;
+import java.util.Map;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -19,6 +20,8 @@ public class DeviceTemplate implements Serializable
     private String name;
     private String protocolType;
     private String protocolName;
+    private int domainID;
+    private Map<String, Integer> pointMap;
 
     public int getDeviceTemplateID()
     {
@@ -110,11 +113,27 @@ public class DeviceTemplate implements Serializable
         this.protocolName = protocolName;
     }
 
+    public int getDomainID() {
+        return domainID;
+    }
+
+    public void setDomainID(int domainID) {
+        this.domainID = domainID;
+    }
+
+    public Map<String, Integer> getPointMap() {
+        return pointMap;
+    }
+
+    public void setPointMap(Map<String, Integer> pointMap) {
+        this.pointMap = pointMap;
+    }
+
     @Override
     public String toString()
     {
         return "DeviceTemplate [deviceTemplateID=" + deviceTemplateID + ", categoryID=" + categoryID + ", typeID="
                 + typeID + ", brand=" + brand + ", model=" + model + ", innerVer=" + innerVer + ", name=" + name
-                + ", protocolType=" + protocolType + ", protocolName=" + protocolName + "]";
+                + ", protocolType=" + protocolType + ", protocolName=" + protocolName + ", domainId=" + domainID + "]";
     }
 }
