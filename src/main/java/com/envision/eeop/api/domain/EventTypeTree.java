@@ -17,7 +17,7 @@ public class EventTypeTree implements Serializable {
     private String ns;
     private String category;
     // private String nodeId;
-    private boolean isLeaf;
+    // private boolean isLeaf;
     private String type;
     // private String nodeName;
     private String tag;
@@ -79,14 +79,6 @@ public class EventTypeTree implements Serializable {
 
     public void setCategory(String category) {
         this.category = category;
-    }
-
-    public boolean isLeaf() {
-        return isLeaf;
-    }
-
-    public void setLeaf(boolean leaf) {
-        isLeaf = leaf;
     }
 
     public String getType() {

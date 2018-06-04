@@ -8,13 +8,7 @@ import com.envision.eeop.api.util.EnvisionHashMap;
 import java.util.Map;
 
 public class AppResourceGetRequest implements EnvisionRequest<AppResourceGetResponse>{
-    private static final String API_METHOD = "/userService/getAppResource";
-
-    private String locale;           // optional
-
-    public AppResourceGetRequest(String locale){
-        this.locale = locale;
-    }
+    private static final String API_METHOD = "/appService/getAppResource";
     
     public String getApiMethodName(){
         return API_METHOD;
@@ -22,8 +16,6 @@ public class AppResourceGetRequest implements EnvisionRequest<AppResourceGetResp
     
     public Map<String, String> getTextParams(){
         EnvisionHashMap txtParams = new EnvisionHashMap();
-
-        txtParams.put("locale", locale);
         
         return txtParams;
     }
