@@ -9,14 +9,23 @@ import java.util.Map;
 
 public class AppResourceGetRequest implements EnvisionRequest<AppResourceGetResponse>{
     private static final String API_METHOD = "/appService/getAppResource";
-    
+
+    private String mdmId;
+
     public String getApiMethodName(){
         return API_METHOD;
+    }
+
+    public AppResourceGetRequest() {
+        this.mdmId = "";
+    }
+    public AppResourceGetRequest(String mdmId) {
+        this.mdmId = mdmId;
     }
     
     public Map<String, String> getTextParams(){
         EnvisionHashMap txtParams = new EnvisionHashMap();
-        
+        txtParams.put("mdmid", mdmId);
         return txtParams;
     }
     

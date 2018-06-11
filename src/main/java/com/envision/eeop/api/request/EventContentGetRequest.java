@@ -13,14 +13,23 @@ public class EventContentGetRequest implements EnvisionRequest<EventContentGetRe
 
     private String categoryId;
     private String locale;           // optional
+    private String mdmId;
 
-    public EventContentGetRequest(String categoryId, String locale){
+    public EventContentGetRequest(String categoryId, String mdmId){
         this.categoryId = categoryId;
+        this.mdmId = mdmId;
+        this.locale = "";
+    }
+
+    public EventContentGetRequest(String categoryId, String mdmId, String locale){
+        this.categoryId = categoryId;
+        this.mdmId = mdmId;
         this.locale = locale;
     }
 
     public EventContentGetRequest(String categoryId){
         this.categoryId = categoryId;
+        this.mdmId = "";
         this.locale = "";
     }
     
@@ -33,6 +42,7 @@ public class EventContentGetRequest implements EnvisionRequest<EventContentGetRe
         
         txtParams.put("categoryid", categoryId);
         txtParams.put("locale", locale);
+        txtParams.put("mdmid", mdmId);
         
         return txtParams;
     }

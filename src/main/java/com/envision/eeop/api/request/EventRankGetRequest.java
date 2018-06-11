@@ -13,14 +13,23 @@ public class EventRankGetRequest implements EnvisionRequest<EventRankGetResponse
 
     private String categoryId;
     private String locale;           // optional
+    private String mdmId;
 
-    public EventRankGetRequest(String categoryId, String locale){
+    public EventRankGetRequest(String categoryId, String mdmId){
         this.categoryId = categoryId;
+        this.mdmId = mdmId;
+        this.locale = "";
+    }
+
+    public EventRankGetRequest(String categoryId, String mdmId, String locale){
+        this.categoryId = categoryId;
+        this.mdmId = mdmId;
         this.locale = locale;
     }
 
     public EventRankGetRequest(String categoryId){
         this.categoryId = categoryId;
+        this.mdmId = "";
         this.locale = "";
     }
     
@@ -30,9 +39,10 @@ public class EventRankGetRequest implements EnvisionRequest<EventRankGetResponse
     
     public Map<String, String> getTextParams(){
         EnvisionHashMap txtParams = new EnvisionHashMap();
-        
+
         txtParams.put("categoryid", categoryId);
         txtParams.put("locale", locale);
+        txtParams.put("mdmid", mdmId);
         
         return txtParams;
     }

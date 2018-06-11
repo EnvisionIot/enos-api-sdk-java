@@ -13,14 +13,23 @@ public class EventTypeGetRequest implements EnvisionRequest<EventTypeGetResponse
 
     private String categoryId;
     private String locale;           // optional
+    private String mdmId;
 
-    public EventTypeGetRequest(String categoryId, String locale){
+    public EventTypeGetRequest(String categoryId, String mdmId){
         this.categoryId = categoryId;
+        this.mdmId = mdmId;
+        this.locale = "";
+    }
+
+    public EventTypeGetRequest(String categoryId, String mdmId, String locale){
+        this.categoryId = categoryId;
+        this.mdmId = mdmId;
         this.locale = locale;
     }
 
     public EventTypeGetRequest(String categoryId){
         this.categoryId = categoryId;
+        this.mdmId = "";
         this.locale = "";
     }
     
@@ -30,9 +39,10 @@ public class EventTypeGetRequest implements EnvisionRequest<EventTypeGetResponse
     
     public Map<String, String> getTextParams(){
         EnvisionHashMap txtParams = new EnvisionHashMap();
-        
+
         txtParams.put("categoryid", categoryId);
         txtParams.put("locale", locale);
+        txtParams.put("mdmid", mdmId);
         
         return txtParams;
     }
