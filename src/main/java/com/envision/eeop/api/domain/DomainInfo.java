@@ -31,9 +31,14 @@ public class DomainInfo implements Serializable
 
     public List<DomainSchema> getSchemas()
     {
-        List<DomainSchema> allSchemas = new ArrayList<>(schemas.size() + passthroughPoints.size());
-        allSchemas.addAll(schemas);
-        allSchemas.addAll(passthroughPoints);
+        int size = (schemas != null ? schemas.size() : 0) + (passthroughPoints != null ? passthroughPoints.size() : 0);
+        List<DomainSchema> allSchemas = new ArrayList<>(size);
+        if (schemas != null) {
+            allSchemas.addAll(schemas);
+        }
+        if (passthroughPoints != null) {
+            allSchemas.addAll(passthroughPoints);
+        }
         return allSchemas;
     }
     

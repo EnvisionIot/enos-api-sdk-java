@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.envisioniot</groupId>
     <artifactId>eeop</artifactId>
-    <version>0.1.46-SNAPSHOT</version>
+    <version>0.1.47-SNAPSHOT</version>
     <name>Envision Energy Open Platform</name>
     
 	<description>
@@ -35,6 +35,7 @@
 		0.1.44-SNAPSHOT: 新增getusertokeninfobysessionid，getuserinfo，geteventtype，geteventrank，geteventcontent，getappresource接口
 		0.1.45-SNAPSHOT: 在DeviceTemplate中添加domainID、pointMap字段，新增DomainSchemasGetById接口
 		0.1.46-SNAPSHOT: 修复event接口，getappresource接口在多组织场景下返回异常的问题
+		0.1.47-SNAPSHOT: 修复DomainInfo.getSchemas方法passthroughPoints可能为null的问题
 	</description>
 
     <properties>
