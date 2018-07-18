@@ -7,6 +7,7 @@ import com.envision.eeop.api.domain.DomainInfo;
  * Domain schemas
  * @author changhua.jiang
  */
+@SuppressWarnings("serial")
 public class DomainSchemasGetByIdResponse extends EnvisionResponse
 {
 

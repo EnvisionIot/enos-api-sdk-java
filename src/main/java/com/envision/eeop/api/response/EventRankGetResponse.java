@@ -1,7 +1,6 @@
 package com.envision.eeop.api.response;
 
 import com.envision.eeop.api.EnvisionResponse;
-import com.envision.eeop.api.domain.EventContent;
 import com.envision.eeop.api.domain.EventRank;
 import com.google.gson.annotations.SerializedName;
 

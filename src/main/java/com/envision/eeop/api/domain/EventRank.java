@@ -1,9 +1,6 @@
 package com.envision.eeop.api.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Created by zuoyong.tang on 2018/5/14.
