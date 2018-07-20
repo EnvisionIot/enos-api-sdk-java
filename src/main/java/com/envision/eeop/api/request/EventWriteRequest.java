@@ -2,18 +2,20 @@ package com.envision.eeop.api.request;
 
 import com.envision.eeop.api.EnvisionRequest;
 import com.envision.eeop.api.exception.EnvisionRuleException;
-import com.envision.eeop.api.response.EventQueryResponse;
+import com.envision.eeop.api.response.EventWriteResponse;
 import com.envision.eeop.api.util.EnvisionHashMap;
-import com.envision.eeop.api.util.StringUtils;
+import com.envision.event.bean.Event;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.util.List;
 import java.util.Map;
 
 
-public class EventQueryRequest implements EnvisionRequest<EventQueryResponse> {
-    private static final String API_METHOD = "/eventService/getEventsByEventIDs";
+public class EventWriteRequest implements EnvisionRequest<EventWriteResponse> {
+    private static final String API_METHOD = "/eventService/insertEvents";
 
-    private String eventIds;
+    private List<Event> eventList;
 
 
     @Override
@@ -21,25 +23,22 @@ public class EventQueryRequest implements EnvisionRequest<EventQueryResponse> {
         return API_METHOD;
     }
 
-    public EventQueryRequest(List<String> eventIdList) {
-        this.eventIds = StringUtils.listToString(eventIdList, ",");
-    }
-
-    public void setEventIdList(List<String> eventIdList) {
-        this.eventIds = StringUtils.listToString(eventIdList, ",");
+    public EventWriteRequest(List<Event> eventList) {
+        this.eventList = eventList;
     }
 
     @Override
     public Map<String, String> getTextParams() {
         EnvisionHashMap txtParams = new EnvisionHashMap();
-        txtParams.put("eventIds", eventIds);
+        Gson gson =  new GsonBuilder().setPrettyPrinting().create();
+        txtParams.put("events", gson.toJson(eventList));
 
         return txtParams;
     }
 
     @Override
-    public Class<EventQueryResponse> getResponseClass() {
-        return EventQueryResponse.class;
+    public Class<EventWriteResponse> getResponseClass() {
+        return EventWriteResponse.class;
     }
 
     @Override
