@@ -17,11 +17,13 @@ public class MqttClientStatusGetRequest implements EnvisionRequest<MqttClientSta
     private static final String API_METHOD = "/connectService/getMqttClientStatus";
 
     private String licenseId;   // mandatory
+    private String thingName;   // mandatory
     private String clientId;    // mandatory
 
-    public MqttClientStatusGetRequest(String licenseId, String clientId)
+    public MqttClientStatusGetRequest(String licenseId, String thingName, String clientId)
     {
         this.licenseId = licenseId;
+        this.thingName = thingName;
         this.clientId = clientId;
     }
 
@@ -33,6 +35,16 @@ public class MqttClientStatusGetRequest implements EnvisionRequest<MqttClientSta
     public void setLicenseId(String licenseId)
     {
         this.licenseId = licenseId;
+    }
+
+    public String getThingName()
+    {
+        return thingName;
+    }
+
+    public void setThingName(String thingName)
+    {
+        this.thingName = thingName;
     }
 
     public String getClientId()
@@ -54,6 +66,7 @@ public class MqttClientStatusGetRequest implements EnvisionRequest<MqttClientSta
     {
         EnvisionHashMap txtParams = new EnvisionHashMap();
         txtParams.put("licenseId", licenseId);
+        txtParams.put("thingName", thingName);
         txtParams.put("clientId", clientId);
         return txtParams;
     }
@@ -66,6 +79,7 @@ public class MqttClientStatusGetRequest implements EnvisionRequest<MqttClientSta
     public void check() throws EnvisionRuleException
     {
         RuleCheckUtils.checkNotEmpty(licenseId, "licenseId");
+        RuleCheckUtils.checkNotEmpty(thingName, "thingName");
         RuleCheckUtils.checkNotEmpty(clientId, "clientId");
     }
 }
