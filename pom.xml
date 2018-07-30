@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.envisioniot</groupId>
     <artifactId>eeop</artifactId>
-    <version>0.1.50-SNAPSHOT</version>
+    <version>0.1.51-SNAPSHOT</version>
     <name>Envision Energy Open Platform</name>
     
 	<description>
@@ -38,6 +38,7 @@
 		0.1.47-SNAPSHOT: 修复DomainInfo.getSchemas方法passthroughPoints可能为null的问题
 		0.1.49-SNAPSHOT: 增加getMqttClientStatus接口
 		0.1.50-SNAPSHOT: 上线了告警eeop新版查询接口，下线了部分老版接口(EventQueryRequest\EventConfirmRequest\EventUpdateRequest\EventUpdateResponse)
+		0.1.51-SNAPSHOT: 兼容老告警eeop-SDK
 	</description>
 
     <properties>

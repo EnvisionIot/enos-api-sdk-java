@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Created by alan.wang on 2018/6/25.
  */
-public class EventQueryResponse extends EnvisionResponse {
+public class EventQueryByIdsResponse extends EnvisionResponse {
 
     private static final long serialVersionUID = 2890558180702877644L;
     private List<Event> eventList;
