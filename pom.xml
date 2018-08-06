@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.envisioniot</groupId>
     <artifactId>eeop</artifactId>
-    <version>0.1.51-SNAPSHOT</version>
+    <version>0.1.52-SNAPSHOT</version>
     <name>Envision Energy Open Platform</name>
     
 	<description>
@@ -39,6 +39,7 @@
 		0.1.49-SNAPSHOT: 增加getMqttClientStatus接口
 		0.1.50-SNAPSHOT: 上线了告警eeop新版查询接口，下线了部分老版接口(EventQueryRequest\EventConfirmRequest\EventUpdateRequest\EventUpdateResponse)
 		0.1.51-SNAPSHOT: 兼容老告警eeop-SDK
+		0.1.52-SNAPSHOT: 支持在DomainSchema接口中查询测点值类型
 	</description>
 
     <properties>
@@ -87,12 +88,7 @@
 			<artifactId>eos-event-api-new</artifactId>
 			<version>1.0</version>
 		</dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>RELEASE</version>
-        </dependency>
-    </dependencies>
+ 	   </dependencies>
     
     	<build>
 		<finalName>${project.artifactId}-${project.version}</finalName>
@@ -100,6 +96,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.0</version>
 				<configuration>
 					<includes>
 						<include>**</include>
@@ -147,6 +144,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>3.0.1</version>
 				<configuration>
 					<attach>true</attach>
 					<sourceFileIncludes>**</sourceFileIncludes>
@@ -187,7 +185,7 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-resources-plugin</artifactId>
-					<version>2.4</version>
+					<version>3.1.0</version>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>

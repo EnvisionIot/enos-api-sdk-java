@@ -17,6 +17,7 @@ public class DomainSchemasGetRequestV2 implements EnvisionRequest<DomainSchemasG
 
     public static final String FIELD_DESC = "desc";
     public static final String FIELD_METADATA = "metadata";
+    public static final String FIELD_VALUE_TYPE = "valueType";
 
     private String mdmIDList;   // mandatory
     private String fieldList;   // optional
@@ -45,7 +46,7 @@ public class DomainSchemasGetRequestV2 implements EnvisionRequest<DomainSchemasG
         this(mdmIDList, includeDesc, includeMetadata);
         this.locale = locale;
     }
-
+    
     public DomainSchemasGetRequestV2(List<String> mdmIDList)
     {
         this.mdmIDList = StringUtils.listToString(mdmIDList, ',');

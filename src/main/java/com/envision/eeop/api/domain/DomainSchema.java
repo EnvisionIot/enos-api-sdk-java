@@ -11,6 +11,8 @@ public class DomainSchema implements Serializable
     private String schema;
     private String desc;
     private Map<String,String> metadata;
+    private String valueType;
+    private boolean isArray;
 
     public DomainSchema()
     {
@@ -51,6 +53,26 @@ public class DomainSchema implements Serializable
         this.metadata = metadata;
     }
 
+    public String getValueType()
+    {
+        return valueType;
+    }
+
+    public void setValueType(String valueType)
+    {
+        this.valueType = valueType;
+    }
+
+    public boolean isArray()
+    {
+        return isArray;
+    }
+
+    public void setArray(boolean isArray)
+    {
+        this.isArray = isArray;
+    }
+
     /**
      * @deprecated replaced by getSchema() and getDesc()
      */
@@ -68,7 +90,8 @@ public class DomainSchema implements Serializable
     @Override
     public String toString()
     {
-        return "DomainSchema [schema=" + schema + ", desc=" + desc + ", metadata=" + metadata + "]";
+        return "DomainSchema [schema=" + schema + ", desc=" + desc + ", metadata=" + metadata + ", valueType="
+                + valueType + ", isArray=" + isArray + "]";
     }
 
     @Override
@@ -77,8 +100,10 @@ public class DomainSchema implements Serializable
         final int prime = 31;
         int result = 1;
         result = prime * result + ((desc == null) ? 0 : desc.hashCode());
+        result = prime * result + (isArray ? 1231 : 1237);
         result = prime * result + ((metadata == null) ? 0 : metadata.hashCode());
         result = prime * result + ((schema == null) ? 0 : schema.hashCode());
+        result = prime * result + ((valueType == null) ? 0 : valueType.hashCode());
         return result;
     }
 
@@ -98,6 +123,8 @@ public class DomainSchema implements Serializable
                 return false;
         } else if (!desc.equals(other.desc))
             return false;
+        if (isArray != other.isArray)
+            return false;
         if (metadata == null)
         {
             if (other.metadata != null)
@@ -109,6 +136,12 @@ public class DomainSchema implements Serializable
             if (other.schema != null)
                 return false;
         } else if (!schema.equals(other.schema))
+            return false;
+        if (valueType == null)
+        {
+            if (other.valueType != null)
+                return false;
+        } else if (!valueType.equals(other.valueType))
             return false;
         return true;
     }
