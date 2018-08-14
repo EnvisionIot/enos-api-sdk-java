@@ -6,6 +6,7 @@ import com.envision.eeop.api.response.DimensionsGetResponse;
 import com.envision.eeop.api.util.EnvisionHashMap;
 import com.envision.eeop.api.util.JsonParser;
 import com.envision.eeop.api.util.RuleCheckUtils;
+import com.google.gson.GsonBuilder;
 
 import java.util.Map;
 
@@ -32,7 +33,8 @@ public class DimensionFindByColumnsRequest extends EnvisionPaginationRequest<Dim
         super();
         this.mdmid = mdmid;
         this.table = table;
-        columnFilters = JsonParser.toJson(columns);
+        // null is a valid filter value
+        columnFilters = new GsonBuilder().serializeNulls().create().toJson(columns);
     }
     
     public DimensionFindByColumnsRequest(String mdmid, String table, Map<String, Object> columns, int pageNo, int pageSize)
