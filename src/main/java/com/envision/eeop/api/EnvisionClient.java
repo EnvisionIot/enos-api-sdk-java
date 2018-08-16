@@ -16,7 +16,7 @@ public interface EnvisionClient {
 	 * @param <T>
 	 * @param request 
 	 * @return
-	 * @throws ApiException
+	 * @throws EnvisionApiException
 	 */
 	public <T extends EnvisionResponse> T execute(EnvisionRequest<T> request) throws EnvisionApiException;
 
@@ -26,7 +26,7 @@ public interface EnvisionClient {
 	 * @param <T>
 	 * @param request 
 	 * @return
-	 * @throws ApiException
+	 * @throws EnvisionApiException
 	 */
 	public <T extends EnvisionResponse> T execute(EnvisionRequest<T> request, String token) throws EnvisionApiException;
 

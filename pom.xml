@@ -3,8 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.envisioniot</groupId>
     <artifactId>eeop</artifactId>
-    <version>0.1.53-SNAPSHOT</version>
-    <name>Envision Energy Open Platform</name>
+    <version>0.1.54-SNAPSHOT</version>    <name>Envision Energy Open Platform</name>
     
 	<description>
 		0.1.16-SNAPSHOT: 升级event api 1.7.0
@@ -41,7 +40,7 @@
 		0.1.51-SNAPSHOT: 兼容老告警eeop-SDK
 		0.1.52-SNAPSHOT: 支持在DomainSchema接口中查询测点值类型
 		0.1.53-SNAPSHOT: DimensionFindByColumn接口支持null值过滤
-	</description>
+		0.1.54-SNAPSHOT: /domainService/getmdmidspoints接口添加timeWindow参数	</description>
 
     <properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
