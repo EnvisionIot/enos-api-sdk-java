@@ -46,7 +46,6 @@
 		0.1.54-SNAPSHOT: /domainService/getmdmidspoints接口添加timeWindow参数
     </description>
     
-    <url>https://github.com/EnvisionIot/enos-openapi-java-sdk</url>
     
     <licenses>
         <license>
