@@ -4,15 +4,26 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.google.gson.Gson;
+
 public class DomainSchema implements Serializable
 {
     private static final long serialVersionUID = -581311503263219261L;
 
     private String schema;
+    private String schemaType;
     private String desc;
     private Map<String,String> metadata;
     private String valueType;
-    private boolean isArray;
+    private Boolean isArray;
+    
+    public static void main(String[] args)
+    {
+        DomainSchema schema = new DomainSchema();
+        schema.schema = "foo";
+        System.out.println(new Gson().toJson(schema));
+        System.out.println(schema.isArray());
+    }
 
     public DomainSchema()
     {
@@ -31,6 +42,16 @@ public class DomainSchema implements Serializable
     public void setSchema(String schema)
     {
         this.schema = schema;
+    }
+
+    public String getSchemaType()
+    {
+        return schemaType;
+    }
+
+    public void setSchemaType(String schemaType)
+    {
+        this.schemaType = schemaType;
     }
 
     public String getDesc()
@@ -65,7 +86,7 @@ public class DomainSchema implements Serializable
 
     public boolean isArray()
     {
-        return isArray;
+        return isArray != null ? isArray : false;
     }
 
     public void setArray(boolean isArray)
@@ -100,9 +121,10 @@ public class DomainSchema implements Serializable
         final int prime = 31;
         int result = 1;
         result = prime * result + ((desc == null) ? 0 : desc.hashCode());
-        result = prime * result + (isArray ? 1231 : 1237);
+        result = prime * result + ((isArray == null) ? 0 : isArray.hashCode());
         result = prime * result + ((metadata == null) ? 0 : metadata.hashCode());
         result = prime * result + ((schema == null) ? 0 : schema.hashCode());
+        result = prime * result + ((schemaType == null) ? 0 : schemaType.hashCode());
         result = prime * result + ((valueType == null) ? 0 : valueType.hashCode());
         return result;
     }
@@ -123,7 +145,11 @@ public class DomainSchema implements Serializable
                 return false;
         } else if (!desc.equals(other.desc))
             return false;
-        if (isArray != other.isArray)
+        if (isArray == null)
+        {
+            if (other.isArray != null)
+                return false;
+        } else if (!isArray.equals(other.isArray))
             return false;
         if (metadata == null)
         {
@@ -136,6 +162,12 @@ public class DomainSchema implements Serializable
             if (other.schema != null)
                 return false;
         } else if (!schema.equals(other.schema))
+            return false;
+        if (schemaType == null)
+        {
+            if (other.schemaType != null)
+                return false;
+        } else if (!schemaType.equals(other.schemaType))
             return false;
         if (valueType == null)
         {

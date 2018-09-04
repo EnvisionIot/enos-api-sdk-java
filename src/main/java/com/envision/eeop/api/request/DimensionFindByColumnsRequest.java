@@ -4,7 +4,6 @@ import com.envision.eeop.api.EnvisionPaginationRequest;
 import com.envision.eeop.api.exception.EnvisionRuleException;
 import com.envision.eeop.api.response.DimensionsGetResponse;
 import com.envision.eeop.api.util.EnvisionHashMap;
-import com.envision.eeop.api.util.JsonParser;
 import com.envision.eeop.api.util.RuleCheckUtils;
 import com.google.gson.GsonBuilder;
 

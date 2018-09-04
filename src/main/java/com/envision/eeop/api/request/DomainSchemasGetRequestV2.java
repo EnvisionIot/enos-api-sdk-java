@@ -15,6 +15,7 @@ public class DomainSchemasGetRequestV2 implements EnvisionRequest<DomainSchemasG
 {
     private static final String API_METHOD = "/mdmService/getSchemasV2";
 
+    public static final String FIELD_SCHEMA_TYPE = "schemaType";
     public static final String FIELD_DESC = "desc";
     public static final String FIELD_METADATA = "metadata";
     public static final String FIELD_VALUE_TYPE = "valueType";
