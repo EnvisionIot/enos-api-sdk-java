@@ -2,8 +2,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.envisioniot</groupId>
-    <artifactId>eeop</artifactId>
-    <version>0.1.58</version>
+    <artifactId>enos-api</artifactId>
+    <version>0.1.59</version>
     <url>https://www.envisioniot.com</url>
     <name>Envision-Energy-Open-Platform-SDK</name>
     
@@ -46,6 +46,7 @@
 		0.1.54-SNAPSHOT: /domainService/getmdmidspoints接口添加timeWindow参数	
 		0.1.55-SNAPSHOT: 新告警增加统计接口，加字段
 		0.1.58-SNAPSHOT: 支持在DomainSchema接口中查询领域点类别
+        0.1.59: 更新对event的依赖版本
 	</description>
 
     
@@ -103,16 +104,16 @@
         </dependency>
         
         <dependency>
-            <groupId>com.envision.eos.event</groupId>
+            <groupId>com.envisioniot</groupId>
             <artifactId>eos-event-api</artifactId>
-            <version>2.0.7-SNAPSHOT</version>
+            <version>2.0.7</version>
         </dependency>
 
 		<dependency>
-			<groupId>com.envisioniot.event</groupId>
-			<artifactId>eos-event-api-new</artifactId>
-			<version>1.1</version>
-		</dependency>
+            <groupId>com.envisioniot</groupId>
+            <artifactId>enos-event-api</artifactId>
+            <version>1.2</version>
+        </dependency>
  	   </dependencies>
     
     	<build>
@@ -319,17 +320,17 @@
                             </execution>
                         </executions>
                     </plugin>
-                    <!--<plugin>-->
-                        <!--<groupId>org.sonatype.plugins</groupId>-->
-                        <!--<artifactId>nexus-staging-maven-plugin</artifactId>-->
-                        <!--<version>1.6.3</version>-->
-                        <!--<extensions>true</extensions>-->
-                        <!--<configuration>-->
-                            <!--<serverId>ossrh</serverId>-->
-                            <!--<nexusUrl>https://oss.sonatype.org/</nexusUrl>-->
-                            <!--<autoReleaseAfterClose>true</autoReleaseAfterClose>-->
-                        <!--</configuration>-->
-                    <!--</plugin>-->
+                    <plugin> 
+                        <groupId>org.sonatype.plugins</groupId> 
+                        <artifactId>nexus-staging-maven-plugin</artifactId> 
+                        <version>1.6.3</version> 
+                        <extensions>true</extensions> 
+                        <configuration> 
+                            <serverId>oss</serverId> 
+                            <nexusUrl>https://oss.sonatype.org/</nexusUrl> 
+                            <autoReleaseAfterClose>true</autoReleaseAfterClose> 
+                        </configuration> 
+                    </plugin> 
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
