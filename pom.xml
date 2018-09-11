@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.envisioniot</groupId>
     <artifactId>enos-api</artifactId>
-    <version>0.1.59</version>
+    <version>0.1.58-SNAPSHOT</version>
     <url>https://www.envisioniot.com</url>
     <name>Envision-Energy-Open-Platform-SDK</name>
     
@@ -47,6 +47,7 @@
 		0.1.55-SNAPSHOT: 新告警增加统计接口，加字段
 		0.1.58-SNAPSHOT: 支持在DomainSchema接口中查询领域点类别
         0.1.59: 更新对event的依赖版本
+        0.1.60: 更新slf4j-api依赖的scope
 	</description>
 
     
@@ -100,7 +101,6 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>1.7.7</version>
-            <scope>provided</scope>
         </dependency>
         
         <dependency>
