@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.envisioniot</groupId>
     <artifactId>enos-api</artifactId>
-    <version>0.1.58-SNAPSHOT</version>
+    <version>0.1.60</version>
     <url>https://www.envisioniot.com</url>
     <name>Envision-Energy-Open-Platform-SDK</name>
     
