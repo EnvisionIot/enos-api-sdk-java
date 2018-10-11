@@ -3,12 +3,11 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.envisioniot</groupId>
     <artifactId>enos-api</artifactId>
-    <version>0.1.61-SNAPSHOT</version>
+    <version>0.1.61</version>
     <url>https://www.envisioniot.com</url>
     <name>Envision-Energy-Open-Platform-SDK</name>
     
-	<description>
-        Envision Energy Open Platform
+	<description>Envision Energy Open Platform
 		0.1.16-SNAPSHOT: 升级event api 1.7.0
 		0.1.17-SNAPSHOT: getFilteredObjects接口支持查询资产节点
 		0.1.18-SNAPSHOT: 添加getDeviceTemplates接口
@@ -48,8 +47,7 @@
 		0.1.58-SNAPSHOT: 支持在DomainSchema接口中查询领域点类别
         0.1.59: 更新对event的依赖版本
         0.1.60: 更新slf4j-api依赖的scope
-        0.1.61: 增加根据指定userId获取其有权限的ObjectStructure
-	</description>
+        0.1.61-SNAPSHOT: 增加根据指定userId获取其有权限的ObjectStructure</description>
 
     
     <licenses>
