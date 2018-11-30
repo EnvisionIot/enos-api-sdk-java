@@ -1,0 +1,365 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.envisioniot</groupId>
+    <artifactId>enos-api</artifactId>
+    <version>1.1.0</version>
+    <url>https://www.envisioniot.com</url>
+    <name>Envision-Energy-Open-Platform-SDK</name>
+    
+	<description>
+        Envision Energy Open Platform
+		0.1.16-SNAPSHOT: 升级event api 1.7.0
+		0.1.17-SNAPSHOT: getFilteredObjects接口支持查询资产节点
+		0.1.18-SNAPSHOT: 添加getDeviceTemplates接口
+		0.1.19-SNAPSHOT: 
+		0.1.20-SNAPSHOT: 添加CloudedgeAttachDeviceRequest，CloudedgeDetachDeviceRequest接口
+		0.1.23-SNAPSHOT: 升级event api 2.0.1
+		0.1.24-SNAPSHOT: 添加AttachedDeviceTemplatesGetRequest接口
+		0.1.25-SNAPSHOT: 添加Event相关分页接口
+		0.1.26-SNAPSHOT: 升級event api 到 2.0.4-SNAPSHOT，支持date，hour函數
+		0.1.27-SNAPSHOT: 升級event api 到 2.0.5，支持minute函數
+		0.1.28-SNAPSHOT: eventSR查询支持Orderby
+		0.1.29-SNAPSHOT: 支持eeop入告警
+		0.1.30-SNAPSHOT: 添加参数检测规则
+		0.1.31-SNAPSHOT: 支持同时控制多个控制点
+		0.1.32-SNAPSHOT: detailsV2接口支持船舶的数据补齐功能
+		0.1.33-SNAPSHOT: 支持cloudedge更多信息
+		0.1.34-SNAPSHOT: getFilterObject支持In操作
+		0.1.35-SNAPSHOT: 适配多通道接入配置
+		0.1.36-SNAPSHOT: 丰富分页客户端执行请求失败时的日志
+		0.1.37-SNAPSHOT: 升级event api 2.0.7，支持EventUpdate对code_desc的语言选择
+		0.1.38-SNAPSHOT: 增加接入状态查询接口, 修正Dimension接口typo-fault
+		0.1.39-SNAPSHOT: detailsV2接口返回结果支持毫秒数
+		0.1.41-SNAPSHOT: 扩充connect config接口
+		0.1.42-SNAPSHOT: 添加tsdb的采样数据查询接口
+		0.1.43-SNAPSHOT: 在DeviceTemplate中添加name字段
+		0.1.44-SNAPSHOT: 新增getusertokeninfobysessionid，getuserinfo，geteventtype，geteventrank，geteventcontent，getappresource接口
+		0.1.45-SNAPSHOT: 在DeviceTemplate中添加domainID、pointMap字段，新增DomainSchemasGetById接口
+		0.1.46-SNAPSHOT: 修复event接口，getappresource接口在多组织场景下返回异常的问题
+		0.1.47-SNAPSHOT: 修复DomainInfo.getSchemas方法passthroughPoints可能为null的问题
+		0.1.49-SNAPSHOT: 增加getMqttClientStatus接口
+		0.1.50-SNAPSHOT: 上线了告警eeop新版查询接口，下线了部分老版接口(EventQueryRequest\EventConfirmRequest\EventUpdateRequest\EventUpdateResponse)
+		0.1.51-SNAPSHOT: 兼容老告警eeop-SDK
+		0.1.52-SNAPSHOT: 支持在DomainSchema接口中查询测点值类型
+		0.1.53-SNAPSHOT: DimensionFindByColumn接口支持null值过滤
+		0.1.54-SNAPSHOT: /domainService/getmdmidspoints接口添加timeWindow参数	
+		0.1.55-SNAPSHOT: 新告警增加统计接口，加字段
+		0.1.58-SNAPSHOT: 支持在DomainSchema接口中查询领域点类别
+        0.1.59: 更新对event的依赖版本
+        0.1.60: 更新slf4j-api依赖的scope
+        0.1.61: 增加根据指定userId获取其有权限的ObjectStructure
+	</description>
+
+    
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
+    <scm>
+        <url>git@github.com:EnvisionIot/enos-openapi-java-sdk.git</url>
+        <connection>scm:git:git@github.com:EnvisionIot/enos-openapi-java-sdk.git</connection>
+    </scm>
+    <developers>
+        <developer>
+            <id>EnvisionIot</id>
+            <name>EnOS Core</name>
+            <email>sw.tc@envisioncn.com</email>
+        </developer>
+    </developers>
+
+    <properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<!-- for compiler plugin -->
+		<maven.compiler.source>1.7</maven.compiler.source>
+		<maven.compiler.target>1.7</maven.compiler.target>
+		<maven.compiler.encoding>UTF-8</maven.compiler.encoding>
+    </properties>
+
+    <dependencies>
+        <!-- gson -->
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.6.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpmime</artifactId>
+            <version>4.5.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.7</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>com.envisioniot</groupId>
+            <artifactId>eos-event-api</artifactId>
+            <version>2.0.7</version>
+        </dependency>
+
+		<dependency>
+            <groupId>com.envisioniot</groupId>
+            <artifactId>enos-event-api</artifactId>
+            <version>1.2</version>
+        </dependency>
+ 	   </dependencies>
+    
+    	<build>
+		<finalName>${project.artifactId}-${project.version}</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.0</version>
+				<configuration>
+					<includes>
+						<include>**</include>
+					</includes>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>share</id>
+						<phase>package</phase>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+						<configuration>
+							<includes>
+								<include>**</include>
+							</includes>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<configuration>
+					<attach>true</attach>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>compile</phase>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+						<configuration>
+							<includes>
+								<include>**</include>
+							</includes>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<!--<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>3.0.1</version>
+				<configuration>
+					<attach>true</attach>
+					<sourceFileIncludes>**</sourceFileIncludes>
+				</configuration>
+			</plugin>-->
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <!--这部分可有可无,加上的话则直接生成可运行jar包-->
+                    <!--<archive>-->
+                        <!--<manifest>-->
+                            <!--<mainClass>${exec.mainClass}</mainClass>-->
+                        <!--</manifest>-->
+                    <!--</archive>-->
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                </configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy-dependencies</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>lib</outputDirectory>
+							<overWriteReleases>false</overWriteReleases>
+							<overWriteSnapshots>true</overWriteSnapshots>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-jar-plugin</artifactId>
+					<version>2.4</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-deploy-plugin</artifactId>
+					<version>2.4</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-resources-plugin</artifactId>
+					<version>3.1.0</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-source-plugin</artifactId>
+					<version>2.4</version>
+					<executions>
+						<execution>
+							<id>attach-sources</id>
+							<goals>
+								<goal>jar</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-javadoc-plugin</artifactId>
+					<executions>
+						<execution>
+							<id>attach-javadocs</id>
+							<goals>
+								<goal>jar</goal>
+							</goals>
+							<configuration>
+							    <failOnError>false</failOnError>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+	
+	<distributionManagement>
+		<repository>
+			<id>envision.repo</id>
+			<name>envision internal repository for released artifacts</name>
+			<url>http://nexus.envisioncn.com/content/repositories/releases</url>
+		</repository>
+		<snapshotRepository>
+			<id>envision.repo.snapshots</id>
+			<name>envision internal repository for snapshots artifacts</name>
+			<url>http://nexus.envisioncn.com/content/repositories/snapshots</url>
+		</snapshotRepository>
+	</distributionManagement>
+    
+    <profiles>
+        <profile>
+            <id>release</id>
+            <build>
+                <plugins>
+                    <!-- Source -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <version>2.2.1</version>
+                        <executions>
+                            <execution>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>jar-no-fork</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-compiler-plugin</artifactId>
+                        <version>3.1</version>
+                        <configuration>
+                            <source>1.7</source>
+                            <target>1.7</target>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-jar-plugin</artifactId>
+                        <version>2.3.2</version>
+                        <configuration>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <version>2.9.1</version>
+                        <executions>
+                            <execution>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin> 
+                        <groupId>org.sonatype.plugins</groupId> 
+                        <artifactId>nexus-staging-maven-plugin</artifactId> 
+                        <version>1.6.3</version> 
+                        <extensions>true</extensions> 
+                        <configuration> 
+                            <serverId>oss</serverId> 
+                            <nexusUrl>https://oss.sonatype.org/</nexusUrl> 
+                            <autoReleaseAfterClose>false</autoReleaseAfterClose> 
+                        </configuration> 
+                    </plugin> 
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>1.5</version>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+
+            <distributionManagement>
+                <snapshotRepository>
+                    <id>oss</id>
+                    <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+                </snapshotRepository>
+                <repository>
+                    <id>oss</id>
+                    <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+                </repository>
+            </distributionManagement>
+        </profile>
+    </profiles>
+        
+</project>

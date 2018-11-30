@@ -1,0 +1,111 @@
+package com.envision.eeop.api.request;
+
+import com.envision.eeop.api.EnvisionRequest;
+import com.envision.eeop.api.exception.EnvisionRuleException;
+import com.envision.eeop.api.response.UserAddContactResponse;
+import com.envision.eeop.api.util.EnvisionHashMap;
+import com.envision.eeop.api.util.RuleCheckUtils;
+
+import java.util.Map;
+
+/**
+ * Created by zhiqi.yang on 2017/5/19.
+ */
+public class UserAddContactRequest implements EnvisionRequest<UserAddContactResponse> {
+    private static final String API_METHOD = "/userService/addContact";
+    /** add user contact Stp2 */
+    public static final String STP1 = "step1";
+    /** add user contact Stp2 */
+    public static final String STP2 = "step2";
+
+    private String email;
+    private String areaCode;
+    private String mobile;
+    private String step;
+    private String verificationCode;
+
+    public UserAddContactRequest() {
+    }
+
+    public UserAddContactRequest(String email, String areaCode, String mobile, String step, String verificationCode) {
+        this.email = email;
+        this.areaCode = areaCode;
+        this.mobile = mobile;
+        this.step = step;
+        this.verificationCode = verificationCode;
+    }
+
+    @Override
+    public String getApiMethodName() {
+        return API_METHOD;
+    }
+
+    @Override
+    public Map<String, String> getTextParams() {
+        EnvisionHashMap txtParams = new EnvisionHashMap();
+        txtParams.put("email", this.email);
+        txtParams.put("areaCode", this.areaCode);
+        txtParams.put("mobile", this.mobile);
+        txtParams.put("verificationCode", this.verificationCode);
+        txtParams.put("step", this.step);
+        return txtParams;
+    }
+
+    @Override
+    public Class<UserAddContactResponse> getResponseClass() {
+        return UserAddContactResponse.class;
+    }
+
+    @Override
+    public void check() throws EnvisionRuleException {
+        RuleCheckUtils.checkNotEmpty(this.step, "step" );
+        switch (this.step){
+            case STP1 :
+                RuleCheckUtils.checkNotEmpty((this.email == null ? "" : this.email) + (this.mobile == null ? "" : this.mobile), "email or mobile" );
+                break;
+            case STP2 :
+                RuleCheckUtils.checkNotEmpty(this.verificationCode, "verificationCode" );
+                break;
+        }
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getAreaCode() {
+        return areaCode;
+    }
+
+    public void setAreaCode(String areaCode) {
+        this.areaCode = areaCode;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
+    public String getStep() {
+        return step;
+    }
+
+    public void setStep(String step) {
+        this.step = step;
+    }
+
+    public String getVerificationCode() {
+        return verificationCode;
+    }
+
+    public void setVerificationCode(String verificationCode) {
+        this.verificationCode = verificationCode;
+    }
+}
