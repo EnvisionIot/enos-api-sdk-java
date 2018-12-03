@@ -2,14 +2,14 @@
 
 This article instructs how to prepare your development environment to use the *EnOS API SDK for Java*.
 
-- [Installing Java JDK SE](https://github.com/EnvisionIot/enos-mqtt-java-sdk#installjava)
-- [Installing Maven](https://github.com/EnvisionIot/enos-mqtt-java-sdk#installmaven)
+- [Installing Java JDK SE](https://github.com/EnvisionIot/enos-api-sdk-java#installjava)
+- [Installing Maven](https://github.com/EnvisionIot/enos-api-sdk-java#installmaven)
 - Obtaining EnOS API SDK for Java
-  - [Include dependency in Maven project](https://github.com/EnvisionIot/enos-mqtt-java-sdk#installiotmaven)
-  - [Building from source](https://github.com/EnvisionIot/enos-mqtt-java-sdk#installiotsource)
-- [Feature list](https://github.com/EnvisionIot/enos-mqtt-java-sdk#featurelist)
-- [API reference](https://github.com/EnvisionIot/enos-mqtt-java-sdk#apiref)
-- [Sample code](https://github.com/EnvisionIot/enos-mqtt-java-sdk#samplecode)
+  - [Include dependency in Maven project](https://github.com/EnvisionIot/enos-api-sdk-java#installiotmaven)
+  - [Building from source](https://github.com/EnvisionIot/enos-api-sdk-java#installiotsource)
+- [Feature list](https://github.com/EnvisionIot/enos-api-sdk-java#featurelist)
+- [API reference](https://github.com/EnvisionIot/enos-api-sdk-java#apiref)
+- [Sample code](https://github.com/EnvisionIot/enos-api-sdk-java#samplecode)
 
 ## Installing Java JDK SE
 
@@ -30,7 +30,7 @@ You can obtain the EnOS API SDK through the following methods:
 
 *This is the recommended method of including the EnOS API SDK in your project.*
 
-- Navigate to [http://search.maven.org](http://search.maven.org/), search for **com.envisioniot.enos** and take note of the latest version number (or the version number of whichever version of the sdk you want to use).
+- Navigate to [http://search.maven.org](http://search.maven.org/), search for **com.envisioniot** and take note of the latest version number (or the version number of whichever version of the sdk you want to use).
 - In your main pom.xml file, add the EnOS API SDK as a dependency as follows:
 
 ```
