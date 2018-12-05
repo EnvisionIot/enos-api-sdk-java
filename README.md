@@ -1,73 +1,74 @@
-# Using EnOS API SDK for Java
+# Using EnOS Service SDK for Java
 
-This article instructs how to prepare your development environment to use the *EnOS API SDK for Java*.
+This article instructs how to prepare your development environment to use the *EnOS Service SDK for Java*.
 
-- [Installing Java JDK SE](https://github.com/EnvisionIot/enos-api-sdk-java#installjava)
-- [Installing Maven](https://github.com/EnvisionIot/enos-api-sdk-java#installmaven)
-- Obtaining EnOS API SDK for Java
-  - [Include dependency in Maven project](https://github.com/EnvisionIot/enos-api-sdk-java#installiotmaven)
-  - [Building from source](https://github.com/EnvisionIot/enos-api-sdk-java#installiotsource)
-- [Feature list](https://github.com/EnvisionIot/enos-api-sdk-java#featurelist)
-- [API reference](https://github.com/EnvisionIot/enos-api-sdk-java#apiref)
-- [Sample code](https://github.com/EnvisionIot/enos-api-sdk-java#samplecode)
+- [Installing Java JDK SE](https://github.com/EnvisionIot/enos-mqtt-java-sdk#installjava)
+- [Installing Maven](https://github.com/EnvisionIot/enos-mqtt-java-sdk#installmaven)
+- Obtaining EnOS Service SDK for Java
+  - [Including Dependency in Maven Project](https://github.com/EnvisionIot/enos-mqtt-java-sdk#installiotmaven)
+  - [Building from Source Code](https://github.com/EnvisionIot/enos-mqtt-java-sdk#installiotsource)
+- [Feature List](https://github.com/EnvisionIot/enos-mqtt-java-sdk#featurelist)
+- [API Reference](https://github.com/EnvisionIot/enos-mqtt-java-sdk#apiref)
+- [Sample Code](https://github.com/EnvisionIot/enos-mqtt-java-sdk#samplecode)
 
 ## Installing Java JDK SE
 
-To use the EnOS API SDK for Java, you will need **Java SE 8**.
+To use the EnOS Service SDK for Java, you will need **Java SE 8**.
 
 ## Installing Maven
 
-For EnOS API SDK for Java, we recommend you to use **Maven 3**.
+For EnOS Service SDK for Java, we recommend you to use **Maven 3**.
 
-## Obtaining EnOS API SDK for Java
+## Obtaining EnOS Service SDK for Java
 
-You can obtain the EnOS API SDK through the following methods:
+You can obtain the EnOS Service SDK through the following methods:
 
-- Include the project as a dependency in your Maven project.
+- Include the project as a dependency in your Maven project
 - Download the source code by cloning this repo and build on your machine
 
-### Get EnOS API SDK for Java from Maven (as a dependency)
+### Including Dependency in Maven Project
 
-*This is the recommended method of including the EnOS API SDK in your project.*
+*This is the recommended method of including the EnOS Service SDK for Java in your project.*
 
-- Navigate to [http://search.maven.org](http://search.maven.org/), search for **com.envisioniot** and take note of the latest version number (or the version number of whichever version of the sdk you want to use).
-- In your main pom.xml file, add the EnOS API SDK as a dependency as follows:
+- Navigate to [http://search.maven.org](http://search.maven.org/), search for **com.envisioniot.enos** and take note of the latest version number (or the version number of whichever version of the sdk you want to use).
 
-```
-<dependency>
-    <groupId>com.envisioniot</groupId>
-    <artifactId>enos-api</artifactId>
-    <version>2.1.0</version>
-    <!--You might need to change the version number as you need.-->
-</dependency>
-```
+- In your main pom.xml file, add the EnOS Service SDK for Java as a dependency as follows:
 
-### Build EnOS API SDK for Java from the source code in this repo
+  ```
+  <dependency>
+      <groupId>com.envisioniot</groupId>
+      <artifactId>enos-api</artifactId>
+      <version>2.1.0</version>
+      <!--You might need to change the version number as you need.-->
+  </dependency>
+  ```
 
-- Get a copy of the **EnOS API SDK for Java** from master branch of the GitHub (current repo). You should fetch a copy of the source from the **master** branch of the GitHub repository: https://github.com/EnvisionIot/enos-api-sdk-java
+### Building from Source Code
 
-```
-	git clone https://github.com/EnvisionIot/enos-api-sdk-java.git
-```
+- Get a copy of the **EnOS Service SDK for Java** from master branch of the GitHub (current repo). You should fetch a copy of the source from the **master** branch of the GitHub repository: https://github.com/EnvisionIot/enos-api-sdk-java
+
+  ```
+  git clone https://github.com/EnvisionIot/enos-api-sdk-java.git
+  ```
 
 - When you have obtained a copy of the source, you can build the SDK for Java.
 
-## Key features
+## Key Features
 
-The EnOS API SDK supports the following functions:
+The EnOS Service SDK for Java supports the following functions:
 
 - Generating API request signature automatically
 - Assembling API request URL  
 - Parsing API response
-- 
+- Open API services, including device connection service, model service, asset service, data service, and common file service.
 
-## API reference
+## API Reference
 
 To access the EnOS API documentation, go to **EnOS API > API Documents** in the EnOS Console. Summary of APIs is displayed in tables by API service categories. Click the **More** icon for each API to view details, including API function, calling method, requesting URL, parameter description, calling sample, and response sample. 
 
-## Sample code
+## Sample Code
 
-The following sample code is for creating a product using the EnOS API SDK. 
+The following sample code is for creating a product using the EnOS Service SDK for Java. 
 
 ```
 import com.envisioniot.enos.enosapi.api.request.connectservice.CreateProductRequest;
