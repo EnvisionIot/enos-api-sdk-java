@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.envisioniot</groupId>
 	<artifactId>enos-api</artifactId>
-	<version>0.1.63</version>
+	<version>0.1.63-newlarm-SNAPSHOT</version>
 	<url>https://www.envisioniot.com</url>
 	<name>Envision-Energy-Open-Platform-SDK</name>
 
@@ -114,7 +114,7 @@
 		<dependency>
 			<groupId>com.envisioniot</groupId>
 			<artifactId>enos-event-api-v2</artifactId>
-			<version>1.4</version>
+			<version>1.5-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 
