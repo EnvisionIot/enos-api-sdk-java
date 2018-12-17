@@ -10,6 +10,8 @@ import java.io.Serializable;
 public class EnvisionResponse implements Serializable {
 	private static final long serialVersionUID = -8822133856840363264L;
 
+	private String requestId;
+
 	protected int status;
 
 	protected String msg;
@@ -56,5 +58,13 @@ public class EnvisionResponse implements Serializable {
 
 	public void setStatus(int status) {
 		this.status = status;
+	}
+
+	public String getRequestId() {
+		return requestId;
+	}
+
+	public void setRequestId(String requestId) {
+		this.requestId = requestId;
 	}
 }

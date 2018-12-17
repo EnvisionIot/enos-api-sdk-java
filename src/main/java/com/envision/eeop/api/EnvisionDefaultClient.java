@@ -113,6 +113,8 @@ public class EnvisionDefaultClient implements EnvisionClient {
 
 		String url = makeUrl(textParams, request.getApiMethodName());
 
+		System.out.println(url);
+
 		String ret = null;
 		try {
 			ret = WebUtils.doPost(url, textParams, WebUtils.DEFAULT_CHARSET, this.connectTimeout, this.readTimeout);
