@@ -13,7 +13,7 @@ This article instructs how to prepare your development environment to use the *E
 
 ## Installing Java JDK SE
 
-To use the EnOS API SDK for Java, you will need **Java SE 8**.
+To use the EnOS API SDK for Java, you will need **Java SE 7**.
 
 ## Installing Maven
 
@@ -36,8 +36,8 @@ You can obtain the EnOS API SDK through the following methods:
 ```
 	<dependency>
     <groupId>com.envisioniot</groupId>
-    <artifactId>enos-api-sdk</artifactId>
-    <version>0.0.2</version>
+    <artifactId>enos-api</artifactId>
+    <version>1.1.0</version>
     <!--You might need to change the version number as you need.-->
     </dependency>
 ```
@@ -59,7 +59,7 @@ The EnOS API SDK supports the following functions:
 - Generating API request signature automatically
 - Assembling API request URL  
 - Parsing API response
-- 
+
 
 ## API reference
 
@@ -70,32 +70,28 @@ To access the EnOS API documentation, go to **EnOS API > API Documents** in the
 The following sample code is for creating a product using the EnOS API SDK. 
 
 ```
-import com.envisioniot.enos.enosapi.api.request.connectservice.CreateProductRequest;
-import com.envisioniot.enos.enosapi.api.resource.connectservice.Product;
-import com.envisioniot.enos.enosapi.common.exception.EnOSApiException;
-import com.envisioniot.enos.enosapi.common.response.EnOSResponse;
-import com.envisioniot.enos.enosapi.sdk.client.EnOSDefaultClient;
+import com.envision.eeop.api.EnvisionClient;
+import com.envision.eeop.api.EnvisionDefaultClient;
+import com.envision.eeop.api.request.AppResourceGetRequest;
+import com.envision.eeop.api.request.UserLoginRequest;
+import com.envision.eeop.api.response.AppResourceGetResponse;
+import com.envision.eeop.api.response.UserLoginResponse;
 
 public class Main {
-    public static void main(String[] args) {
-    String serverUrl = "xxx";
-    String accessKey = "xxx";
-    String secretKey = "xxx";
-    int connectTimeout = 5000;
-    int readTimeout = 5000;
-    product.setProductName("XXX");
-    product.setProductDesc("XXX");
-    product.setModelId("XXXXX");
-    product.setDataType(1);
-    product.setNodeType(1);
-    EnOSDefaultClient client = new EnOSDefaultClient(serverUrl, accessKey,secretKey,connectTimeout,readTimeout);
-    Product product = new Product();
-    CreateProductRequest request = new CreateProductRequest(orgId, product);
-    try {
-        EnOSResponse response = client.defaultClient().execute(request);
-    } catch (EnOSApiException e) {
-        e.printStackTrace();
+    public static void main(String[] args) throws Exception {
+        String serverUrl = "xxx";
+        String appKey = "xxx";
+        String appSecret = "xxx";
+        EnvisionClient client = new EnvisionDefaultClient(serverUrl, appKey, appSecret);
+        String userName = "xxx";
+        String userSecret = "xxx";
+        //login and get access token
+        UserLoginRequest loginRequest = new UserLoginRequest(userName, userSecret);
+        UserLoginResponse loginResponse = client.execute(loginRequest);
+        String token = loginResponse.getAccessToken();
+        //get app resource
+        AppResourceGetRequest request = new AppResourceGetRequest("xxx");
+        AppResourceGetResponse response = client.execute(request, token);
     }
-  }
- }
+}
 ```
