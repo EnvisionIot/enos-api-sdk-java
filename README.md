@@ -34,20 +34,20 @@ You can obtain the EnOS API SDK through the following methods:
 - In your main pom.xml file, add the EnOS API SDK as a dependency as follows:
 
 ```
-	<dependency>
+<dependency>
     <groupId>com.envisioniot</groupId>
     <artifactId>enos-api</artifactId>
     <version>1.1.0</version>
     <!--You might need to change the version number as you need.-->
-    </dependency>
+</dependency>
 ```
 
 ### Build EnOS API SDK for Java from the source code in this repo
 
-- Get a copy of the **EnOS API SDK for Java** from master branch of the GitHub (current repo). You should fetch a copy of the source from the **master** branch of the GitHub repository: https://github.com/EnvisionIot/enos-api-java-sdk
+- Get a copy of the **EnOS API SDK for Java** from master branch of the GitHub (current repo). You should fetch a copy of the source from the **V1.1.0** branch of the GitHub repository: https://github.com/EnvisionIot/enos-api-sdk-java
 
 ```
-	git clone https://github.com/EnvisionIot/enos-api-java-sdk.git
+	git clone -b V1.1.0 https://github.com/EnvisionIot/enos-api-sdk-java.git
 ```
 
 - When you have obtained a copy of the source, you can build the SDK for Java.
