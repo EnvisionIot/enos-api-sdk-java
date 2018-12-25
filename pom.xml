@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.envisioniot</groupId>
 	<artifactId>enos-api</artifactId>
-	<version>0.1.64</version>
+	<version>1.1.1</version>
 	<url>https://www.envisioniot.com</url>
 	<name>Envision-Energy-Open-Platform-SDK</name>
 
@@ -50,7 +50,7 @@
 		0.1.61-SNAPSHOT: 增加根据指定userId获取其有权限的ObjectStructure
 		0.1.62-SNAPSHOT: 修改了新老告警的依赖，规范了命名。
 		0.1.63-SNAPSHOT: 修改了新告警的依赖，提供异常处理
-		0.1.64-SNAPSHOT: 增加了localOccurTime和localEndTime的处理
+		1.1.1: 增加了localOccurTime和localEndTime的处理
 	</description>
 
 
@@ -331,7 +331,7 @@
 						<configuration>
 							<serverId>oss</serverId>
 							<nexusUrl>https://oss.sonatype.org/</nexusUrl>
-							<autoReleaseAfterClose>true</autoReleaseAfterClose>
+							<autoReleaseAfterClose>false</autoReleaseAfterClose>
 						</configuration>
 					</plugin>
 					<plugin>
