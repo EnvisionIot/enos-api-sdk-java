@@ -19,6 +19,22 @@ public class GetThingModelRequest extends EnOSRequest<EnOSResponse<ThingModel>> 
         this.thingModelId = thingModelId;
     }
 
+    public String getOrgId() {
+        return orgId;
+    }
+
+    public void setOrgId(String orgId) {
+        this.orgId = orgId;
+    }
+
+    public String getThingModelId() {
+        return thingModelId;
+    }
+
+    public void setThingModelId(String thingModelId) {
+        this.thingModelId = thingModelId;
+    }
+
     @Override
     public String getApiMethodName() {
         return API_METHOD;

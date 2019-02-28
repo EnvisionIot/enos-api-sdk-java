@@ -1,6 +1,8 @@
 package com.envisioniot.enos.enosapi.sdk.util;
 
+import com.envisioniot.enos.enosapi.common.util.StreamUtil;
 import org.apache.http.HttpEntity;
+import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
@@ -12,15 +14,30 @@ import java.io.InputStream;
 public class HttpResponseResult {
 
     private int status;
-    private HttpEntity entity;
-    private boolean isRead = false;
+    private boolean isStream;
+    private String strResponse;
+    private InputStream inputStream;
 
-    public HttpResponseResult() {
+    //realease resource if isStream
+    CloseableHttpResponse httpResponse = null;
+    HttpEntity entity = null;
+
+    public HttpResponseResult(int status, HttpEntity entity, boolean isStream) throws IOException {
+        this.status = status;
+        this.isStream = isStream;
+        if (isStream) {
+            this.inputStream = entity.getContent();
+        } else {
+            strResponse = EntityUtils.toString(entity);
+        }
     }
 
-    public HttpResponseResult(int status, HttpEntity entity) {
-        this.status = status;
-        this.entity = entity;
+    public HttpResponseResult(int status, HttpEntity entity, boolean isStream, CloseableHttpResponse httpResponse) throws IOException {
+        this(status, entity, isStream);
+        if (isStream) {
+            this.httpResponse = httpResponse;
+            this.entity = entity;
+        }
     }
 
     public int getStatus() {
@@ -32,32 +49,41 @@ public class HttpResponseResult {
     }
 
     public InputStream getInputStreamResult() {
-        if(isRead) {
-            return null;
+        if (isStream) {
+            return inputStream;
         }
-        try {
-            isRead = true;
-            return entity.getContent();
-        } catch (IOException e) {
-            return null;
-        }
+        return null;
     }
+
 
     public String getStringResult() {
-        if(isRead) {
-            return null;
-        }
-        try {
-            isRead = true;
-            return EntityUtils.toString(entity);
-        } catch (IOException e) {
-            return null;
+        if (!isStream) {
+            return strResponse;
+        } else {
+            //将stream转换为string
+            try {
+                strResponse = StreamUtil.inputStreamToString(inputStream);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return strResponse;
         }
     }
 
-    public void setEntity(HttpEntity entity) {
-        this.entity = entity;
+    public void releaseIfIsStream() {
+        if (isStream) {
+            try {
+                EntityUtils.consume(entity);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            if (httpResponse != null) {
+                try {
+                    this.httpResponse.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
-
-
 }

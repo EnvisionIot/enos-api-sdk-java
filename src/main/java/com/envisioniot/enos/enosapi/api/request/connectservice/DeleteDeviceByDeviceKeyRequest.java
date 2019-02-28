@@ -14,6 +14,7 @@ public class DeleteDeviceByDeviceKeyRequest extends EnOSRequest<EnOSResponse> {
     private static final String REQUEST_METHOD = "DELETE";
     
     private String orgId;
+    private Boolean force;
     @EnOSPathVariable(name = "productKey")
     private String productKey;
     @EnOSPathVariable(name = "deviceKey")
@@ -23,6 +24,12 @@ public class DeleteDeviceByDeviceKeyRequest extends EnOSRequest<EnOSResponse> {
         this.orgId = orgId;
         this.productKey = productKey;
         this.deviceKey = deviceKey;
+        this.force = false;
+    }
+
+    public DeleteDeviceByDeviceKeyRequest(String orgId, String productKey, String deviceKey, Boolean force) {
+        this(orgId, productKey, deviceKey);
+        this.force = force;
     }
 
     @Override

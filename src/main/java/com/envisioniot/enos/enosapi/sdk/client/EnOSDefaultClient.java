@@ -9,6 +9,7 @@ import com.envisioniot.enos.enosapi.common.response.EnOSPage;
 import com.envisioniot.enos.enosapi.common.response.EnOSResponse;
 import com.envisioniot.enos.enosapi.common.util.*;
 import com.envisioniot.enos.enosapi.sdk.util.HttpResponseResult;
+import com.envisioniot.enos.enosapi.sdk.util.JacksonUtil;
 import com.envisioniot.enos.enosapi.sdk.util.Sign;
 import com.envisioniot.enos.enosapi.sdk.util.WebUtils;
 import org.apache.http.client.methods.HttpRequestBase;
@@ -155,6 +156,7 @@ public class EnOSDefaultClient implements EnOSClient {
                 }
             }
         }
+        HttpResponseResult httpResponse = null;
         try {
             HttpRequestBase httpRequest = null;
             if (!request.hasFileUpload()) {
@@ -165,10 +167,11 @@ public class EnOSDefaultClient implements EnOSClient {
                 httpRequest = WebUtils.getFilledHttpRequestWithFileUpload(url, textParams, null, uploadFiles, WebUtils.DEFAULT_CHARSET, request.getRequestMethod(), this.connectTimeout, this.readTimeout);
 
             }
-            HttpResponseResult httpResponse = WebUtils.getHttpResponseResult(httpRequest);
+            boolean isStream = (downloadFile != null);
+            httpResponse = WebUtils.getHttpResponseResult(httpRequest, isStream);
 
             //文件下载后续处理，将文件内容写入下载文件
-            if (downloadFile != null) {
+            if (downloadFile != null && isStream) {
                 EnOSResponse response = new EnOSResponse();
                 int httpCode = httpResponse.getStatus();
                 if (httpCode == 200) {
@@ -183,28 +186,18 @@ public class EnOSDefaultClient implements EnOSClient {
 
             } else {
                 String strResponse = httpResponse.getStringResult();
-                T response = JsonParser.fromJson(strResponse, request.getResponseType());
-                if (response.getData() instanceof EnOSPage) {
-                    EnOSPage page = (EnOSPage) response.getData();
-                    if (page.getPageToken() instanceof Double) {
-                        double doublePageToken = (double) page.getPageToken();
-                        if (isIntegerForDouble(doublePageToken)) {
-                            page.setPageToken(doubleToInt(doublePageToken));
-                        }
-                    }
-                    if (page.getNextPageToken() instanceof Double) {
-                        double doubleNextPageToken = (double) page.getNextPageToken();
-                        if (isIntegerForDouble(doubleNextPageToken)) {
-                            page.setNextPageToken(doubleToInt(doubleNextPageToken));
-                        }
-                    }
-                }
+//                T response = JsonParser.fromJson(strResponse, request.getResponseType());
+                T response = JacksonUtil.fromJson(strResponse, request.getResponseType());
                 return response;
             }
 
         } catch (IOException e) {
             logger.error("Execute Post Request Failed!", e);
             throw new EnOSClientException(e);
+        } finally {
+            if (httpResponse != null) {
+                httpResponse.releaseIfIsStream();
+            }
         }
     }
 
@@ -224,14 +217,5 @@ public class EnOSDefaultClient implements EnOSClient {
         url.append(sign);
 
         return url.toString();
-    }
-
-    private static boolean isIntegerForDouble(double obj) {
-        double eps = 1e-10;  // 精度范围
-        return obj - Math.floor(obj) < eps;
-    }
-
-    private static int doubleToInt(double d) {
-        return (int) d;
     }
 }

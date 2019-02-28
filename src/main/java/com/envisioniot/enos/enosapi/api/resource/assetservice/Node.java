@@ -1,7 +1,6 @@
 package com.envisioniot.enos.enosapi.api.resource.assetservice;
 
 import java.io.Serializable;
-import java.util.List;
 
 
 public class Node implements Serializable

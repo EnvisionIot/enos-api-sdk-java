@@ -31,6 +31,38 @@ public class ListAssetsRequest extends EnOSRequest<EnOSResponse<EnOSPage<Asset>>
         this.pageToken = pageToken;
     }
 
+    public String getOrgId() {
+        return orgId;
+    }
+
+    public void setOrgId(String orgId) {
+        this.orgId = orgId;
+    }
+
+    public int getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
+    }
+
+    public int getPageToken() {
+        return pageToken;
+    }
+
+    public void setPageToken(int pageToken) {
+        this.pageToken = pageToken;
+    }
+
+    public String getFilter() {
+        return filter;
+    }
+
+    public void setFilter(String filter) {
+        this.filter = filter;
+    }
+
     @Override
     public String getApiMethodName() {
         return API_METHOD;

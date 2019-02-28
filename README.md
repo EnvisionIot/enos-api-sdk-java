@@ -30,28 +30,30 @@ You can obtain the EnOS Service SDK through the following methods:
 
 *This is the recommended method of including the EnOS Service SDK for Java in your project.*
 
-- Navigate to [http://search.maven.org](http://search.maven.org/), search for **com.envisioniot.enos** and take note of the latest version number (or the version number of whichever version of the sdk you want to use).
+- Open the [Maven Repository](https://mvnrepository.com/artifact/com.envisioniot/enos-api) of EnOS Service SDK, click a version number of the SDK you want to use. 
 
-- In your main pom.xml file, add the EnOS Service SDK for Java as a dependency as follows:
+- Download the SDK source code and get the maven dependency information on the repository page of the SDK.
+
+- In your main pom.xml file, add the EnOS Service SDK for Java as a dependency:
 
   ```
   <dependency>
       <groupId>com.envisioniot</groupId>
       <artifactId>enos-api</artifactId>
-      <version>2.1.0</version>
+      <version>2.3.2</version>
       <!--You might need to change the version number as you need.-->
   </dependency>
   ```
 
 ### Building from Source Code
 
-- Get a copy of the **EnOS Service SDK for Java** from master branch of the GitHub (current repo). You should fetch a copy of the source from the **master** branch of the GitHub repository: https://github.com/EnvisionIot/enos-api-sdk-java
+- Get a copy of the **EnOS Service SDK for Java** from the master branch of the GitHub repository (current repo): https://github.com/EnvisionIot/enos-api-sdk-java
 
   ```
   git clone https://github.com/EnvisionIot/enos-api-sdk-java.git
   ```
 
-- When you have obtained a copy of the source, you can build the SDK for Java.
+- When you have obtained a copy of the source, you can build the SDK for Java in your development environment.
 
 ## Key Features
 
@@ -60,7 +62,7 @@ The EnOS Service SDK for Java supports the following functions:
 - Generating API request signature automatically
 - Assembling API request URL  
 - Parsing API response
-- Open API services, including device connection service, model service, asset service, data service, and common file service.
+- Open API services, including Connect Service, Model Service, Asset Service, Data Service, Event Service, and Common File Service.
 
 ## API Reference
 

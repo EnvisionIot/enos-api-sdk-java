@@ -16,6 +16,7 @@ public class DeleteTopologyByDeviceKeyRequest extends EnOSRequest<EnOSResponse> 
     private static final String REQUEST_METHOD = "DELETE";
     
     private String orgId;
+    private Boolean force;
     @EnOSPathVariable(name = "productKey")
     private String productKey;
     @EnOSPathVariable(name = "deviceKey")
@@ -28,6 +29,13 @@ public class DeleteTopologyByDeviceKeyRequest extends EnOSRequest<EnOSResponse> 
         this.productKey = productKey;
         this.deviceKey = deviceKey;
         this.subDevices = subDevices;
+        this.force = false;
+    }
+
+    public DeleteTopologyByDeviceKeyRequest(String orgId, String productKey, String deviceKey, List<Device> subDevices, Boolean force)
+    {
+        this(orgId, productKey, deviceKey, subDevices);
+        this.force = force;
     }
 
     @Override

@@ -13,15 +13,12 @@ import java.util.*;
 public class RenewCertificateRequest extends EnOSRequest<EnOSResponse<RequestCertificateResult>> {
     private static final String API_METHOD = "/certificateService/renewCertificate";
     private static final String REQUEST_METHOD = "POST";
-    
-    private String accessKey;
-    
+
     private String reqData;
     
     private int oldCertSn;
 
-    public RenewCertificateRequest(String accessKey, String reqData, int oldCertSn) {
-        this.accessKey = accessKey;
+    public RenewCertificateRequest(String reqData, int oldCertSn) {
         this.reqData = reqData;
         this.oldCertSn = oldCertSn;
     }

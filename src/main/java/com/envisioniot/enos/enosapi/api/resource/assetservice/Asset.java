@@ -14,11 +14,11 @@ public class Asset implements Serializable {
 
     private String desc;
 
+    private String timezone;
+
     private Map<String, Object> attributes;
 
     private String modelId;
-
-    private String modelOrgId;
 
     private Map<String,String> tags;
 
@@ -58,6 +58,14 @@ public class Asset implements Serializable {
         this.desc = desc;
     }
 
+    public String getTimezone() {
+        return timezone;
+    }
+
+    public void setTimezone(String timezone) {
+        this.timezone = timezone;
+    }
+
     public Map<String, Object> getAttributes() {
         return attributes;
     }
@@ -80,13 +88,5 @@ public class Asset implements Serializable {
 
     public void setTags(Map<String,String> tags) {
         this.tags = tags;
-    }
-
-    public String getModelOrgId() {
-        return modelOrgId;
-    }
-
-    public void setModelOrgId(String modelOrgId) {
-        this.modelOrgId = modelOrgId;
     }
 }

@@ -77,13 +77,14 @@ public abstract class WebUtils {
 
         // System.out.println("url & query & body: " + basicUrl + " & " + query + " & " + body);
         HttpRequestBase httpRequest =  getFilledHttpRequest(basicUrl, urlParams, null, bodyContent, null, charset, method, connectTimeout, readTimeout);
-        return getHttpResponseResult(httpRequest);
+        boolean isStream = false;
+        return getHttpResponseResult(httpRequest, isStream);
     }
 
-    public static HttpResponseResult getHttpResponseResult(HttpRequestBase request) throws IOException {
+    public static HttpResponseResult getHttpResponseResult(HttpRequestBase request, boolean isStream) throws IOException {
         HttpResponseResult rsp = null;
         try {
-            rsp = HttpClientUtils.getHttpResponseResult(request);
+            rsp = HttpClientUtils.getHttpResponseResult(request, isStream);
         } catch (Exception e) {
             logger.error("", e);
             throw e;

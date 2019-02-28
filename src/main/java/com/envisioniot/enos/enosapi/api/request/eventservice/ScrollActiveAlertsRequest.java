@@ -1,8 +1,9 @@
-package com.envisioniot.enos.enosapi.api.request.dataservice;
+package com.envisioniot.enos.enosapi.api.request.eventservice;
 
 import com.envisioniot.enos.enosapi.common.response.EnOSResponse;
-import java.util.Map;
-import java.lang.Object;
+import com.envisioniot.enos.enosapi.api.resource.alarmruleservice.AlarmingEvent;
+import java.lang.Long;
+import java.lang.Boolean;
 import java.lang.String;
 import java.lang.Integer;
 import com.envisioniot.enos.enosapi.common.response.EnOSPage;
@@ -13,32 +14,35 @@ import com.envisioniot.enos.enosapi.common.exception.*;
 
 import java.util.*;
 
-public class GetAssetsRawDataByTimeRangeRequest extends EnOSRequest<EnOSResponse<EnOSPage<Map<String, Object>>>> {
-    private static final String API_METHOD = "/dataService/assets/tsdb/rawData/timeRange";
+public class ScrollActiveAlertsRequest extends EnOSRequest<EnOSResponse<EnOSPage<AlarmingEvent>>> {
+    private static final String API_METHOD = "/eventService/scrollActiveAlerts";
     private static final String REQUEST_METHOD = "GET";
     
     private String orgId;
     
     private String modelId;
     
-    private String assetIds;
+    private String deviceId;
     
-    private String measurepoints;
+    private Long timeFrom;
     
-    private String startTime;
+    private Long timeTo;
     
-    private String endTime;
+    private Boolean isLocalTime;
     
     private Integer pageSize;
+    
+    private String pageToken;
 
-    public GetAssetsRawDataByTimeRangeRequest(String orgId, String modelId, String assetIds, String measurepoints, String startTime, String endTime, Integer pageSize) {
+    public ScrollActiveAlertsRequest(String orgId, String modelId, String deviceId, Long timeFrom, Long timeTo, Boolean isLocalTime, Integer pageSize, String pageToken) {
         this.orgId = orgId;
         this.modelId = modelId;
-        this.assetIds = assetIds;
-        this.measurepoints = measurepoints;
-        this.startTime = startTime;
-        this.endTime = endTime;
+        this.deviceId = deviceId;
+        this.timeFrom = timeFrom;
+        this.timeTo = timeTo;
+        this.isLocalTime = isLocalTime;
         this.pageSize = pageSize;
+        this.pageToken = pageToken;
     }
 
     @Override

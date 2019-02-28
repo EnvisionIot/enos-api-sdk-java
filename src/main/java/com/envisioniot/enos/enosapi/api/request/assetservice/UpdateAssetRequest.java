@@ -23,6 +23,30 @@ public class UpdateAssetRequest extends EnOSRequest<EnOSResponse<Asset>> {
         this.asset = asset;
     }
 
+    public String getOrgId() {
+        return orgId;
+    }
+
+    public void setOrgId(String orgId) {
+        this.orgId = orgId;
+    }
+
+    public String getAssetId() {
+        return assetId;
+    }
+
+    public void setAssetId(String assetId) {
+        this.assetId = assetId;
+    }
+
+    public Asset getAsset() {
+        return asset;
+    }
+
+    public void setAsset(Asset asset) {
+        this.asset = asset;
+    }
+
     @Override
     public String getApiMethodName() {
         return API_METHOD;

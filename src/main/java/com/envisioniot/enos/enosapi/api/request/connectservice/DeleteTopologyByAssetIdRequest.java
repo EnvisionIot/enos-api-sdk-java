@@ -14,6 +14,7 @@ public class DeleteTopologyByAssetIdRequest extends EnOSRequest<EnOSResponse> {
     private static final String REQUEST_METHOD = "DELETE";
     
     private String orgId;
+    private Boolean force;
     @EnOSPathVariable(name = "assetId")
     private String assetId;
     
@@ -23,6 +24,13 @@ public class DeleteTopologyByAssetIdRequest extends EnOSRequest<EnOSResponse> {
         this.orgId = orgId;
         this.assetId = assetId;
         this.assetIds = assetIds;
+        this.force = false;
+    }
+
+    public DeleteTopologyByAssetIdRequest(String orgId, String assetId, String assetIds, Boolean force)
+    {
+        this(orgId, assetId, assetIds);
+        this.force = force;
     }
 
     @Override

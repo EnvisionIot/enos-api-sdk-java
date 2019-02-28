@@ -12,6 +12,8 @@ public class Device implements Serializable {
     private String deviceName;
     private String deviceSecret;
     private String deviceDesc;
+    private String timezone;
+    private Boolean isDST;
     private String assetId;
     private String topo;
     private String orgId;
@@ -85,6 +87,26 @@ public class Device implements Serializable {
 
     public void setDeviceDesc(String deviceDesc) {
         this.deviceDesc = deviceDesc;
+    }
+
+    public String getTimezone()
+    {
+        return timezone;
+    }
+
+    public void setTimezone(String timezone)
+    {
+        this.timezone = timezone;
+    }
+
+    public Boolean getIsDST()
+    {
+        return isDST;
+    }
+
+    public void setIsDST(Boolean isDST)
+    {
+        this.isDST = isDST;
     }
 
     public String getAssetId() {
@@ -183,6 +205,7 @@ public class Device implements Serializable {
         this.deviceAttributes = deviceAttributes;
     }
 
+    @Override
     public String toString() {
         return "Device [productKey=" + this.productKey + ", productName=" + this.productName + ", deviceKey=" + this.deviceKey + ", deviceName=" + this.deviceName + ", deviceSecret=" + this.deviceSecret + ", assetId=" + this.assetId + ", gmtCreate=" + this.gmtCreate + ", gmtActive=" + this.gmtModified + ", gmtModified=" + this.gmtActive + ", gmtOnline=" + this.gmtOnline + ", gmtOffline=" + this.gmtOffline + ", status=" + this.status + ", nodeType=" + this.nodeType + ", deviceAttributes=" + this.deviceAttributes + "]";
     }

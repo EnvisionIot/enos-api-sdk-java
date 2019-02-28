@@ -14,12 +14,19 @@ public class DeleteDeviceByAssetIdRequest extends EnOSRequest<EnOSResponse> {
     private static final String REQUEST_METHOD = "DELETE";
     
     private String orgId;
+    private Boolean force;
     @EnOSPathVariable(name = "assetId")
     private String assetId;
 
     public DeleteDeviceByAssetIdRequest(String orgId, String assetId) {
         this.orgId = orgId;
         this.assetId = assetId;
+        this.force = false;
+    }
+
+    public DeleteDeviceByAssetIdRequest(String orgId, String assetId, Boolean force) {
+        this(orgId, assetId);
+        this.force = force;
     }
 
     @Override

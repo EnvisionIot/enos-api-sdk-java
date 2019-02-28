@@ -13,8 +13,8 @@ import com.envisioniot.enos.enosapi.common.exception.*;
 
 import java.util.*;
 
-public class GetAssetsRawDataByTimeRangeRequest extends EnOSRequest<EnOSResponse<EnOSPage<Map<String, Object>>>> {
-    private static final String API_METHOD = "/dataService/assets/tsdb/rawData/timeRange";
+public class GetAssetsAINormalizedDataRequest extends EnOSRequest<EnOSResponse<EnOSPage<Map<String, Object>>>> {
+    private static final String API_METHOD = "/dataService/assets/tsdb/ai/normalizedData/measurepoints";
     private static final String REQUEST_METHOD = "GET";
     
     private String orgId;
@@ -23,7 +23,9 @@ public class GetAssetsRawDataByTimeRangeRequest extends EnOSRequest<EnOSResponse
     
     private String assetIds;
     
-    private String measurepoints;
+    private String measurepointsWithLogic;
+    
+    private Integer interval;
     
     private String startTime;
     
@@ -31,11 +33,12 @@ public class GetAssetsRawDataByTimeRangeRequest extends EnOSRequest<EnOSResponse
     
     private Integer pageSize;
 
-    public GetAssetsRawDataByTimeRangeRequest(String orgId, String modelId, String assetIds, String measurepoints, String startTime, String endTime, Integer pageSize) {
+    public GetAssetsAINormalizedDataRequest(String orgId, String modelId, String assetIds, String measurepointsWithLogic, Integer interval, String startTime, String endTime, Integer pageSize) {
         this.orgId = orgId;
         this.modelId = modelId;
         this.assetIds = assetIds;
-        this.measurepoints = measurepoints;
+        this.measurepointsWithLogic = measurepointsWithLogic;
+        this.interval = interval;
         this.startTime = startTime;
         this.endTime = endTime;
         this.pageSize = pageSize;

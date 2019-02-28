@@ -1,6 +1,0 @@
-*.class
-.svn/
-target/
-.project
-iot_mqtt_sdk.iml
-.idea/

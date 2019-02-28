@@ -9,6 +9,7 @@ public class DeviceKeyBatchCheckResult implements Serializable {
     private Set<String> successSet;
     private Set<String> existedSet;
     private Set<String> invalidSet;
+    private Set<String> invalidCharSet;
 
     public DeviceKeyBatchCheckResult() {
     }
@@ -36,4 +37,15 @@ public class DeviceKeyBatchCheckResult implements Serializable {
     public void setInvalidSet(Set<String> invalidSet) {
         this.invalidSet = invalidSet;
     }
+
+    public Set<String> getInvalidCharSet()
+    {
+        return invalidCharSet;
+    }
+
+    public void setInvalidCharSet(Set<String> invalidCharSet)
+    {
+        this.invalidCharSet = invalidCharSet;
+    }
+
 }

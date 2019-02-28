@@ -17,6 +17,9 @@ public class MeasurepointSetInfo implements Serializable
     public Object inputData;
     public long gmtDeviceReply;
 
+    public MeasurepointSetInfo() {
+    }
+
     public MeasurepointSetInfo(String messageId, String productKey, String deviceKey, String assetId, Object inputData,
                                long gmtDeviceReply)
     {

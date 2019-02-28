@@ -18,6 +18,8 @@ public class ListThingModelsRequest extends EnOSRequest<EnOSResponse<EnOSPage<Th
     
     private String filter;
 
+    private Integer scope;
+
     public ListThingModelsRequest(String orgId, int pageSize, int pageToken, String filter) {
         this.orgId = orgId;
         this.pageSize = pageSize;
@@ -29,6 +31,46 @@ public class ListThingModelsRequest extends EnOSRequest<EnOSResponse<EnOSPage<Th
         this.orgId = orgId;
         this.pageSize = pageSize;
         this.pageToken = pageToken;
+    }
+
+    public String getOrgId() {
+        return orgId;
+    }
+
+    public void setOrgId(String orgId) {
+        this.orgId = orgId;
+    }
+
+    public int getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
+    }
+
+    public int getPageToken() {
+        return pageToken;
+    }
+
+    public void setPageToken(int pageToken) {
+        this.pageToken = pageToken;
+    }
+
+    public String getFilter() {
+        return filter;
+    }
+
+    public void setFilter(String filter) {
+        this.filter = filter;
+    }
+
+    public Integer getScope() {
+        return scope;
+    }
+
+    public void setScope(Integer scope) {
+        this.scope = scope;
     }
 
     @Override

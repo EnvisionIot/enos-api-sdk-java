@@ -1,16 +1,18 @@
 package com.envisioniot.enos.enosapi.sdk.util;
 
-import java.io.IOException;
-import java.io.InputStream;
-
 import org.apache.http.HttpEntity;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.methods.*;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpRequestBase;
+import org.apache.http.entity.ContentType;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
-
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
+import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.Charset;
 
 public class HttpClientUtils {
     private static PoolingHttpClientConnectionManager cm;
@@ -42,41 +44,102 @@ public class HttpClientUtils {
      * @return
      */
     public static String getResult(HttpRequestBase request) throws IOException {
-        // CloseableHttpClient httpClient = HttpClients.createDefault();
-        CloseableHttpClient httpClient = getHttpClient();
-        CloseableHttpResponse response = httpClient.execute(request);
-        // response.getStatusLine().getStatusCode();
-        HttpEntity entity = response.getEntity();
-        if (entity != null) {
-            // long len = entity.getContentLength();// -1 表示长度未知
-            String result = EntityUtils.toString(entity);
-            response.close();
-            // httpClient.close();
-            return result;
-        }
+        CloseableHttpClient httpClient = null;
+        CloseableHttpResponse response = null;
+        try {
 
-        return EMPTY_STR;
+            // CloseableHttpClient httpClient = HttpClients.createDefault();
+            httpClient = getHttpClient();
+            response = httpClient.execute(request);
+            // response.getStatusLine().getStatusCode();
+            HttpEntity entity = response.getEntity();
+            if (entity != null) {
+                // long len = entity.getContentLength();// -1 表示长度未知
+                String result = EntityUtils.toString(entity);
+                response.close();
+                // httpClient.close();
+                return result;
+            }
+            return EMPTY_STR;
+        } finally {
+            if (response != null) {
+                response.close();
+            }
+            if (httpClient != null) {
+                //连接池模式，不应该关闭
+//                httpClient.close();
+            }
+        }
     }
 
     public static InputStream getInputStreamResult(HttpRequestBase request) throws IOException {
         // CloseableHttpClient httpClient = HttpClients.createDefault();
-        CloseableHttpClient httpClient = getHttpClient();
-        CloseableHttpResponse response = httpClient.execute(request);
-        // response.getStatusLine().getStatusCode();
-        HttpEntity entity = response.getEntity();
-        return entity.getContent();
+        CloseableHttpClient httpClient = null;
+        CloseableHttpResponse response = null;
+        try {
+            httpClient = getHttpClient();
+            response = httpClient.execute(request);
+            // response.getStatusLine().getStatusCode();
+            HttpEntity entity = response.getEntity();
+            return entity.getContent();
+        } finally {
+            if (response != null) {
+                response.close();
+            }
+            if (httpClient != null) {
+                //连接池模式，不应该关闭
+//                httpClient.close();
+            }
+        }
+
     }
 
     public static HttpResponseResult getHttpResponseResult(HttpRequestBase request) throws IOException {
         // CloseableHttpClient httpClient = HttpClients.createDefault();
-        HttpResponseResult httpResponseResult = new HttpResponseResult();
-        CloseableHttpClient httpClient = getHttpClient();
-        CloseableHttpResponse response = httpClient.execute(request);
-        int status = response.getStatusLine().getStatusCode();
-        HttpEntity entity = response.getEntity();
-        httpResponseResult.setStatus(status);
-        httpResponseResult.setEntity(entity);
-        return httpResponseResult;
+        return getHttpResponseResult(request, false);
+    }
+
+    /**
+     * 如果是获取流信息，则待流信息关闭后再
+     */
+    public static HttpResponseResult getHttpResponseResult(HttpRequestBase request, boolean isStream) throws IOException {
+        // CloseableHttpClient httpClient = HttpClients.createDefault();
+        CloseableHttpClient httpClient = null;
+        CloseableHttpResponse response = null;
+        HttpEntity entity = null;
+        try {
+            httpClient = getHttpClient();
+            response = httpClient.execute(request);
+            int status = response.getStatusLine().getStatusCode();
+            entity = response.getEntity();
+            HttpResponseResult httpResponseResult = new HttpResponseResult(status, entity, isStream, response);
+            return httpResponseResult;
+        } finally {
+            if (!isStream) {
+                //释放entity资源
+                EntityUtils.consume(entity);
+
+                if (response != null) {
+                    response.close();
+                }
+                if (httpClient != null) {
+                    //连接池模式，不应该关闭
+//                    httpClient.close();
+                }
+            }
+        }
+    }
+
+    public static Charset getCharset(HttpEntity entity) {
+        Charset charset = null;
+        final ContentType contentType = ContentType.get(entity);
+        if (contentType != null) {
+            charset = contentType.getCharset();
+        }
+        if (charset == null) {
+            charset = HTTP.DEF_CONTENT_CHARSET;
+        }
+        return charset;
     }
 
 }
