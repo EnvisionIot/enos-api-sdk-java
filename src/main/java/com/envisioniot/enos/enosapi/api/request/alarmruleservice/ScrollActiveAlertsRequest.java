@@ -1,8 +1,12 @@
-package com.envisioniot.enos.enosapi.api.request.eventservice;
+package com.envisioniot.enos.enosapi.api.request.alarmruleservice;
 
 import com.envisioniot.enos.enosapi.common.response.EnOSResponse;
-import com.envisioniot.enos.enosapi.api.resource.alarmruleservice.HistoryEvent;
+import com.google.gson.Gson;
+
+import java.util.List;
 import java.lang.Long;
+import java.util.Map;
+import com.envisioniot.enos.enosapi.api.resource.alarmruleservice.ActiveAlert;
 import java.lang.Boolean;
 import java.lang.String;
 import java.lang.Integer;
@@ -14,23 +18,28 @@ import com.envisioniot.enos.enosapi.common.exception.*;
 
 import java.util.*;
 
-public class ScrollHistoryAlertsRequest extends EnOSRequest<EnOSResponse<EnOSPage<HistoryEvent>>> {
-    private static final String API_METHOD = "/eventService/scrollHistoryAlerts";
+public class ScrollActiveAlertsRequest extends EnOSRequest<EnOSResponse<EnOSPage<ActiveAlert>>> {
+    private static final String API_METHOD = "/eventService/alerts/activeAlerts/scroll";
     private static final String REQUEST_METHOD = "GET";
+
     
     private String orgId;
     
+    private String eventIds;
+    
     private String modelId;
     
-    private String deviceId;
+    private String deviceIds;
     
-    private Long timeFrom;
+    private String pointIds;
     
-    private Long timeTo;
+    private String ruleIds;
     
-    private Long recoverTimeFrom;
+    private String tagMap;
     
-    private Long recoverTimeTo;
+    private Long startTime;
+    
+    private Long endTime;
     
     private Boolean isLocalTime;
     
@@ -38,14 +47,17 @@ public class ScrollHistoryAlertsRequest extends EnOSRequest<EnOSResponse<EnOSPag
     
     private String pageToken;
 
-    public ScrollHistoryAlertsRequest( String orgId, String modelId, String deviceId, Long timeFrom, Long timeTo, Long recoverTimeFrom, Long recoverTimeTo, Boolean isLocalTime, Integer pageSize, String pageToken) {
+    public ScrollActiveAlertsRequest(String orgId, String eventIds, String modelId, String deviceIds, String pointIds, String ruleIds, Map<String, String> tagMap, Long startTime, Long endTime, Boolean isLocalTime, Integer pageSize, String pageToken) {
         this.orgId = orgId;
+        this.eventIds = eventIds;
         this.modelId = modelId;
-        this.deviceId = deviceId;
-        this.timeFrom = timeFrom;
-        this.timeTo = timeTo;
-        this.recoverTimeFrom = recoverTimeFrom;
-        this.recoverTimeTo = recoverTimeTo;
+        this.deviceIds = deviceIds;
+        this.pointIds = pointIds;
+        this.ruleIds = ruleIds;
+        Gson gson = new Gson();
+        this.tagMap = gson.toJson(tagMap);
+        this.startTime = startTime;
+        this.endTime = endTime;
         this.isLocalTime = isLocalTime;
         this.pageSize = pageSize;
         this.pageToken = pageToken;

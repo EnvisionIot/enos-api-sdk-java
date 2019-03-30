@@ -58,25 +58,32 @@ public class NodePath implements Serializable {
     @Override
     public boolean equals(Object obj)
     {
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
+        }
         NodePath other = (NodePath) obj;
         if (endNode == null)
         {
-            if (other.endNode != null)
+            if (other.endNode != null) {
                 return false;
-        } else if (!endNode.equals(other.endNode))
+            }
+        } else if (!endNode.equals(other.endNode)) {
             return false;
+        }
         if (startNode == null)
         {
-            if (other.startNode != null)
+            if (other.startNode != null) {
                 return false;
-        } else if (!startNode.equals(other.startNode))
+            }
+        } else if (!startNode.equals(other.startNode)) {
             return false;
+        }
         return true;
     }
 }

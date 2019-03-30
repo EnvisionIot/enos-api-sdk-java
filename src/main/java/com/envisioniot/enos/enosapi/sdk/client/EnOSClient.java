@@ -21,9 +21,9 @@ public interface EnOSClient {
 
     /**
      * Implment Api Request
-     *
-     * @param <T>
      * @param request
+     * @param requestTimestamp
+     * @param <T>
      * @return
      * @throws EnOSApiException
      */

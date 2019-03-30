@@ -60,21 +60,27 @@ public class NodeDeleteInfo implements Serializable
     @Override
     public boolean equals(Object obj)
     {
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
+        }
         NodeDeleteInfo other = (NodeDeleteInfo) obj;
         if (isLastNodeFromInstance == null)
         {
-            if (other.isLastNodeFromInstance != null)
+            if (other.isLastNodeFromInstance != null) {
                 return false;
-        } else if (!isLastNodeFromInstance.equals(other.isLastNodeFromInstance))
+            }
+        } else if (!isLastNodeFromInstance.equals(other.isLastNodeFromInstance)) {
             return false;
-        if (num_nodeDeleted != other.num_nodeDeleted)
+        }
+        if (num_nodeDeleted != other.num_nodeDeleted) {
             return false;
+        }
         return true;
     }
 }

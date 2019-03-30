@@ -48,16 +48,12 @@ public class HttpClientUtils {
         CloseableHttpResponse response = null;
         try {
 
-            // CloseableHttpClient httpClient = HttpClients.createDefault();
             httpClient = getHttpClient();
             response = httpClient.execute(request);
-            // response.getStatusLine().getStatusCode();
             HttpEntity entity = response.getEntity();
             if (entity != null) {
-                // long len = entity.getContentLength();// -1 表示长度未知
                 String result = EntityUtils.toString(entity);
                 response.close();
-                // httpClient.close();
                 return result;
             }
             return EMPTY_STR;
@@ -67,19 +63,16 @@ public class HttpClientUtils {
             }
             if (httpClient != null) {
                 //连接池模式，不应该关闭
-//                httpClient.close();
             }
         }
     }
 
     public static InputStream getInputStreamResult(HttpRequestBase request) throws IOException {
-        // CloseableHttpClient httpClient = HttpClients.createDefault();
         CloseableHttpClient httpClient = null;
         CloseableHttpResponse response = null;
         try {
             httpClient = getHttpClient();
             response = httpClient.execute(request);
-            // response.getStatusLine().getStatusCode();
             HttpEntity entity = response.getEntity();
             return entity.getContent();
         } finally {
@@ -88,14 +81,12 @@ public class HttpClientUtils {
             }
             if (httpClient != null) {
                 //连接池模式，不应该关闭
-//                httpClient.close();
             }
         }
 
     }
 
     public static HttpResponseResult getHttpResponseResult(HttpRequestBase request) throws IOException {
-        // CloseableHttpClient httpClient = HttpClients.createDefault();
         return getHttpResponseResult(request, false);
     }
 
@@ -103,7 +94,6 @@ public class HttpClientUtils {
      * 如果是获取流信息，则待流信息关闭后再
      */
     public static HttpResponseResult getHttpResponseResult(HttpRequestBase request, boolean isStream) throws IOException {
-        // CloseableHttpClient httpClient = HttpClients.createDefault();
         CloseableHttpClient httpClient = null;
         CloseableHttpResponse response = null;
         HttpEntity entity = null;

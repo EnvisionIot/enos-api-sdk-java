@@ -35,7 +35,7 @@ import java.util.Set;
 /**
  * Web Utility
  */
-public abstract class WebUtils {
+public class WebUtils {
     private static Logger logger = LoggerFactory.getLogger(WebUtils.class);
 
     public static final String DEFAULT_CHARSET = Constants.CHARSET_UTF8;
@@ -46,6 +46,9 @@ public abstract class WebUtils {
     public static final String CONTENT_TYPE_MULTIPART_FORM_DATA = "multipart/form-data";
     public static final String CONTENT_TYPE_APPLICATION_JSON = "application/json";
     public static final String CONTENT_TYPE_APPLICATION_FORM_URLENCODED = "application/x-www-form-urlencoded";
+
+    private static String QST_MARK = "?";
+    private static String AND_MARK = "&";
 
 
     private WebUtils() {
@@ -75,7 +78,6 @@ public abstract class WebUtils {
                                         String charset, String method, int connectTimeout, int readTimeout)
             throws IOException, EnOSClientException {
 
-        // System.out.println("url & query & body: " + basicUrl + " & " + query + " & " + body);
         HttpRequestBase httpRequest =  getFilledHttpRequest(basicUrl, urlParams, null, bodyContent, null, charset, method, connectTimeout, readTimeout);
         boolean isStream = false;
         return getHttpResponseResult(httpRequest, isStream);
@@ -95,22 +97,23 @@ public abstract class WebUtils {
 
     private static URL buildGetUrl(String strUrl, String query)
             throws IOException {
+
         URL url = new URL(strUrl);
         if (StringUtils.isEmpty(query)) {
             return url;
         }
 
         if (StringUtils.isEmpty(url.getQuery())) {
-            if (strUrl.endsWith("?")) {
+            if (strUrl.endsWith(QST_MARK)) {
                 strUrl = strUrl + query;
             } else {
-                strUrl = strUrl + "?" + query;
+                strUrl = strUrl + QST_MARK + query;
             }
         } else {
-            if (strUrl.endsWith("&")) {
+            if (strUrl.endsWith(AND_MARK)) {
                 strUrl = strUrl + query;
             } else {
-                strUrl = strUrl + "&" + query;
+                strUrl = strUrl + AND_MARK + query;
             }
         }
 
@@ -200,11 +203,11 @@ public abstract class WebUtils {
         return result;
     }
 
-    @SuppressWarnings("unused")
+    @Deprecated
     private static Map<String, String> getParamsFromUrl(String url) {
         Map<String, String> map = null;
-        if (url != null && url.indexOf('?') != -1) {
-            map = splitUrlQuery(url.substring(url.indexOf('?') + 1));
+        if (url != null && url.indexOf(QST_MARK) != -1) {
+            map = splitUrlQuery(url.substring(url.indexOf(QST_MARK) + 1));
         }
         if (map == null) {
             map = new HashMap<String, String>();
@@ -212,6 +215,7 @@ public abstract class WebUtils {
         return map;
     }
 
+    @Deprecated
     public static Map<String, String> splitUrlQuery(String query) {
         Map<String, String> result = new HashMap<String, String>();
 

@@ -8,10 +8,13 @@ import com.envisioniot.enos.enosapi.common.resource.EnOSTransferFileInfo;
 import com.envisioniot.enos.enosapi.common.response.EnOSPage;
 import com.envisioniot.enos.enosapi.common.response.EnOSResponse;
 import com.envisioniot.enos.enosapi.common.util.*;
+import com.envisioniot.enos.enosapi.sdk.enums.SignMethods;
 import com.envisioniot.enos.enosapi.sdk.util.HttpResponseResult;
 import com.envisioniot.enos.enosapi.sdk.util.JacksonUtil;
 import com.envisioniot.enos.enosapi.sdk.util.Sign;
 import com.envisioniot.enos.enosapi.sdk.util.WebUtils;
+import com.google.common.base.Strings;
+import org.apache.http.HttpStatus;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,11 +33,12 @@ public class EnOSDefaultClient implements EnOSClient {
 
     private String secretKey;
 
-    // Connect Timeout(ms)
     private int connectTimeout = 30000;
 
-    // Read Timeout(ms)
     private int readTimeout = 30000;
+
+    private SignMethods signMethod = SignMethods.SHA_256;
+
 
     /**
      * @param serverUrl
@@ -65,6 +69,10 @@ public class EnOSDefaultClient implements EnOSClient {
         this.readTimeout = readTimeout;
     }
 
+    public void setSignMethod(SignMethods signMethod) {
+        this.signMethod = signMethod;
+    }
+
     public String getServerUrl() {
         return serverUrl;
     }
@@ -89,10 +97,12 @@ public class EnOSDefaultClient implements EnOSClient {
         this.secretKey = secretKey;
     }
 
+    @Override
     public <T extends EnOSResponse> T execute(EnOSRequest<T> request) throws EnOSApiException {
         return doExecute(request, null);
     }
 
+    @Override
     public <T extends EnOSResponse> T execute(EnOSRequest<T> request, Long requestTimestamp)
             throws EnOSApiException {
         return doExecute(request, requestTimestamp);
@@ -128,7 +138,7 @@ public class EnOSDefaultClient implements EnOSClient {
         Map<String, String> textParams = request.getUrlParams();
         String jsonParam = request.getJsonParam();
         if (requestTimestamp == null) {
-            requestTimestamp = new Date().getTime();
+            requestTimestamp = System.currentTimeMillis();
         }
         textParams.put(Constants.REQUEST_TIMESTAMP, requestTimestamp.toString());
         String url = makeUrl(request.getApiPath(), textParams, jsonParam);
@@ -174,7 +184,7 @@ public class EnOSDefaultClient implements EnOSClient {
             if (downloadFile != null && isStream) {
                 EnOSResponse response = new EnOSResponse();
                 int httpCode = httpResponse.getStatus();
-                if (httpCode == 200) {
+                if (httpCode == HttpStatus.SC_OK) {
                     InputStream responseStream = httpResponse.getInputStreamResult();
                     FileUtil.writeFileAsStream(downloadFile.getAbsolutePath(), responseStream);
                 } else {
@@ -186,7 +196,6 @@ public class EnOSDefaultClient implements EnOSClient {
 
             } else {
                 String strResponse = httpResponse.getStringResult();
-//                T response = JsonParser.fromJson(strResponse, request.getResponseType());
                 T response = JacksonUtil.fromJson(strResponse, request.getResponseType());
                 return response;
             }
@@ -201,9 +210,12 @@ public class EnOSDefaultClient implements EnOSClient {
         }
     }
 
-    private String makeUrl(String apiName, Map<String, String> textParams, String bodyContent) {
+    private String makeUrl(String apiName, Map<String, String> textParams, String bodyContent) throws EnOSClientException {
         // Add sign
-        String sign = Sign.sign(accessKey, secretKey, textParams, bodyContent);
+        String sign = Sign.sign(accessKey, secretKey, textParams, bodyContent, signMethod.getAlgorithm());
+        if(Strings.isNullOrEmpty(sign)) {
+            throw new EnOSClientException(EnOSErrorCode.APP_SIGN_FAIL);
+        }
 
         // Build Url
         StringBuilder url = new StringBuilder(serverUrl);

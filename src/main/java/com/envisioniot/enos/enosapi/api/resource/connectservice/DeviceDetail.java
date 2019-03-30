@@ -143,6 +143,7 @@ public class DeviceDetail implements Serializable {
         this.nodeType = nodeType;
     }
 
+    @Override
     public String toString() {
         return "DeviceDetail [productKey=" + this.productKey + ", productName=" + this.productName + ", deviceKey=" + this.deviceKey + ", deviceName=" + this.deviceName + ", deviceSecret=" + this.deviceSecret + ", assetId=" + this.assetId + ", gmtCreate=" + this.gmtCreate + ", gmtActive=" + this.gmtActive + ", gmtOnline=" + this.gmtOnline + ", status=" + this.status + ", nodeType=" + this.nodeType + "]";
     }

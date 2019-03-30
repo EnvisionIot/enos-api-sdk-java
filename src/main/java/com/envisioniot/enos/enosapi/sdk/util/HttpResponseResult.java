@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
- * created by dongdong.wang
+ * @author dongdong.wang
  */
 public class HttpResponseResult {
 

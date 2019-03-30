@@ -55,6 +55,7 @@ public class DeviceStatistics {
         this.disableCount = disableCount;
     }
 
+    @Override
     public String toString() {
         return "DeviceStatistics [deviceTotal=" + this.deviceTotal + ",onlineCount=" + this.onlineCount + ",offlineCount=" + this.offlineCount + ",inactiveCount=" + this.inactiveCount + ",disableCount=" + this.disableCount + "]";
     }

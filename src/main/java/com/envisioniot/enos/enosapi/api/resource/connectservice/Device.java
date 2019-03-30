@@ -13,7 +13,7 @@ public class Device implements Serializable {
     private String deviceSecret;
     private String deviceDesc;
     private String timezone;
-    private Boolean isDST;
+    private boolean isDST;
     private String assetId;
     private String topo;
     private String orgId;
@@ -38,7 +38,6 @@ public class Device implements Serializable {
         this.gmtModified = null;
         this.gmtActive = null;
         this.gmtOnline = null;
-        this.gmtOnline = gmtOffline;
     }
 
     public String getProductKey() {
@@ -89,23 +88,19 @@ public class Device implements Serializable {
         this.deviceDesc = deviceDesc;
     }
 
-    public String getTimezone()
-    {
+    public String getTimezone() {
         return timezone;
     }
 
-    public void setTimezone(String timezone)
-    {
+    public void setTimezone(String timezone) {
         this.timezone = timezone;
     }
 
-    public Boolean getIsDST()
-    {
+    public boolean getIsDST() {
         return isDST;
     }
 
-    public void setIsDST(Boolean isDST)
-    {
+    public void setIsDST(boolean isDST) {
         this.isDST = isDST;
     }
 

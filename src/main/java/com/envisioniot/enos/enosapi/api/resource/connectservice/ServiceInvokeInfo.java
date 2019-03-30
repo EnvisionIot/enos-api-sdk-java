@@ -145,6 +145,7 @@ public class ServiceInvokeInfo {
         this.gmtDeviceReply = gmtDeviceReply;
     }
 
+    @Override
     public String toString() {
         return "ServiceInvokeInfo{requestId=\'" + this.requestId + '\'' + ", messageId=\'" + this.messageId + '\'' + ", requestMethod=\'" + this.requestMethod + '\'' + ", callType=\'" + this.callType + '\'' + ", productKey=\'" + this.productKey + '\'' + ", deviceKey=\'" + this.deviceKey + '\'' + ", assetId=\'" + this.assetId + '\'' + ", serviceName=\'" + this.serviceName + '\'' + ", serviceId=\'" + this.serviceId + '\'' + ", callbackUrl=\'" + this.callbackUrl + '\'' + ", inputData=" + this.inputData + ", outputData=" + this.outputData + ", gmtServiceRequest=" + this.gmtServiceRequest + ", gmtServiceReply=" + this.gmtServiceReply + ", gmtDeviceReply=" + this.gmtDeviceReply + '}';
     }

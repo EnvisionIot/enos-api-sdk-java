@@ -7,8 +7,16 @@
  */
 package com.envisioniot.enos.enosapi.sdk.util;
 
+import com.envisioniot.enos.enosapi.api.request.connectservice.CheckDevicesRequest;
+import com.envisioniot.enos.enosapi.common.exception.EnOSApiException;
+import com.envisioniot.enos.enosapi.common.exception.EnOSClientException;
+import com.envisioniot.enos.enosapi.common.response.EnOSResponse;
 import com.envisioniot.enos.enosapi.common.util.Constants;
+import com.envisioniot.enos.enosapi.common.util.EnOSErrorCode;
 import com.envisioniot.enos.enosapi.common.util.StringUtils;
+import com.envisioniot.enos.enosapi.sdk.client.EnOSClient;
+import com.envisioniot.enos.enosapi.sdk.client.EnOSDefaultClient;
+import com.envisioniot.enos.enosapi.sdk.enums.SignMethods;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,7 +33,6 @@ import java.util.Map;
 
 /**
  * Digest
- *
  */
 public class Sign {
     private static Logger logger = LoggerFactory.getLogger(Sign.class);
@@ -41,8 +48,11 @@ public class Sign {
             int halfbyte = (data[i] >>> 4) & 0x0F;
             int twoHalfs = 0;
             do {
-                if ((0 <= halfbyte) && (halfbyte <= 9)) buf.append((char) ('0' + halfbyte));
-                else buf.append((char) ('a' + (halfbyte - 10)));
+                if ((0 <= halfbyte) && (halfbyte <= 9)) {
+                    buf.append((char) ('0' + halfbyte));
+                } else {
+                    buf.append((char) ('a' + (halfbyte - 10)));
+                }
                 halfbyte = data[i] & 0x0F;
             }
             while (twoHalfs++ < 1);
@@ -64,7 +74,7 @@ public class Sign {
         for (String key : keyArray) {
             stringBuilder.append(key).append(paramMap.get(key));
         }
-        if(!StringUtils.isEmpty(bodyContent)) {
+        if (!StringUtils.isEmpty(bodyContent)) {
             stringBuilder.append(bodyContent);
         }
         stringBuilder.append(secret);
@@ -76,7 +86,7 @@ public class Sign {
         byte[] bytes = null;
 
         try {
-            MessageDigest md5 = MessageDigest.getInstance(Constants.KEY_MD5);
+            MessageDigest md5 = MessageDigest.getInstance(SignMethods.MD5.getAlgorithm());
             md5.update(data);
             bytes = md5.digest();
         } catch (NoSuchAlgorithmException e) {
@@ -90,9 +100,23 @@ public class Sign {
         byte[] bytes = null;
 
         try {
-            MessageDigest sha = MessageDigest.getInstance(Constants.KEY_SHA);
+            MessageDigest sha = MessageDigest.getInstance(SignMethods.SHA1.getAlgorithm());
             sha.update(data);
             bytes = sha.digest();
+        } catch (NoSuchAlgorithmException e) {
+            throw new IOException(e);
+        }
+
+        return bytes;
+    }
+
+    private static byte[] encryptSHA256(byte[] data) throws IOException {
+        byte[] bytes = null;
+
+        try {
+            MessageDigest sha2 = MessageDigest.getInstance(SignMethods.SHA_256.getAlgorithm());
+            sha2.update(data);
+            bytes = sha2.digest();
         } catch (NoSuchAlgorithmException e) {
             throw new IOException(e);
         }
@@ -103,7 +127,7 @@ public class Sign {
     public static byte[] encryptHMAC(byte[] data, String key) throws IOException {
         byte[] bytes = null;
         try {
-            SecretKey sk = new SecretKeySpec(key.getBytes(Constants.CHARSET_UTF8), Constants.KEY_HMAC);
+            SecretKey sk = new SecretKeySpec(key.getBytes(Constants.CHARSET_UTF8), SignMethods.HMAC_MD5.getAlgorithm());
             Mac mac = Mac.getInstance(sk.getAlgorithm());
             mac.init(sk);
             bytes = mac.doFinal(data);
@@ -113,21 +137,39 @@ public class Sign {
         return bytes;
     }
 
+    /**
+     * 支持多种签名算法：SHA1、SHA-256、MD5、HmacMD5
+     * @param accessKey
+     * @param secret
+     * @param paramMap
+     * @param bodyContent
+     * @param type
+     * @return
+     */
     public static String sign(String accessKey, String secret, Map<String, String> paramMap, String bodyContent, String type) {
         String sign = null;
-
         try {
             String codes = makeString(accessKey, secret, paramMap, bodyContent);
             byte[] bytes = codes.getBytes(Constants.CHARSET_UTF8);
-            byte[] encrypt;
-            if (type.equals(Constants.KEY_MD5)) {
-                encrypt = encryptMD5(bytes);
-            } else if (type.equals(Constants.KEY_HMAC)) {
-                encrypt = encryptHMAC(bytes, secret);
-            } else {
-                encrypt = encryptSHA(bytes);
+            byte[] encrypt = null;
+            SignMethods m = SignMethods.SIGN_METHODS_MAP.get(type);
+            switch (m) {
+                case SHA1:
+                    encrypt = encryptSHA(bytes);
+                    break;
+                case SHA_256:
+                    encrypt = encryptSHA256(bytes);
+                    break;
+                case MD5:
+                    encrypt = encryptMD5(bytes);
+                    break;
+                case HMAC_MD5:
+                    encrypt = encryptHMAC(bytes, secret);
+                    break;
+                default:
+                    encrypt = encryptSHA256(bytes);
+                    break;
             }
-
             String hexStr = convertToHex(encrypt);
             sign = hexStr.toUpperCase();
         } catch (UnsupportedEncodingException e) {
@@ -141,13 +183,15 @@ public class Sign {
         return sign;
     }
 
-    //Default signature algorithm : SHA
+    /**
+     * Default signature algorithm : SHA-256
+     * @param accessKey
+     * @param secret
+     * @param paramMap
+     * @param bodyContent
+     * @return
+     */
     public static String sign(String accessKey, String secret, Map<String, String> paramMap, String bodyContent) {
-        return sign(accessKey, secret, paramMap, bodyContent, Constants.KEY_SHA);
-    }
-
-    //Default signature algorithm : SHA
-    public static String sign(String secret, Map<String, String> paramMap, String bodyContent) {
-        return sign(null, secret, paramMap, bodyContent, Constants.KEY_SHA);
+        return sign(accessKey, secret, paramMap, bodyContent, SignMethods.SHA_256.getAlgorithm());
     }
 }
