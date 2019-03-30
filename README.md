@@ -40,7 +40,7 @@ You can obtain the EnOS Service SDK through the following methods:
   <dependency>
       <groupId>com.envisioniot</groupId>
       <artifactId>enos-api</artifactId>
-      <version>2.3.3</version>
+      <version>2.3.4</version>
       <!--You might need to change the version number as you need.-->
   </dependency>
   ```
